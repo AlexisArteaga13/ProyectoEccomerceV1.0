@@ -28,6 +28,7 @@ body a:hover{
 }
 .letras{
     font-family: 'Fredoka One', cursive;
+    font-size: xx-large !important;
 }
 /*-- header --*/
 .fixed{
