@@ -30,6 +30,9 @@ body a:hover{
     font-family: 'Fredoka One', cursive;
     font-size: x-large !important;
 }
+.colorestrella{
+	color: yellow;
+ }
 /*-- header --*/
 .fixed{
 	position: fixed;
