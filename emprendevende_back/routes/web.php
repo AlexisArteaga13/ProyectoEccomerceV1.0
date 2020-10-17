@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('modulostienda.inicio');
 });
 
 Auth::routes();

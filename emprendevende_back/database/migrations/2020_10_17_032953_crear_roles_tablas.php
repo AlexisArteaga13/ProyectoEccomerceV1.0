@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolesTables extends Migration
+class CrearRolesTablas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,30 +13,31 @@ class CreateRolesTables extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+       /* Schema::create('roles', function (Blueprint $table) {
             //
-            $table->bigIncrements('id');
-            $table->string('id');
+            $table->bigIncrements('id'); HA
+            $table->string('name');
             $table->string('label')->nullable();
             $table->timestamps();
 
-        });
+        });*/
         Schema::create('role_user', function (Blueprint $table) {
             //
             $table->bigIncrements('id');
-            $table->string( 'id');
+            $table->string('name');
             $table->string('label')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('role_id');
             $table->timestamps();
-            $table->foreing('user_id')
+            $table->foreign('user_id')
             ->references('id')
             ->on('users')
             ->onDelete('cascade');
-            $table->foreing('user_id')
+            $table->foreign('role_id')
             ->references('id')
             ->on('roles')
             ->onDelete('cascade');
         });
-
     }
 
     /**
@@ -46,9 +47,8 @@ class CreateRolesTables extends Migration
      */
     public function down()
     {
-        Schema::table('role_user', function (Blueprint $table) {
+        Schema::table('roles', function (Blueprint $table) {
             //
-         
         });
     }
 }
