@@ -647,6 +647,8 @@ EmprendeVende cuenta con métodos de pagos seguros y rápidos, entre ellos conta
 				</div>
 				<!-- //payment -->
 			</div>
+			@include('sweetalert::alert')
+
 		</div>
 		<!-- //footer fourth section (text) -->
 	</footer>
