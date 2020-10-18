@@ -24,18 +24,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		}
 	</script>
 	<!-- //Meta tag Keywords -->
-	<link href="css/style1.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ asset('css/style1.css') }}" rel="stylesheet" type="text/css" media="all" />
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<!-- Custom-Files -->
-	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
 	<!-- Bootstrap css -->
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
 	<!-- Main css -->
-	<link rel="stylesheet" href="css/fontawesome-all.css">
+	<link rel="stylesheet" href="{{ asset('css/fontawesome-all.css') }}">
 	<!-- Font-Awesome-Icons-CSS -->
-	<link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ asset('css/popuo-box.css') }}" rel="stylesheet" type="text/css" media="all" />
 	<!-- pop-up-box -->
-	<link href="css/menu.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ asset('css/menu.css') }}" rel="stylesheet" type="text/css" media="all" />
 	<!--css de materialize-->
 	<!-- Compiled and minified CSS 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
@@ -392,11 +392,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</nav>
 		</div>
 	</div>
+	<br>
 	<!-- //navigation -->
 
         @yield('contenido')
 	<!-- //top products -->
-
+<br>
 	<!-- middle section -->
 	<div class="join-w3l1 py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
@@ -664,7 +665,7 @@ EmprendeVende cuenta con métodos de pagos seguros y rápidos, entre ellos conta
 
 	<!-- js-files -->
 	<!-- jquery -->
-	<script src="js/jquery-2.2.3.min.js"></script>
+	<script src="{{asset('js/jquery-2.2.3.min.js') }}"></script>
 	<!-- //jquery -->
 
 	<!-- nav smooth scroll -->
@@ -685,7 +686,7 @@ EmprendeVende cuenta con métodos de pagos seguros y rápidos, entre ellos conta
 	<!-- //nav smooth scroll -->
 
 	<!-- popup modal (for location)-->
-	<script src="js/jquery.magnific-popup.js"></script>
+	<script src="{{asset('js/jquery.magnific-popup.js') }}"></script>
 	<script>
 		$(document).ready(function () {
 			$('.popup-with-zoom-anim').magnificPopup({
@@ -705,7 +706,7 @@ EmprendeVende cuenta con métodos de pagos seguros y rápidos, entre ellos conta
 	<!-- //popup modal (for location)-->
 
 	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
+	<script src="{{asset('js/minicart.js') }}"></script>
 	<script>
 		paypals.minicarts.render(); //use only unique class names other than paypals.minicarts.Also Replace same class name in css and minicart.min.js
 
@@ -748,16 +749,16 @@ EmprendeVende cuenta con métodos de pagos seguros y rápidos, entre ellos conta
 	<!-- //password-script -->
 
 	<!-- scroll seller -->
-	<script src="js/scroll.js"></script>
+	<script src="{{asset('js/scroll.js') }}"></script>
 	<!-- //scroll seller -->
 
 	<!-- smoothscroll -->
-	<script src="js/SmoothScroll.min.js"></script>
+	<script src="{{asset('js/SmoothScroll.min.js') }}"></script>
 	<!-- //smoothscroll -->
 
 	<!-- start-smooth-scrolling -->
-	<script src="js/move-top.js"></script>
-	<script src="js/easing.js"></script>
+	<script src="{{asset('js/move-top.js') }}"></script>
+	<script src="{{asset('js/easing.js') }}"></script>
 	<script>
 		jQuery(document).ready(function ($) {
 			$(".scroll").click(function (event) {
@@ -792,7 +793,7 @@ EmprendeVende cuenta con métodos de pagos seguros y rápidos, entre ellos conta
 
 	<!-- for bootstrap working -->
 
-	<script src="js/bootstrap.js"></script>
+	<script src="{{asset('js/bootstrap.js')}}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 	<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

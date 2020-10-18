@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('plantillas.ptienda')
 
-@section('content')
+@section('contenido')
+<br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -62,4 +63,6 @@
         </div>
     </div>
 </div>
+<br>
+<br>
 @endsection
