@@ -1,5 +1,5 @@
 
-@extends('plantillas.index')
+@extends('plantillas.ptienda')
 @section('titulo','Bienvenido a EmprendeVende')
 @section('contenido')
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
