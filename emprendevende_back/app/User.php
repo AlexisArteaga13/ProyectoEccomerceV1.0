@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
 //use App\Role;
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -34,7 +35,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'String',
     ];
 
     public function roles()

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 class UsuariosController extends Controller
 {
     //
@@ -15,23 +17,7 @@ class UsuariosController extends Controller
 
         $this->middleware('subscribed')->except('store');*/
     }
-    public function crear_user_vendedor(Request $request){
-
-       /*$validator = Validator::make($request->all(),[
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'apellidos' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-
-      
-        ]
-        );*/
-      //  if ($validator->fails()) {
-            //return $validator->messages()->all()[0];
-        //    return back()->with('error',$validator->messages()->all()[0])->withInput();
-           // return $validator->messages()->all()[0]->withInput();
-      //  }
-        
+    public function crear_user_vendedor(Request $request){       
          $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -39,15 +25,23 @@ class UsuariosController extends Controller
             'clave' => ['required', 'string', 'min:8', 'confirmed'],
 
         ]);
+            $request['codconfirmar']= Str::random(25);
       //else{
             $nuevovendedor=new User();
             $nuevovendedor->name = request('name');
             $nuevovendedor->apellidos = request('apellidos');
             $nuevovendedor->email = request('email');
             $nuevovendedor->password = bcrypt(request('clave'));
+            $nuevovendedor->email_verified_at=request('codconfirmar');
+            $nuevovendedor->estado='0';
             $nuevovendedor->save();
             $nuevovendedor -> asignarRol(1);
-            return back()->with('info','Verifique su correo electrónico.');
+            Mail::send('emails.confirmarcorreo', $request->all(), function($message) use ($request) {
+                $message->to($request['email'], $request['name'])->subject('Por favor confirma tu correo');
+            });
+            
+           return back()->with('info','Verifique su correo electrónico.');
+           //return $nuevovendedor;
        // }
     }
 

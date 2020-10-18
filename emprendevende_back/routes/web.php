@@ -11,6 +11,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes(['verify' => true]);
 
 Route::get('/', function () {
    /* Alert::success('Success Title', 'Success Message');
@@ -18,8 +19,8 @@ Route::get('/', function () {
     return view('modulostienda.inicio');
 });
 
-Auth::routes(['verify' => true]);
-
+// E-mail verification
+Route::get('/register/verify/{code}', 'CorreosController@verify');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
