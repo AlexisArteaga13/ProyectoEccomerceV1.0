@@ -23,7 +23,7 @@ Route::get('/', function () {
    /* Alert::success('Success Title', 'Success Message');
 ;*/
     return view('modulostienda.inicio');
-});
+})->name('inicio');
 
 // E-mail verification
 Route::get('/register/verify/{code}', 'CorreosController@verify');

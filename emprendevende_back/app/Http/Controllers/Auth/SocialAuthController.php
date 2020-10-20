@@ -31,7 +31,7 @@ class SocialAuthController extends Controller
                 'email' => $social_user->email,
                 'avatar' => $social_user->getAvatar(),
             ]);
-                $user->asignarRol(1);
+                $user->asignarRol(3);
                 //return $social_user->avatar;
             return $this->authAndRedirect($user); // Login y redirección
         }

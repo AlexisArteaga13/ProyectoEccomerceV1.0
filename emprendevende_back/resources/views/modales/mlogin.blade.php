@@ -44,7 +44,17 @@
                                     {{ __('Iniciar Sesión') }}
                                 </button>
                         </div>
-        
+						<p style="font-size: small;" ALIGN="text-center">Tambien puedes iniciar sesión con alguna de estas redes sociales.</p>
+						<div class="row " ALIGN=center>
+							<div class="col-12 col-md-6">
+								<!--<button type="button" class="btn btn-sm btn-fb"><i class="fab fa-facebook-f pr-1"></i> Facebook</button> !-->
+											<a class="btn btn-primary" href="{{ route('social.auth', 'facebook') }}"><i class="fab fa-facebook-f pr-1"></i> Facebook</a>
+							</div>
+							<div class="col-12 col-md-6">
+							<a class="btn btn-danger" href="{{ route('social.auth', 'google') }}"><i class="fab fa-google pr-1"></i> Google</a>
+								<!--<button type="button" class="btn btn-sm btn-fb"><i class="fab fa-google pr-1"></i> Google</button>!-->
+							</div>
+						</div>
                         
 						<!--<div class="sub-w3l">
 							<div class="custom-control custom-checkbox mr-sm-2">
