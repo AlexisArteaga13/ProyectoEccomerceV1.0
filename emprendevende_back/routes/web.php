@@ -11,7 +11,13 @@ use RealRashid\SweetAlert\Facades\Alert;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Rutas para autenticacion
 Auth::routes(['verify' => true]);
+
+// Rutas para autenticar con facebook
+Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider')->name('social.auth');
+Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
+/* ***************Fin de rutas autenticar de facebook*** */ 
 
 Route::get('/', function () {
    /* Alert::success('Success Title', 'Success Message');

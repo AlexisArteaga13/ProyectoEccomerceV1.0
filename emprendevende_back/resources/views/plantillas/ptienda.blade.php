@@ -392,12 +392,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</nav>
 		</div>
 	</div>
-	<br>
+
 	<!-- //navigation -->
 
         @yield('contenido')
 	<!-- //top products -->
-<br>
+
 	<!-- middle section -->
 	<div class="join-w3l1 py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
