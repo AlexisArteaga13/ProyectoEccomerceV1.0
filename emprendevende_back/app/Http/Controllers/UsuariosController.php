@@ -40,7 +40,7 @@ class UsuariosController extends Controller
                 $message->to($request['email'], $request['name'])->subject('Por favor confirma tu correo');
             });
             
-           return back()->with('info','Verifique su correo electrónico.');
+           return back()->with('info','Confirme su cuenta desde su correo electrónico.');
            //return $nuevovendedor;
        // }
     }
