@@ -10,7 +10,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <head>
 	<title>@yield('titulo')</title>
 	<!-- Meta tag Keywords -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 	<meta charset="UTF-8" />
 	<meta name="keywords"
 		content="Electro Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />

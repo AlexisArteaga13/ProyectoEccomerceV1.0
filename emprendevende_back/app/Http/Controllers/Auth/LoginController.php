@@ -31,10 +31,11 @@ class LoginController extends Controller
         $userb = User::with('roles')->where('email', $user->email)->first();
         $role= $userb->roles->first()->name;
         if($role=='administrador'){
-            return redirect()->route('inicio') ;
+            return redirect()->route('administrable') ;
         }else{
            // return redirect()->route('regular.dashboard') ;
-           return $request->all();
+          // return $request->all();
+           return redirect()->route('inicio') ;
         }
     }
     /**
