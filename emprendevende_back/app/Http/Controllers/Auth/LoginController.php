@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use App\User;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -26,8 +26,18 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
+    //protected $redirectTo = RouteServiceProvider::HOME;
+    public function authenticated($request , $user){
+        $userb = User::with('roles')->where('email', $user->email)->first();
+        $role= $userb->roles->first()->name;
+        if($role=='administrador'){
+            return redirect()->route('administrable') ;
+        }else{
+           // return redirect()->route('regular.dashboard') ;
+          // return $request->all();
+           return redirect()->route('inicio') ;
+        }
+    }
     /**
      * Create a new controller instance.
      *

@@ -1,9 +1,10 @@
-@extends('layouts.app')
-
-@section('content')
+@extends('plantillas.ptienda')
+@section('titulo','Recupera tu clave')
+@section('contenido')
 <div class="container">
+<br>
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('Reset Password') }}</div>
 
@@ -61,5 +62,8 @@
             </div>
         </div>
     </div>
+    <br>
+<br>
 </div>
+
 @endsection

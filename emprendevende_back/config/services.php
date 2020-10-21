@@ -29,5 +29,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'facebook' => [
+        'client_id' => '988250804988769',
+        'client_secret' => '406bc9aad1e3c7391e326a195373965f',
+        'redirect' => 'http://localhost/ProyectoEccomerce/emprendevende_back/public/auth/facebook/callback'
+    ]
 
 ];

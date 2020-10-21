@@ -1,4 +1,5 @@
 <?php
+use RealRashid\SweetAlert\Facades\Alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,11 +11,27 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Rutas para autenticacion
+Auth::routes(['verify' => true]);
+
+// Rutas para autenticar con facebook
+Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider')->name('social.auth');
+Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
+/* ***************Fin de rutas autenticar de facebook*** */ 
 
 Route::get('/', function () {
-    return view('home');
-});
+   /* Alert::success('Success Title', 'Success Message');
+;*/
+    return view('modulostienda.inicio');
+})->name('inicio');
 
-Auth::routes();
+// E-mail verification
+Route::get('/register/verify/{code}', 'CorreosController@verify');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
+// Rutas para crear usuarios
+Route::post('/modulostienda/inicio','UsuariosController@crear_user_vendedor')->name('crearvendedor');
+
+//Rutas para administrable
+Route::get('/login/administrable','HomeController@indexadmin')->name('administrable');
