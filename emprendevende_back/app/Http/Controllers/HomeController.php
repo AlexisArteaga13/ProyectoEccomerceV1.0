@@ -27,7 +27,7 @@ class HomeController extends Controller
     }
     public function indexadmin()
     {
-        return view('plantillas.padministrable');
+        return view('modulosadmin.inicioadmin');
     }
    
 }
