@@ -1,5 +1,5 @@
 @extends('plantillas.padministrable')
-@section('titulo','Dashboard-EV')
+@section('titulo','Administracion de '.Auth::user()->name)
 @section('contenidoadmin')
 <div class="app-main__outer">
                     <div class="app-main__inner">
