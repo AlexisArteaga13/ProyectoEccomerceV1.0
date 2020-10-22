@@ -91,7 +91,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						
 							
 								@if(Auth::check())
-
+						
+								@can('administrador','vendedor')
+								<li class="text-center border-right text-white">
+								<a href="{{ route('administrable') }}"  class="text-white">
+								<i class="fas fa-truck mr-2"></i>Administrar</a>
+								
+								</li>
+								@endcan
+								
 								<li class="text-white nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                   
@@ -423,7 +431,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 	<!-- //navigation -->
 
-        @yield('contenido')
+    @yield('contenido')
 	<!-- //top products -->
 
 	<!-- middle section -->

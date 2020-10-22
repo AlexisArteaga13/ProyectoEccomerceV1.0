@@ -36,3 +36,6 @@ Route::post('/modulostienda/inicio','UsuariosController@crear_user_vendedor')->n
 
 //Rutas para administrable
 Route::get('/login/administrable','HomeController@indexadmin')->name('administrable');
+
+//ruta de prueba
+
