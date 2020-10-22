@@ -23,6 +23,7 @@ Route::get('/', function () {
    /* Alert::success('Success Title', 'Success Message');
 ;*/
     return view('modulostienda.inicio');
+   //return view('vistasadmin/indexadmin');
 })->name('inicio');
 
 // E-mail verification

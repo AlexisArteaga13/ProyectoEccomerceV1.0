@@ -27,7 +27,7 @@ class HomeController extends Controller
     }
     public function indexadmin()
     {
-        return view('modulosadmin.inicioadmin');
+        return view('vistasadmin.indexadmin');
     }
    
 }
