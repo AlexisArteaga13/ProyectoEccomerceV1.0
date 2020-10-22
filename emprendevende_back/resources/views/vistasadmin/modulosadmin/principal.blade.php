@@ -604,4 +604,5 @@
     </section>
     <!-- /.content -->
   </div>
+  @include('vistasadmin.modulosadmin.llamadoscript.scriptsimple')
   @endsection

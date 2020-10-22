@@ -476,4 +476,5 @@
         </section>
         <!-- /.content -->
     </div>
+@include('vistasadmin.modulosadmin.llamadoscript.scripttable')
 @endsection
