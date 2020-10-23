@@ -39,4 +39,4 @@ Route::get('/login/administrable','HomeController@indexadmin')->name('administra
 
 //ruta de rubros
 Route::get('/login/rubros','RubrosController@index')->name('rubros.index');
-
+Route::post('/login/rubros/store','RubrosController@store')->name('rubros.store');

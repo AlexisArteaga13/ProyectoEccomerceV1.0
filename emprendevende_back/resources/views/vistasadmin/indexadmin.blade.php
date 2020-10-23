@@ -191,7 +191,7 @@
             </ul>
         </nav>
         <!-- /.navbar -->
-
+        @include('sweetalert::alert')
         <!-- Main Sidebar Container -->
         @include('vistasadmin.modulosadmin.siderbar')
 
