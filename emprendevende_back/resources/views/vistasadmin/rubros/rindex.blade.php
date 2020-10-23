@@ -179,13 +179,13 @@
                             <label for="inputPassword" class="col-sm-2 col-form-label">Estado</label>
                             <div class="col-sm-10">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="opcion1" id="opcion1"
-                                        value="option1">
+                                    <input class="form-check-input" type="radio" name="opcion" id="opcion1"
+                                        value="opcion1">
                                     <label class="form-check-label" for="inlineRadio1">Activo</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="opcion2" id="opcion2"
-                                        value="option2">
+                                    <input class="form-check-input" type="radio" name="opcion" id="opcion2"
+                                        value="opcion2" active>
                                     <label class="form-check-label" for="inlineRadio2">Inactivo</label>
                                 </div>
                             </div>
