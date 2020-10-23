@@ -8,7 +8,7 @@ class Rubros extends Model
 {
     //
     protected $table='rubro';
-    protected $primaryKey='id';
+    protected $primaryKey='idRubro';
     public $timestamps=false;
     protected $fillable = [
         'nombreRubro','estado',

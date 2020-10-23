@@ -35,8 +35,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/modulostienda/inicio','UsuariosController@crear_user_vendedor')->name('crearvendedor');
 
 //Rutas para administrable
-Route::get('/login/administrable','HomeController@indexadmin')->name('administrable');
+Route::get('/login/administrable','HomeController@indexadmin')->name('administrable')->middleware('role:["administrador"],["vendedor"]');
 
 //ruta de rubros
 Route::get('/login/rubros','RubrosController@index')->name('rubros.index');
 Route::post('/login/rubros/store','RubrosController@store')->name('rubros.store');
+Route::post('/login/rubros/update','RubrosController@update')->name('rubros.update');
+Route::delete('/login/rubros/delete/{id}','RubrosController@destroy')->name('rubros.delete');
