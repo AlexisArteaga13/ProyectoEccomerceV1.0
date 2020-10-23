@@ -23,12 +23,13 @@
           <div class="container-fluid">
               <div class="row mb-2">
                   <div class="col-sm-6">
-                    <button type="button" class="btn btn-success"> + Agregar Nuevo</button>
+                    <button type="button" class="btn btn-success" data-toggle= "modal" data-target="#ModalAgregar"> + Agregar Nuevo</button>
                   </div>
                  
               </div>
           </div><!-- /.container-fluid -->
       </section>
+
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -57,8 +58,9 @@
                                       <tr>
                                         <td>Rubro 1</td>
                                         <td>Mrubro 1 de pruebaa</td>
-                                        <td><button type="button" class="btn btn-outline-warning">Editar</button>
-                                          <button type="button" class="btn btn-outline-danger">Eliminar</button>
+                                        <td>
+                                        <button type="button" class= "btn btn-outline-warning" data-toggle= "modal" data-target="#ModalEditar">Editar</button>
+                                        <button type="button" class= "btn btn-outline-danger" data-toggle= "modal" data-target="#ModalEliminar">Eliminar</button>
                                         </td>
                                         
                                       </tr>
@@ -84,5 +86,108 @@
         </section>
         <!-- /.content -->
     </div>
+        <!--Modales -->
+        <!-- Modal Agregar-->
+        <div class="modal fade" id="ModalAgregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Agregar Nuevo Rubro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nombre Rubro">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Estado</label>
+                    <div class="col-sm-10">                   
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1">Activo</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <label class="form-check-label" for="inlineRadio2">Inactivo</label>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+            </div>
+        </div>
+        </div>
+
+    <!-- Modal Editar-->
+    <div class="modal fade" id="ModalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Editar Rubro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id="formGroupExampleInput">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Estado</label>
+                    <div class="col-sm-10">                   
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1">Activo</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <label class="form-check-label" for="inlineRadio2">Inactivo</label>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+            </div>
+        </div>
+        </div>
+
+    <!--Modal Elimiar -->
+        <div class="modal fade" id="ModalEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Rubro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Esta seguro de Eliminar el rubro</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Eliminar</button>
+            </div>
+            </div>
+        </div>
+        </div>
 @include('vistasadmin.modulosadmin.llamadoscript.scripttable')
 @endsection
