@@ -46,12 +46,13 @@ class EmpresasController extends Controller
         //$this->middleware()->only('');
     }
     public function index(){
+        $rubros= DB::table('rubro')->where('estado','=',1)->get();
         $empresas = DB::table('empresa as e')
         ->join('rubro as r','e.idRubro','=','r.idRubro')
         ->join('users as u','u.id','=','e.idUsuario')
         ->get();
         
-       return view('vistasadmin.empresas.eindex',compact('empresas'));
+       return view('vistasadmin.empresas.eindex',compact('empresas','rubros'));
     }
 
     /*public function store(Request $request){
@@ -79,7 +80,7 @@ class EmpresasController extends Controller
             'descripcion' =>['required'],
             'vision' =>['required'],
             'mision' =>['required'],
-            'logo' =>['required'],
+            'logo' =>['image'],
             'ruc' =>['required'],
             'telefono' =>['required'],
             'razonsocial' =>['required'],
@@ -95,7 +96,11 @@ class EmpresasController extends Controller
         $empresa->descripcion = $request->descripcion;
         $empresa->vision = $request->vision;
         $empresa->mision = $request->mision;
-        $empresa->logo_img_empresa = $request->file('logo')->store('public');
+        if($request->file('logo')){
+            
+            $empresa->logo_img_empresa = $request->file('logo')->store('public');
+        }
+       
         $empresa->ruc = $request->ruc;
         $empresa->telefono = $request->telefono;
         $empresa->razonSocial  = $request->razonsocial;
