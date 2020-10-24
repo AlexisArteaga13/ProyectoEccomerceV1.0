@@ -53,3 +53,10 @@ Route::delete('/login/categorias/delete/{id}','CategoriasController@destroy')->n
 Route::get('/login/empresas','EmpresasController@index')->name('empresas.index');
 Route::post('/login/empresas/update','EmpresasController@update')->name('empresas.update');
 Route::delete('/login/empresas/delete/{id}','EmpresasController@destroy')->name('empresas.delete');
+
+//ruta de planes
+Route::get('/login/planes','PlanesController@index')->name('planes.index');
+Route::post('/login/planes/store','PlanesController@store')->name('planes.store');
+Route::post('/login/planes/update','PlanesController@update')->name('planes.update');
+Route::delete('/login/planes/delete/{id}','PlanesController@destroy')->name('planes.delete');
+
