@@ -23,7 +23,7 @@ $('#ModalEditar').on('show.bs.modal', function (event) {
     modal.find('.modal-body #descripcion').val(descripcion);
     modal.find('.modal-body #vision').val(vision);
     modal.find('.modal-body #mision').val(mision);
-    modal.find('.modal-body #logo').val(logo);
+    modal.find('.modal-body #logo2').attr("data-initial-preview",logo);
     modal.find('.modal-body #ruc').val(ruc);
     modal.find('.modal-body #telefono').val(telefono);
     modal.find('.modal-body #razonsocial').val(razonsocial);
