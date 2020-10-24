@@ -170,7 +170,7 @@
                 <div class="modal-body">
                     <form action="{{ route('rubros.update') }}" method="post">
 
-                        {{ csrf_field() }}
+                        @csrf
                         <input type="hidden" name="id" id="id" value="">
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>

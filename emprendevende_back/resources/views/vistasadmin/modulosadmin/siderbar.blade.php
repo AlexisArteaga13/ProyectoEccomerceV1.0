@@ -87,7 +87,7 @@
                             <path
                                 d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1z" />
                         </svg>
-                        <p> Rubros</p>
+                        <p> Rubros de empresas</p>
                     </a>
                 </li>
                 <!-- <li class="nav-item">
