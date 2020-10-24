@@ -65,7 +65,7 @@
             </ul>
           </li> -->
                 <li class="nav-item">
-                    <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                    <a href="{{ route('empresas.index') }}" class="nav-link">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-building" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
