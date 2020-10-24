@@ -42,4 +42,14 @@ Route::get('/login/rubros','RubrosController@index')->name('rubros.index');
 Route::post('/login/rubros/store','RubrosController@store')->name('rubros.store');
 Route::post('/login/rubros/update','RubrosController@update')->name('rubros.update');
 Route::delete('/login/rubros/delete/{id}','RubrosController@destroy')->name('rubros.delete');
-///**************EndRubros*************** */
+
+//ruta de categorias
+Route::get('/login/categorias','CategoriasController@index')->name('categorias.index');
+Route::post('/login/categorias/store','CategoriasController@store')->name('categorias.store');
+Route::post('/login/categorias/update','CategoriasController@update')->name('categorias.update');
+Route::delete('/login/categorias/delete/{id}','CategoriasController@destroy')->name('categorias.delete');
+
+//ruta de empresas
+Route::get('/login/empresas','EmpresasController@index')->name('empresas.index');
+Route::post('/login/empresas/update','EmpresasController@update')->name('empresas.update');
+Route::delete('/login/empresas/delete/{id}','EmpresasController@destroy')->name('empresas.delete');
