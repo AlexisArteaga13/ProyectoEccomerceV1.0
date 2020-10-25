@@ -11,6 +11,9 @@ class Producto extends Model
     protected $primaryKey='idPRODUCTO';
     public $timestamps=false;
     protected $fillable = [
-        'nombreProducto','precio','marca'
+        'nombreProducto','precio','marca','peso',
+        'stock','unidad','descripcion','vistas','calificacion',
+        'imagen_f','imagen_p','imagen_iz','imagen_d','imagen_s','imagen_in',
+        'idCategoria','idEmpresa','estado',
     ];
 }

@@ -105,7 +105,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('categorias.index') }}" class="nav-link">
+                    <a href="{{ route('productos.index') }}" class="nav-link">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-heading" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
