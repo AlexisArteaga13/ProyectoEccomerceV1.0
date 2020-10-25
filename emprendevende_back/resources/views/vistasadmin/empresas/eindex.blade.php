@@ -124,7 +124,7 @@ $("#logo2").fileinput({
                                                 <td>{{ $value->fechaRegistro }}</td> 
                                                 <td>{{ $value->calificacion }}</td> 
                                                 <td>{{ $value->nombreRubro }}</td> 
-                                                <td>{{ $value->name }}</td> 
+                                            <td>{{ $value->name }} {{$value->apellidos}}</td> 
                                                 <td>
                                                     @if ($value->estado == '1')
                                                         <button class="btn btn-success">Activo</button>
@@ -151,7 +151,7 @@ $("#logo2").fileinput({
                                                         data-fecha="{{ $value->fechaRegistro }}"
                                                         data-calificacion="{{ $value->calificacion }}"
                                                         data-rubro="{{ $value->idRubro }}"
-                                                        data-encargado="{{ $value->name }}"
+                                                        data-encargado="{{ $value->name }} {{$value->apellidos}}"
                                                         data-target="#ModalEditar">Editar</button>
                                                     <button type="button" class="btn btn-outline-danger" data-toggle="modal"
                                                         data-target="#ModalEliminar-{{ $value->idEmpresa }}">Eliminar</button>

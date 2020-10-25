@@ -18,7 +18,7 @@ Auth::routes(['verify' => true]);
 Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider')->name('social.auth');
 Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
 /* ***************Fin de rutas autenticar de facebook*** */ 
-
+//****RUTAS SIN NECESIDAD DE CONTROLADOR */
 Route::get('/', function () {
    /* Alert::success('Success Title', 'Success Message');
 ;*/
@@ -26,6 +26,7 @@ Route::get('/', function () {
    //return view('vistasadmin/indexadmin');
 })->name('inicio');
 
+//******* */
 // E-mail verification
 Route::get('/register/verify/{code}', 'CorreosController@verify');
 

@@ -40,8 +40,8 @@ class EmpresasController extends Controller
     }*/
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('role:["administrador"]," "');
+       //$this->middleware('auth');
+        $this->middleware('role:["administrador"]," "')->only('index','update','destroy');
        
         //$this->middleware()->only('');
     }
@@ -54,6 +54,11 @@ class EmpresasController extends Controller
         ->get();
         
        return view('vistasadmin.empresas.eindex',compact('empresas','rubros'));
+    }
+    public function iraregistro(){
+      
+        $rubros= DB::table('rubro')->where('estado','=',1)->get();
+        return view('modulostienda.registrovendedor', compact('rubros'));
     }
 
     /*public function store(Request $request){
@@ -108,7 +113,6 @@ class EmpresasController extends Controller
         $empresa->fechaRegistro = $request->fecha;
         $empresa->calificacion = $request->calificacion;
         $empresa->idRubro  = $request->rubro;
-        
         if($empresa->update()){
             return back()->with('success','Empresa Actualizada Correctamente.');
         }
