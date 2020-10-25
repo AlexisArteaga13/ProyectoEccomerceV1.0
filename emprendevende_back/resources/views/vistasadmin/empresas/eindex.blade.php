@@ -128,8 +128,10 @@ $("#logo2").fileinput({
                                                 <td>
                                                     @if ($value->estado == '1')
                                                         <button class="btn btn-success">Activo</button>
+
                                                     @else
                                                         <button class="btn btn-danger">Inactivo</button>
+
                                                     @endif 
 
                                                 </td>
@@ -183,7 +185,7 @@ $("#logo2").fileinput({
         <!-- /.content -->
     </div>
     <!--Modales -->
-    <!-- Modal Agregar-->
+    <!-- Modal Agregar
     <div class="modal fade" id="ModalAgregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -205,7 +207,7 @@ $("#logo2").fileinput({
                                 <input type="text" name="nombre" class="form-control" id="formGroupExampleInput"
                                     placeholder="Ingrese el nombre del rubro" required>
                             </div>
-                        </div>
+                        </div>-->
                         <!--<div class="form-group row">
                                                 <label for="inputPassword" class="col-sm-2 col-form-label">Estado</label>
                                                 <div class="col-sm-10">

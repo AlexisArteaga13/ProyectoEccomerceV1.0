@@ -60,3 +60,9 @@ Route::post('/login/planes/store','PlanesController@store')->name('planes.store'
 Route::post('/login/planes/update','PlanesController@update')->name('planes.update');
 Route::delete('/login/planes/delete/{id}','PlanesController@destroy')->name('planes.delete');
 
+//ruta de productos
+Route::get('/login/productos','ProductosController@index')->name('productos.index');
+Route::post('/login/productos/store','ProductosController@store')->name('productos.store');
+Route::post('/login/productos/update','ProductosController@update')->name('productos.update');
+Route::delete('/login/productos/delete/{id}','ProductosController@destroy')->name('productos.delete');
+
