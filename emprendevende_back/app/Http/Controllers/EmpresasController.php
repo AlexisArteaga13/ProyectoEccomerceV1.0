@@ -55,9 +55,9 @@ class EmpresasController extends Controller
        return view('vistasadmin.empresas.eindex',compact('empresas','rubros'));
     }
     public function iraregistro(){
-      
+        $planes=DB::table('plan')->where('estado','=','1')->get();
         $rubros= DB::table('rubro')->where('estado','=',1)->get();
-        return view('modulostienda.registrovendedor', compact('rubros'));
+        return view('modulostienda.registrovendedor', compact('rubros','planes'));
     }
 
     /*public function store(Request $request){

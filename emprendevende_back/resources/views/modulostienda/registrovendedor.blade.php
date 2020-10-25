@@ -98,13 +98,12 @@
                     </div>
                 </div>
                 <h5>Adquiere Un plan</h5>
+
                 <div class="form-group row">
                     <div class="col-sm-12">
+                        @foreach ($planes as $p)
                         <div class="form-check form-check-inline">
-                            <div class="card" style="width: 18rem;">
-                                
-                                <img src="{{asset('../storage/app/public/vykSVlo771boqGjHBCikrNEsryhoH4BeLacMYg9E.png')}}" class="card-img-top" alt="">
-                                       
+                            <div class="card" style="width: 18rem;">      
                                 <div class="card-body">
                                   <h5 class="card-title">Card title</h5>
                                   <p class="card-text">Detalles</p>
@@ -121,6 +120,8 @@
                               </div>
                             
                         </div>
+                        @endforeach
+                        
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="estado" id="opcion2" value="0">
                             <label class="form-check-label" for="inlineRadio2">Rey Emprendedor</label>
