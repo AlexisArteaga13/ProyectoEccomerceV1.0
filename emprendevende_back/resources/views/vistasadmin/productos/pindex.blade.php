@@ -284,31 +284,31 @@ $("#imginferior").fileinput({
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Img Posterior</label>
                             <div class="col-sm-10">
-                                <input type="file" name="imgposterior" data-initial-preview="{{Storage::url($value->imagen_p)}}" class="form-control" id="imgposterior">
+                                <input type="file" name="imgposterior"  class="form-control" id="imgposterior">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Img Izquierda</label>
                             <div class="col-sm-10">
-                                <input type="file" name="imgizquierda" data-initial-preview="{{Storage::url($value->imagen_iz)}}" class="form-control" id="imgizquierda">
+                                <input type="file" name="imgizquierda"  class="form-control" id="imgizquierda">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Img Derecha</label>
                             <div class="col-sm-10">
-                                <input type="file" name="imgderecha" data-initial-preview="{{Storage::url($value->imagen_d)}}" class="form-control" id="imgderecha">
+                                <input type="file" name="imgderecha"  class="form-control" id="imgderecha">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Img Superior</label>
                             <div class="col-sm-10">
-                                <input type="file" name="imgsuperior" data-initial-preview="{{Storage::url($value->imagen_s)}}" class="form-control" id="imgsuperior">
+                                <input type="file" name="imgsuperior" class="form-control" id="imgsuperior">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Img Inferior</label>
                             <div class="col-sm-10">
-                                <input type="file" name="imginferior" data-initial-preview="{{Storage::url($value->imagen_in)}}" class="form-control" id="imginferior">
+                                <input type="file" name="imginferior"  class="form-control" id="imginferior">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -419,37 +419,37 @@ $("#imginferior").fileinput({
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Img Frontal</label>
                             <div class="col-sm-10">
-                                <input type="file" name="imgfrontal" data-initial-preview="{{Storage::url($value->imagen_f)}}" class="form-control" id="imgfrontal">
+                                <input type="file" name="imgfrontal" class="form-control" id="imgfrontal">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Img Posterior</label>
                             <div class="col-sm-10">
-                                <input type="file" name="imgposterior" data-initial-preview="{{Storage::url($value->imagen_p)}}" class="form-control" id="imgposterior">
+                                <input type="file" name="imgposterior"  class="form-control" id="imgposterior">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Img Izquierda</label>
                             <div class="col-sm-10">
-                                <input type="file" name="imgizquierda" data-initial-preview="{{Storage::url($value->imagen_iz)}}" class="form-control" id="imgizquierda">
+                                <input type="file" name="imgizquierda"  class="form-control" id="imgizquierda">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Img Derecha</label>
                             <div class="col-sm-10">
-                                <input type="file" name="imgderecha" data-initial-preview="{{Storage::url($value->imagen_d)}}" class="form-control" id="imgderecha">
+                                <input type="file" name="imgderecha" class="form-control" id="imgderecha">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Img Superior</label>
                             <div class="col-sm-10">
-                                <input type="file" name="imgsuperior" data-initial-preview="{{Storage::url($value->imagen_s)}}" class="form-control" id="imgsuperior">
+                                <input type="file" name="imgsuperior"  class="form-control" id="imgsuperior">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Img Inferior</label>
                             <div class="col-sm-10">
-                                <input type="file" name="imginferior" data-initial-preview="{{Storage::url($value->imagen_in)}}" class="form-control" id="imginferior">
+                                <input type="file" name="imginferior"  class="form-control" id="imginferior">
                             </div>
                         </div>
                         <div class="form-group row">

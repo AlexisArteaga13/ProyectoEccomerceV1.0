@@ -61,7 +61,7 @@
                                     </thead>
 
                                     <tbody>
-                                        @foreach ($planes as $key => $value)
+                                        @foreach ($planes as $key=>$value)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $value->nombrePlan }}</td>
