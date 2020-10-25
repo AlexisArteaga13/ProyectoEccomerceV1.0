@@ -3,7 +3,7 @@
     <meta charset="utf-8">
 </head>
 <body>
-    <h2>Hola {{ $name }}, gracias por registrarte en <strong>Programación y más</strong> !</h2>
+    <h2>Hola {{ $nombres }}, gracias por registrarte en <strong>Programación y más</strong> !</h2>
     <p>Por favor confirma tu correo electrónico.</p>
     <p>Para ello simplemente debes hacer click en el siguiente enlace:</p>
 
@@ -71,7 +71,12 @@
                                         style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; padding: 35px;">
                                         <h1
                                             style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; color: #3d4852; font-size: 19px; font-weight: bold; margin-top: 0; text-align: left;">
-                                            ¡Hola! {{ $name }}</h1>
+                                            ¡Hola! {{ $nombres }}</h1>
+                                        <p>Registraste a una empresa en EMPRENDE VENDE, tú estas a cargo, Confirma tu
+                                            cuenta y disfruta de nuestros servicios.</p>
+                                        <span>Estamos SEGUROS que {{ $ncomercial }} superará los límites de lo
+                                            virtual.</span>
+
                                         <p
                                             style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; color: #3d4852; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">
                                             Por favor pulsa el siguiente botón para confirmar tu correo electrónico.</p>

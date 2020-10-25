@@ -52,4 +52,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->roles->flatten()->pluck('name')->unique();
     }
+  
 }

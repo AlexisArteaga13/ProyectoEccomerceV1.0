@@ -14,5 +14,6 @@ class Empresa extends Model
         'logo_img_empresa','ruc','telefono','razonSocial','fechaRegistro',
         'calificacion','idRubro','idUsuario',
     ];
+    
 }
 
