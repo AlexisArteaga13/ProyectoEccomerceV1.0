@@ -105,27 +105,27 @@
                         <div class="form-check form-check-inline">
                             <div class="card" style="width: 18rem;">      
                                 <div class="card-body">
-                                  <h5 class="card-title">Card title</h5>
-                                  <p class="card-text">Detalles</p>
+                                <h5 class="card-title">{{$p->nombrePlan}}</h5>
+                                  <p class="card-text">{{$p->detalle}}</p>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                  <li class="list-group-item">Costo: </li>
+                                <li class="list-group-item">Costo: S/. {{$p->costoMensual}}</li>
                                   
-                                  <li class="list-group-item">Costo Anual</li>
+                                  <li class="list-group-item">Costo Anual: S/. {{$p->costoAnual}}</li>
                                 </ul>
                                 <div class="card-body">
                                     <input class="form-check-input" type="radio" name="estado" id="opcion1" value="1">
-                                    <label class="form-check-label" for="inlineRadio1">Emprende Free</label>
+                                <label class="form-check-label" for="inlineRadio1">{{$p->nombrePlan}}</label>
                                 </div>
                               </div>
                             
                         </div>
                         @endforeach
                         
-                        <div class="form-check form-check-inline">
+                       <!-- <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="estado" id="opcion2" value="0">
                             <label class="form-check-label" for="inlineRadio2">Rey Emprendedor</label>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <h5 class="h5">Antes que nada</h5>
