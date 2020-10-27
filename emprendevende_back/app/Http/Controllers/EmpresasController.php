@@ -50,7 +50,7 @@ class EmpresasController extends Controller
         $empresas = DB::table('empresa as e')
         ->join('rubro as r','e.idRubro','=','r.idRubro')
         ->join('users as u','u.id','=','e.idUsuario')
-        ->select('e.*','r.nombreRubro','u.name')
+        ->select('e.*','r.nombreRubro','u.name','u.apellidos')
         ->get();
         
        return view('vistasadmin.empresas.eindex',compact('empresas','rubros'));
