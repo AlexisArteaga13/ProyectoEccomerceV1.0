@@ -69,6 +69,7 @@ class UsuariosController extends Controller
         $newuser ->password= bcrypt(request('password'));
         $newuser->estado='0';
         $newuser->email_verified_at=request('codconfirmar');
+        $newuser->idPlan = 1;
         $newuser->save();
         $newuser->asignarRol(2);
         //PAra crear nueva empresa

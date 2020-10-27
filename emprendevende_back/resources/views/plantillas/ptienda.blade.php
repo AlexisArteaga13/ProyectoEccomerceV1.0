@@ -9,10 +9,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <head>
     <title>@yield('titulo')</title>
-    <!-- Meta tag Keywords -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <meta charset="UTF-8" />
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
     <meta name="keywords"
         content="Electro Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
     <script>
@@ -94,6 +95,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         @if (Auth::check())
 
                             @can('administrador', 'vendedor')
+                                <li class="text-center border-right text-white">
+                                    <a href="{{ route('administrable') }}" class="text-white">
+                                        <i class="fas fa-truck mr-2"></i>Administrar</a>
+
+                                </li>
+                            @endcan
+                            @can('vendedor')
                                 <li class="text-center border-right text-white">
                                     <a href="{{ route('administrable') }}" class="text-white">
                                         <i class="fas fa-truck mr-2"></i>Administrar</a>
@@ -782,7 +790,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script src="{{ asset('js/minicart.js') }}"></script>
     <script>
         paypals.minicarts
-        .render(); //use only unique class names other than paypals.minicarts.Also Replace same class name in css and minicart.min.js
+            .render(); //use only unique class names other than paypals.minicarts.Also Replace same class name in css and minicart.min.js
 
         paypals.minicarts.cart.on('checkout', function(evt) {
             var items = this.items(),
@@ -797,7 +805,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
             if (total < 3) {
                 alert(
-                    'The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+                    'The minimum order quantity is 3. Please add more to your shopping cart before checking out'
+                    );
                 evt.preventDefault();
             }
         });
