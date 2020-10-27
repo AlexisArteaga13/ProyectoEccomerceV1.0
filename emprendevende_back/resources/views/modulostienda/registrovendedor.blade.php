@@ -22,8 +22,8 @@
     </div>
     <div class="ads-grid  py-sm-5 py-4">
         <div class="container py-xl-4 py-lg-2">
-            <form>
-
+            <form action="{{ route('crearvendedor') }}" method="post">
+                @csrf
                 <h5 class="h5">Datos de la Empresa</h5>
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Número de RUC</label>
@@ -36,13 +36,14 @@
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Razón Social</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="razonsocial" placeholder="" disabled required>
+                        <input type="text" class="form-control" name="razonsocial" id="razonsocial" placeholder="" readonly
+                            required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Nombre Comercial</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="inputPassword3" placeholder="" required>
+                        <input type="text" class="form-control" name="ncomercial" id="ncomercial" placeholder="" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -51,7 +52,7 @@
                         <div class="form-row align-items-center">
                             <div class="col-auto my-1">
                                 <label class="mr-sm-4 sr-only" for="inlineFormCustomSelect">Preference</label>
-                                <select class="custom-select mr-sm-4" id="inlineFormCustomSelect">
+                                <select class="custom-select mr-sm-4" id="categoria" name="categoria">
                                     <option selected disabled>Seleccione una Categoria</option>
                                     @foreach ($rubros as $r)
                                         <option value="{{ $r->idRubro }}">{{ $r->nombreRubro }}</option>
@@ -66,7 +67,8 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Número de DNI</label>
                     <div class="col-sm-3">
-                        <input type="text" id="dni" class="form-control" id="inputEmail3" placeholder="Ingresa tu DNI" required>
+                        <input type="text" id="dni" class="form-control" name="dni" id="inputEmail3"
+                            placeholder="Ingresa tu DNI" required>
                         <span>Recuerda ser mayor de edad</span>
                     </div>
                     <span onclick="obtenerdni();" class="btn btn-primary">Verificar</span>
@@ -74,7 +76,8 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Nombres Completos</label>
                     <div class="col-sm-4">
-                        <input type="text" id="nombres" name="nombres" class="form-control" placeholder="" readonly required>
+                        <input type="text" id="nombres" name="nombres" class="form-control" placeholder="" readonly
+                            required>
                     </div>
 
                 </div>
@@ -88,46 +91,59 @@
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-6">
-                        <input type="email" class="form-control" id="inputPassword3" placeholder="" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password-confirm" class="col-sm-2 col-form-label">Confirmar Password</label>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control" id="password-confirm" name="password_confirmation" placeholder="Password" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Telefono</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" id="inputPassword3" placeholder="Teléfono" required>
+                        <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Teléfono"
+                            required>
                     </div>
                 </div>
-                <h5>Adquiere Un plan</h5>
+                <!--<h5>Adquiere Un plan</h5>
 
                 <div class="form-group row">
                     <div class="col-sm-12">
                         @foreach ($planes as $p)
-                        <div class="form-check form-check-inline">
-                            <div class="card" style="width: 18rem;">      
-                                <div class="card-body">
-                                  <h5 class="card-title">Card title</h5>
-                                  <p class="card-text">Detalles</p>
+                            <div class="form-check form-check-inline">
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $p->nombrePlan }}</h5>
+                                        <p class="card-text">{{ $p->detalle }}</p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Costo: S/. {{ $p->costoMensual }}</li>
+
+                                        <li class="list-group-item">Costo Anual: S/. {{ $p->costoAnual }}</li>
+                                    </ul>
+                                    <div class="card-body">
+                                        <input class="form-check-input" type="radio" name="estado" id="opcion1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">{{ $p->nombrePlan }}</label>
+                                    </div>
                                 </div>
-                                <ul class="list-group list-group-flush">
-                                  <li class="list-group-item">Costo: </li>
-                                  
-                                  <li class="list-group-item">Costo Anual</li>
-                                </ul>
-                                <div class="card-body">
-                                    <input class="form-check-input" type="radio" name="estado" id="opcion1" value="1">
-                                    <label class="form-check-label" for="inlineRadio1">Emprende Free</label>
-                                </div>
-                              </div>
-                            
-                        </div>
+
+                            </div>
                         @endforeach
-                        
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="estado" id="opcion2" value="0">
-                            <label class="form-check-label" for="inlineRadio2">Rey Emprendedor</label>
-                        </div>
-                    </div>
-                </div>
+-->
+                        <!-- <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="estado" id="opcion2" value="0">
+                                <label class="form-check-label" for="inlineRadio2">Rey Emprendedor</label>
+                            </div>-->
+                  <!--  </div>
+                </div> -->
                 <h5 class="h5">Antes que nada</h5>
                 <div class="form-group">
                     <div class="form-check">

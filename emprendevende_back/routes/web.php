@@ -33,7 +33,11 @@ Route::get('/register/verify/{code}', 'CorreosController@verify');
 
 Route::get('/home', 'HomeController@index')->name('home');
 // Rutas para crear usuarios
-Route::post('/modulostienda/inicio','UsuariosController@crear_user_vendedor')->name('crearvendedor');
+Route::post('/modulostienda/inicio','UsuariosController@crear_user_comprador')->name('crearcomprador');
+Route::post('/graciasporregistrarte','UsuariosController@crear_user_vendedor')->name('crearvendedor');
+
+
+///************************************/ */
 
 //Rutas para administrable
 Route::get('/login/administrable','HomeController@indexadmin')->name('administrable')->middleware('role:["administrador"],["vendedor"]');
@@ -60,6 +64,11 @@ Route::get('/login/planes','PlanesController@index')->name('planes.index');
 Route::post('/login/planes/store','PlanesController@store')->name('planes.store');
 Route::post('/login/planes/update','PlanesController@update')->name('planes.update');
 Route::delete('/login/planes/delete/{id}','PlanesController@destroy')->name('planes.delete');
+// planes de vendedor 
+Route::post('/login/planesvendedor/store/{id}','PlanesController@escogerplan')->name('planes.escogerplan');
+
+
+//////
 
 //ruta de productos
 Route::get('/login/productos','ProductosController@index')->name('productos.index');

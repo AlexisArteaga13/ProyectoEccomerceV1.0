@@ -16,10 +16,12 @@
             <div class="info">
                 <a href="#" class="d-block">{{ Auth::user()->name }}</a>
             </div>
+            
         </div>
 
         <!-- SidebarSearch Form -->
         <div class="form-inline">
+          <span class="badge badge-warning navbar-badge">{{ Auth::user()->tieneRol()[0]}}</span>
             <div class="input-group" data-widget="sidebar-search">
                 <input class="form-control form-control-sidebar" type="search" placeholder="Buscar" aria-label="Search">
                 <div class="input-group-append">

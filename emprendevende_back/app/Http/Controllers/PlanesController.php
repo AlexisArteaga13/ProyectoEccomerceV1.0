@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use App\Plan;
+use App\User;
 use Illuminate\Http\Request;
 
 class PlanesController extends Controller
@@ -17,15 +18,37 @@ class PlanesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:["administrador"]," "');
+        $this->middleware('role:["administrador"]," "')->only('destroy','update');
+        $this->middleware('role:["administrador"],["vendedor"]')->only('index');
        
         //$this->middleware()->only('');
     }
     public function index(){
-        $planes = DB::table('plan')->get();
-        return view('vistasadmin.planes.pindex',compact('planes'));
+        if(Auth::user()->tieneRol()[0] == 'administrador'){
+            $planes = DB::table('plan')->get();
+            return view('vistasadmin.planes.pindex',compact('planes'));
+        }
+        elseif(Auth::user()->tieneRol()[0] == 'vendedor'){
+            
+            $planes = DB::table('plan')->get();
+            return view('vistasadmin.planes.planvendedor.index',compact('planes'));
+        }
+       
     }
-
+    public function escogerplan($id){
+        $plan = DB::table('users')->where('idPlan',$id)->first();
+        if($plan){
+            return back()->with('info','Actualmente estas con este plan.');
+        }
+        else {
+            $iduser = Auth::user()->id;
+            $actualizarplan = User::findOrFail($iduser);
+            $actualizarplan->idPlan = $id;
+            $actualizarplan->update();
+            return back()->with('success','Gracias por migrar de plan, no te arrepentiras.');
+        }
+       
+    }
     public function store(Request $request){
         $request->validate([
             'nombre' => ['required', 'string', 'max:255'],
@@ -85,4 +108,6 @@ class PlanesController extends Controller
             return back()->with('error','Ocurrió un error.');
         }
     }
+    /// ACCIONES DEL CONTROLADOR DEL VENDEDOR
+    
 }

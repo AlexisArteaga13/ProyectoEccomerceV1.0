@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use DB;
+use Auth;
 use Illuminate\Support\Facades\Storage;
 class ProductosController extends Controller
 {
@@ -41,20 +42,34 @@ class ProductosController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:["administrador"]," "');
+        $this->middleware('role:["administrador"],["vendedor"]');
        
         //$this->middleware()->only('');
     }
     public function index(){
-        $empresas= DB::table('empresa')->get();
-        $categorias= DB::table('categoria')->where('estado','=',1)->get();
-        $productos = DB::table('producto as p')
-        ->join('empresa as e','p.idEmpresa','=','e.idEmpresa')
-        ->join('categoria as c','p.idCategoria','=','c.idCategoria')
-        ->select('p.*','e.nombreEmpresa','c.nombreCategoria')
-        ->get();
-        
-       return view('vistasadmin.productos.pindex',compact('productos','categorias','empresas'));
+        if(Auth::user()->tieneRol()[0] == 'administrador'){
+            $empresas= DB::table('empresa')->get();
+            $categorias= DB::table('categoria')->where('estado','=',1)->get();
+            $productos = DB::table('producto as p')
+            ->join('empresa as e','p.idEmpresa','=','e.idEmpresa')
+            ->join('categoria as c','p.idCategoria','=','c.idCategoria')
+            ->select('p.*','e.nombreEmpresa','c.nombreCategoria')
+            ->get();
+            
+           return view('vistasadmin.productos.pindex',compact('productos','categorias','empresas'));
+        }
+        else{
+            $empresas= DB::table('empresa')->where('idUsuario','=',Auth::user()->id)->get();
+            $categorias= DB::table('categoria')->where('estado','=',1)->get();
+            $productos = DB::table('producto as p')
+            ->join('empresa as e','p.idEmpresa','=','e.idEmpresa')
+            ->join('categoria as c','p.idCategoria','=','c.idCategoria')
+            ->select('p.*','e.nombreEmpresa','c.nombreCategoria')
+            ->get();
+            
+           return view('vistasadmin.productos.pindex',compact('productos','categorias','empresas'));
+        }
+       
     }
 
     public function store(Request $request){
@@ -62,7 +77,7 @@ class ProductosController extends Controller
             'nombre' => ['required', 'string', 'max:255'],
             'categoria' =>['required'],
             'empresa' =>['required'],
-            'precio' =>['required'],
+            'precio' =>['required','numeric'],
             'marca' =>['required'],
             'imgfrontal' =>['image'],
             'imgposterior' =>['image'],
@@ -70,7 +85,7 @@ class ProductosController extends Controller
             'imgderecha' =>['image'],
             'imgsuperior' =>['image'],
             'imginferior' =>['image'],
-            'peso' =>[''],
+            'peso' =>[' '],
             'stock' =>['required'],
             'unidad' =>['required'],
             'descripcion' =>['required'],
@@ -86,12 +101,28 @@ class ProductosController extends Controller
         $newproducto->descripcion = $request->descripcion;
         $newproducto->vistas ="";
         $newproducto->calificacion ="";
-        $newproducto->imagen_f = $request->file('imgfrontal')->store('public');
-        $newproducto->imagen_p = $request->file('imgposterior')->store('public');
-        $newproducto->imagen_iz = $request->file('imgizquierda')->store('public');
-        $newproducto->imagen_d = $request->file('imgderecha')->store('public');
-        $newproducto->imagen_s = $request->file('imgsuperior')->store('public');
-        $newproducto->imagen_in = $request->file('imginferior')->store('public');
+        if($request->file('imgfrontal')){
+            $newproducto->imagen_f = $request->file('imgfrontal')->store('public/producto');
+        }
+        elseif($request->file('imgizquierda')){
+            $newproducto->imagen_p = $request->file('imgposterior')->store('public/producto');
+        }
+        elseif($request->file('imgizquierda')){
+            $newproducto->imagen_iz = $request->file('imgizquierda')->store('public/producto');
+        }
+        elseif($request->file('imgderecha')){
+            $newproducto->imagen_d = $request->file('imgderecha')->store('public/producto');
+        }
+        elseif($request->file('imgsuperior')){
+            $newproducto->imagen_s = $request->file('imgsuperior')->store('public/producto');
+        }
+        else{
+            $newproducto->imagen_in = $request->file('imginferior')->store('public/producto');
+        }
+       
+       
+        
+        
         $newproducto->idCategoria = $request->categoria;
         $newproducto->idEmpresa = $request->empresa;
         $newproducto->estado = '1';
@@ -109,7 +140,7 @@ class ProductosController extends Controller
             'nombre' => ['required', 'string', 'max:255'],
             'estado' =>['required'],
             'categoria' =>['required'],
-            'precio' =>['required'],
+            'precio' =>['required','numeric','min:0.10'],
             'marca' =>['required'],
             'imgfrontal' =>['image'],
             'imgposterior' =>['image'],

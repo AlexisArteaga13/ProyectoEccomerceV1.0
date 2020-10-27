@@ -8,7 +8,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="{{ route('crearvendedor') }}" method="post">
+					<form action="{{ route('crearcomprador') }}" method="post">
 						@csrf
 						<div class="form-group">
 							<label class="col-form-label">Tu nombre</label>

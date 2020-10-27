@@ -11,13 +11,13 @@ class CorreosController extends Controller
         $user = User::where('email_verified_at', $code)->first();
 
         if (! $user)
-            return redirect('/');
+            return redirect('/')->with('error','Error al confirmar');
     
         $user->estado = true;
        // $user->confirmation_code = null;
         $user->save();
     
-        return redirect('/home')->with('notification', 'Has confirmado correctamente tu correo!');
+        return redirect('/home')->with('info', 'Has confirmado correctamente tu correo!');
     
     }
 }
