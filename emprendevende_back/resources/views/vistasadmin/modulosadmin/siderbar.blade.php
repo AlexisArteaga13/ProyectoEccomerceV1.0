@@ -66,6 +66,8 @@
               </li>
             </ul>
           </li> -->
+          
+         
                 <li class="nav-item">
                     <a href="{{ route('empresas.index') }}" class="nav-link">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-building" fill="currentColor"
@@ -78,6 +80,8 @@
                         <p> Empresas</p>
                     </a>
                 </li>
+                   
+                @can('administrador')
                 <li class="nav-item">
                     <a href="{{ route('rubros.index') }}" class="nav-link">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-heading" fill="currentColor"
@@ -92,6 +96,7 @@
                         <p> Rubros de empresas</p>
                     </a>
                 </li>
+                
                 <li class="nav-item">
                     <a href="{{ route('categorias.index') }}" class="nav-link">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-heading" fill="currentColor"
@@ -106,6 +111,7 @@
                         <p>Categorías</p>
                     </a>
                 </li>
+                @endcan
                 <li class="nav-item">
                     <a href="{{ route('productos.index') }}" class="nav-link">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-heading" fill="currentColor"

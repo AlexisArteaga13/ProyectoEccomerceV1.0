@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 class HomeController extends Controller
 {
     /**
@@ -23,7 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('modulostienda.inicio');
+        $empresas = DB::table('empresa')->where('estado',1)->get();
+        $categorias = DB::table('categoria')->where('estado',1)->get();
+        return view('modulostienda.inicio',compact('empresas','categorias'));
     }
     public function indexadmin()
     {
