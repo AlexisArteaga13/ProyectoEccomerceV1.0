@@ -71,3 +71,7 @@ Route::post('/login/productos/store','ProductosController@store')->name('product
 Route::post('/login/productos/update','ProductosController@update')->name('productos.update');
 Route::delete('/login/productos/delete/{id}','ProductosController@destroy')->name('productos.delete');
 
+//ruta de facturacion de planes
+Route::get('/login/facturacion','FacturacionController@index')->name('facturacion.index');
+Route::get('/login/facturacion/store','FacturacionController@store')->name('facturacion.store');
+
