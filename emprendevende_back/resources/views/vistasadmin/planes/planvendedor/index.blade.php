@@ -27,9 +27,7 @@
 
                         <!-- /.card -->
                         <h5>Adquiere Un plan</h5>
-
                         <div class="form-group row">
-                            
                                 @foreach ($planes as $p)
                                 <div class="col-sm-6">
                                     <form action="{{ route('planes.escogerplan', $p->idPLAN) }}" method="POST">
@@ -58,12 +56,17 @@
                                                 <div class="card-body" style="background-color: coral">
                                                    
                                                     <button class="btn btn-warning">Quiero este plan</button>
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter{{$p->idPLAN}}">
+                                                    Prueba
+                                                    </button>
+                                                    @include('vistasadmin.planes.planvendedor.modalcompra')
                                                 </div>
                                             </div>
-
+                                           
                                         </div>
                                     </form>
                                 </div>
+   
                                 @endforeach
 
                                 <!-- <div class="form-check form-check-inline">

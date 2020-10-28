@@ -5,6 +5,7 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 use App\Plan;
 use App\User;
+use App\MetodoPago;
 use Illuminate\Http\Request;
 
 class PlanesController extends Controller
