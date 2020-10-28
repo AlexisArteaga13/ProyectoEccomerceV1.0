@@ -56,7 +56,7 @@
                                                 <div class="card-body" style="background-color: coral">
                                                    
                                                     <button class="btn btn-warning">Quiero este plan</button>
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter{{$p->idPLAN}}">
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter{{$p->idPLAN,$metodo}}">
                                                     Prueba
                                                     </button>
                                                     @include('vistasadmin.planes.planvendedor.modalcompra')

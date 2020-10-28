@@ -32,7 +32,8 @@ class PlanesController extends Controller
         elseif(Auth::user()->tieneRol()[0] == 'vendedor'){
             
             $planes = DB::table('plan')->get();
-            return view('vistasadmin.planes.planvendedor.index',compact('planes'));
+            $metodo = DB::table('metodo_pago')->get();
+            return view('vistasadmin.planes.planvendedor.index',compact('planes','metodo'));
         }
        
     }
