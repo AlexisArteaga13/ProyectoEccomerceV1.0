@@ -30,8 +30,7 @@
                         <div class="form-group row">
                                 @foreach ($planes as $p)
                                 <div class="col-sm-6">
-                                    <form action="{{ route('planes.escogerplan', $p->idPLAN) }}" method="POST">
-                                        @csrf
+                                    
                                         <div class="form-check form-check-inline">
                                             <div class="card" style="width: 18rem;">
                                                 
@@ -64,7 +63,7 @@
                                             </div>
                                            
                                         </div>
-                                    </form>
+                                  
                                 </div>
    
                                 @endforeach
