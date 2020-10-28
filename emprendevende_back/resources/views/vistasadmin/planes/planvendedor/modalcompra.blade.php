@@ -26,13 +26,13 @@
                         <div style="text-align: center">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="facturacion" id="inlineRadio1"
-                                    value="option1">
+                                    value="option1" required>
                                 <label class="form-check-label" for="inlineRadio1">Facturación Mensual S/.</label>
                                 <label class="form-check-label" for="inlineRadio1">{{ $p->costoMensual }}</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="facturacion" id="inlineRadio2"
-                                    value="option2">
+                                    value="option2" required>
                                 <label class="form-check-label" for="inlineRadio2">Facturación Anual S/.</label>
                                 <label class="form-check-label" for="inlineRadio1">{{ $p->costoAnual }}</label>
                             </div>
@@ -69,6 +69,7 @@
                     </div>
                 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" >Save changes</button>
@@ -76,7 +77,8 @@
             </div>
           </form>
 =======
+=======
+>>>>>>> 2bb1fb829f989bf0f379a2520977dd758af644db
             </form>
->>>>>>> 6a93e62dcc0e355cf508dda4f74bb5a8d86bee96
         </div>
     </div>

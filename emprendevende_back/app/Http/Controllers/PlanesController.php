@@ -8,7 +8,7 @@ use App\User;
 use App\MetodoPago;
 use App\Facturacion;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon; 
 class PlanesController extends Controller
 {
     //
@@ -71,7 +71,8 @@ class PlanesController extends Controller
             $actualizarplan = User::findOrFail($iduser);
             $actualizarplan->idPlan = $id;
             $actualizarplan->update();
-            return $request->all();
+            $fecha = Carbon::now();
+            return $fecha->format('d-m-Y H:i:s');
            // return back()->with('success','Gracias por migrar de plan, no te arrepentiras.');
         }
        
