@@ -68,6 +68,17 @@
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" >Save changes</button>
+                </div>
+            </div>
+          </form>
+=======
+=======
+>>>>>>> 2bb1fb829f989bf0f379a2520977dd758af644db
             </form>
         </div>
     </div>

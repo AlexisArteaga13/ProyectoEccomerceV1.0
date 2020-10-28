@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Plan;
 use App\User;
 use App\MetodoPago;
+use App\Facturacion;
 use Illuminate\Http\Request;
 use Carbon\Carbon; 
 class PlanesController extends Controller
@@ -39,6 +40,29 @@ class PlanesController extends Controller
     }
     public function escogerplan($id,Request $request){
         $plan = DB::table('users')->where('idPlan',$id)->first();
+
+        $request->validate([
+            'nombre' => ['required', 'string', 'max:255'],
+            'slogan' => ['string', 'max:255'],
+            'detalle' => ['required', 'string', 'max:255'],
+            'mensual' => ['required', 'string', 'max:255'],
+            'anual' => ['required', 'string', 'max:255'],
+            
+        ]);
+        $newplan = new Plan();
+        $newplan->nombrePlan = $request->nombre;
+        $newplan->slogan = $request->slogan;
+        $newplan->detalle = $request->detalle;
+        $newplan->costoMensual = $request->mensual;
+        $newplan->costoAnual = $request->anual;
+        $newplan->estado = '1';
+        if($newplan->save()){
+            return back()->with('success','Rubro Creado Correctamente.');
+        }
+        else{
+            return back()->with('error','Ocurrió un error.');
+        }
+      //  
         if($plan){
             return back()->with('info','Actualmente estas con este plan.');
         }
