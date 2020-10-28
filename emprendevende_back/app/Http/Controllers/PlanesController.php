@@ -37,7 +37,7 @@ class PlanesController extends Controller
         }
        
     }
-    public function escogerplan($id){
+    public function escogerplan($id,Request $request){
         $plan = DB::table('users')->where('idPlan',$id)->first();
         if($plan){
             return back()->with('info','Actualmente estas con este plan.');
@@ -47,7 +47,8 @@ class PlanesController extends Controller
             $actualizarplan = User::findOrFail($iduser);
             $actualizarplan->idPlan = $id;
             $actualizarplan->update();
-            return back()->with('success','Gracias por migrar de plan, no te arrepentiras.');
+            return $request->all();
+           // return back()->with('success','Gracias por migrar de plan, no te arrepentiras.');
         }
        
     }
