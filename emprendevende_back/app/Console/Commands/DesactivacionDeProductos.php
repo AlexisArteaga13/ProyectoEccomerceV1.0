@@ -38,9 +38,9 @@ class DesactivacionDeProductos extends Command
     public function handle()
     {
         // Probamos para que actualice solo las empresas
-            $empresa = DB::table('empresa')
+            $empresa = DB::table('facturacion')
             /*->select('user_id', DB::raw('count(*) as total_posts'))
-            ->groupBy('user_id')*/
+            ->groupBy('user_id)*/
             ->get();
         
         // update statistics table
