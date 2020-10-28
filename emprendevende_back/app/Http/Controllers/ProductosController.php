@@ -307,48 +307,107 @@ class ProductosController extends Controller
             'calificacion' =>[''],
             
         ]);
-        $producto= Producto::findOrFail($request->id);
-        $producto->nombreProducto = $request->nombre;
-        $producto->estado = $request->estado;
-        $producto->precio = $request->precio;
-        $producto->descripcion = $request->descripcion;
-        $producto->marca = $request->marca;
-        $producto->idCategoria = $request->categoria;
-        if($request->file('imgfrontal')){
+
+        if(Auth::user()->tieneRol()[0]=='administrador' || Auth::user()->idPlan == '2'){
+            $producto= Producto::findOrFail($request->id);
+            $producto->nombreProducto = $request->nombre;
+            $producto->estado = $request->estado;
+            $producto->precio = $request->precio;
+            $producto->descripcion = $request->descripcion;
+            $producto->marca = $request->marca;
+            $producto->idCategoria = $request->categoria;
+            if($request->file('imgfrontal')){
+                
+                $producto->imagen_f = $request->file('imgfrontal')->store('public');
+            }
+            if($request->file('imgposterior')){
+                
+                $producto->imagen_p = $request->file('imgposterior')->store('public');
+            }
+            if($request->file('imgizquierda')){
+                
+                $producto->imagen_iz = $request->file('imgizquierda')->store('public');
+            }
+            if($request->file('imgderecha')){
+                
+                $producto->imagen_d = $request->file('imgderecha')->store('public');
+            }
+            if($request->file('imgsuperior')){
+                
+                $producto->imagen_s = $request->file('imgsuperior')->store('public');
+            }
+            if($request->file('imginferior')){
+                
+                $producto->imagen_in = $request->file('imginferior')->store('public');
+            }
+            $producto->peso = $request->peso;
+            $producto->stock  = $request->stock;
+            $producto->unidad = $request->unidad;
+            $producto->vistas = $request->vistas;
+            $producto->calificacion  = $request->calificacion;
             
-            $producto->imagen_f = $request->file('imgfrontal')->store('public');
+            if($producto->update()){
+                return back()->with('success','Producto Actualizado Correctamente.');
+            }
+            else{
+                return back()->with('error','Ocurrió un error.');
+            }
         }
-        if($request->file('imgposterior')){
-            
-            $producto->imagen_p = $request->file('imgposterior')->store('public');
-        }
-        if($request->file('imgizquierda')){
-            
-            $producto->imagen_iz = $request->file('imgizquierda')->store('public');
-        }
-        if($request->file('imgderecha')){
-            
-            $producto->imagen_d = $request->file('imgderecha')->store('public');
-        }
-        if($request->file('imgsuperior')){
-            
-            $producto->imagen_s = $request->file('imgsuperior')->store('public');
-        }
-        if($request->file('imginferior')){
-            
-            $producto->imagen_in = $request->file('imginferior')->store('public');
-        }
-        $producto->peso = $request->peso;
-        $producto->stock  = $request->stock;
-        $producto->unidad = $request->unidad;
-        $producto->vistas = $request->vistas;
-        $producto->calificacion  = $request->calificacion;
-        
-        if($producto->update()){
-            return back()->with('success','Producto Actualizado Correctamente.');
-        }
-        else{
-            return back()->with('error','Ocurrió un error.');
+        elseif(Auth::user()->idPlan == '1'){
+            $empresa = DB::table('empresa')->where('idUsuario',Auth::user()->id)->first();
+            return json_decode($empresa);
+            $conteodeproductos = DB::table('producto')
+            ->where('idEmpresa',$empresa->id)
+            ->where('estado','1')
+            ->count();
+            if($conteodeproductos<=3){
+                $producto= Producto::findOrFail($request->id);
+                $producto->nombreProducto = $request->nombre;
+                $producto->estado = $request->estado;
+                $producto->precio = $request->precio;
+                $producto->descripcion = $request->descripcion;
+                $producto->marca = $request->marca;
+                $producto->idCategoria = $request->categoria;
+                if($request->file('imgfrontal')){
+                    
+                    $producto->imagen_f = $request->file('imgfrontal')->store('public');
+                }
+                if($request->file('imgposterior')){
+                    
+                    $producto->imagen_p = $request->file('imgposterior')->store('public');
+                }
+                if($request->file('imgizquierda')){
+                    
+                    $producto->imagen_iz = $request->file('imgizquierda')->store('public');
+                }
+                if($request->file('imgderecha')){
+                    
+                    $producto->imagen_d = $request->file('imgderecha')->store('public');
+                }
+                if($request->file('imgsuperior')){
+                    
+                    $producto->imagen_s = $request->file('imgsuperior')->store('public');
+                }
+                if($request->file('imginferior')){
+                    
+                    $producto->imagen_in = $request->file('imginferior')->store('public');
+                }
+                $producto->peso = $request->peso;
+                $producto->stock  = $request->stock;
+                $producto->unidad = $request->unidad;
+                $producto->vistas = $request->vistas;
+                $producto->calificacion  = $request->calificacion;
+                
+                if($producto->update()){
+                    return back()->with('success','Producto Actualizado Correctamente.');
+                }
+                else{
+                    return back()->with('error','Ocurrió un error.');
+                }
+            }
+            else{
+                return back()->with('error','No puedes tener más de 3 productos activos a menos que cambies de plan.');
+            }
         }
     }
     public function destroy($id)

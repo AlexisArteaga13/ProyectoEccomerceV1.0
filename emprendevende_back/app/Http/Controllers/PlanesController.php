@@ -63,10 +63,21 @@ class PlanesController extends Controller
             $iduser = Auth::user()->id;
             $actualizarplan = User::findOrFail($iduser);
             $actualizarplan->idPlan = $id;
+<<<<<<< HEAD
             
            $fecha = Carbon::now();
             $fechainicio = $fecha->format('Y-m-d');
            // return $fecha->format('d-m-Y H:i:s');
+=======
+            $actualizarplan->update();
+            $fecha = Carbon::now();
+            $empresa = DB::table('facturacion')->where('fechaPago','<',Carbon::now())
+            /*->select('user_id', DB::raw('count(*) as total_posts'))
+            ->groupBy('user_id)*/
+            ->get();
+            return json_decode($empresa);
+            //return $fecha->format('d-m-Y H:i:s');
+>>>>>>> ca2fbc425e02db8efd678acea9034f01891557b1
            // return back()->with('success','Gracias por migrar de plan, no te arrepentiras.');
 
            $newfactura = new Facturacion();

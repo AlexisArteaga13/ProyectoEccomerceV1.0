@@ -5,7 +5,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use DB;
 class LoginController extends Controller
 {
     /*
@@ -28,6 +28,7 @@ class LoginController extends Controller
      */
     //protected $redirectTo = RouteServiceProvider::HOME;
     public function authenticated($request , $user){
+       
         $userb = User::with('roles')->where('email', $user->email)->first();
         $role= $userb->roles->first()->name;
         if($role=='administrador'){
@@ -37,6 +38,11 @@ class LoginController extends Controller
           // return $request->all();
            return redirect()->route('inicio') ;
         }
+    }
+    public function showLoginForm()
+    {
+        # code...
+        return redirect()->route('inicio') ;
     }
     /**
      * Create a new controller instance.

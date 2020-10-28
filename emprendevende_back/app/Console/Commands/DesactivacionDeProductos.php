@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon; 
 class DesactivacionDeProductos extends Command
 {
     /**
@@ -38,17 +39,29 @@ class DesactivacionDeProductos extends Command
     public function handle()
     {
         // Probamos para que actualice solo las empresas
-            $empresa = DB::table('facturacion')
+        $facturacion = DB::table('facturacion')->where('fechaPago','=',Carbon::now())
             /*->select('user_id', DB::raw('count(*) as total_posts'))
             ->groupBy('user_id)*/
             ->get();
-        
+      
         // update statistics table
-        foreach($empresa as $e)
+        foreach($facturacion as $f)
         {
-            DB::table('empresa')
-            ->where('idEmpresa', $e->idEmpresa)
-            ->update(['estado' => 1]);
+            DB::table('facturacion')
+            ->where('idFACTURACIÓN', $f->idFACTURACIÓN)
+            ->update(['estado' => 2]);
+        }
+        $empresasdeudoras= DB::table('empresa as e')->join('facturacion as f','f.idFACTURACIÓN')->where('f.estado','2')->get();
+        foreach($empresasdeudoras as $e){
+            DB::table('users')
+            ->where('id', $e->idUsuario)
+            ->update(['idPlan' => 1]);
+            $productos = DB::table('producto')->where('idEmpresa',$e->idEmpresa)->get();
+            foreach($productos as $p){
+                DB::table('producto')
+                ->where('idPRODUCTO', $e->idPRODUCTO)
+                ->update(['estado' => 0]);
+            }
         }
     }
 }
