@@ -64,6 +64,7 @@ class ProductosController extends Controller
             $productos = DB::table('producto as p')
             ->join('empresa as e','p.idEmpresa','=','e.idEmpresa')
             ->join('categoria as c','p.idCategoria','=','c.idCategoria')
+            ->where('e.idUsuario',Auth::user()->id)
             ->select('p.*','e.nombreEmpresa','c.nombreCategoria')
             ->get();
             
@@ -71,8 +72,8 @@ class ProductosController extends Controller
         }
        
     }
-
-    public function store(Request $request){
+    public function validarporvendedor(Request $request){
+       
         $request->validate([
             'nombre' => ['required', 'string', 'max:255'],
             'categoria' =>['required'],
@@ -91,47 +92,197 @@ class ProductosController extends Controller
             'descripcion' =>['required'],
             
         ]);
-        $newproducto = new Producto();
-        $newproducto->nombreProducto = $request->nombre;
-        $newproducto->precio = $request->precio;
-        $newproducto->marca = $request->marca;
-        $newproducto->peso = $request->peso;
-        $newproducto->stock = $request->stock;
-        $newproducto->unidad = $request->unidad;
-        $newproducto->descripcion = $request->descripcion;
-        $newproducto->vistas ="";
-        $newproducto->calificacion ="";
-        if($request->file('imgfrontal')){
-            $newproducto->imagen_f = $request->file('imgfrontal')->store('public/producto');
+        if(Auth::user()->tieneRol()[0]=='vendedor'){
+            $planvendedor = Auth::user()->idPlan;
+            if($planvendedor==1){
+                $empresauser = DB::table('empresa')->where('idUsuario',Auth::user()->id)->first();
+                $conteoderepisa = DB::table('producto')->where('idEmpresa',$empresauser->idEmpresa)->count();
+                if($conteoderepisa<=3){
+                    $this->store($request);
+                }
+                else{
+                    return back()->with('info','Superaste el límite de tu plan, Que esperas? Migra ya!');
+                }
+                //return $conteoderepisa;
+            }
+           else{
+                $empresauser = DB::table('empresa')->where('idUsuario',Auth::user()->id)->first();
+                $conteoderepisa = DB::table('producto')->where('idEmpresa',$empresauser->idEmpresa)->count();
+                if($conteoderepisa<=250){
+                    $this->store($request);
+                }
+                else{
+                    return back()->with('info','Superaste el límite de tu plan');
+                }
+           }
+           
         }
-        elseif($request->file('imgizquierda')){
-            $newproducto->imagen_p = $request->file('imgposterior')->store('public/producto');
+        else {
+            // Administradores
+            $this->store($request);
         }
-        elseif($request->file('imgizquierda')){
-            $newproducto->imagen_iz = $request->file('imgizquierda')->store('public/producto');
-        }
-        elseif($request->file('imgderecha')){
-            $newproducto->imagen_d = $request->file('imgderecha')->store('public/producto');
-        }
-        elseif($request->file('imgsuperior')){
-            $newproducto->imagen_s = $request->file('imgsuperior')->store('public/producto');
-        }
-        else{
-            $newproducto->imagen_in = $request->file('imginferior')->store('public/producto');
-        }
-       
-       
-        
-        
-        $newproducto->idCategoria = $request->categoria;
-        $newproducto->idEmpresa = $request->empresa;
-        $newproducto->estado = '1';
+    }
+    public function store(Request $request){
+      $request->validate([
+            'nombre' => ['required', 'string', 'max:255'],
+            'categoria' =>['required'],
+            'empresa' =>['required'],
+            'precio' =>['required','numeric'],
+            'marca' =>['required'],
+            'imgfrontal' =>['image'],
+            'imgposterior' =>['image'],
+            'imgizquierda' =>['image'],
+            'imgderecha' =>['image'],
+            'imgsuperior' =>['image'],
+            'imginferior' =>['image'],
+            'peso' =>[' '],
+            'stock' =>['required'],
+            'unidad' =>['required'],
+            'descripcion' =>['required'],
+            
+        ]);
+        if(Auth::user()->tieneRol()[0]=='vendedor'){
+            $planvendedor = Auth::user()->idPlan;
+            if($planvendedor==1){
+                $empresauser = DB::table('empresa')->where('idUsuario',Auth::user()->id)->first();
+                $conteoderepisa = DB::table('producto')->where('idEmpresa',$empresauser->idEmpresa)->count();
+                if($conteoderepisa<=2){
+                    $newproducto = new Producto();
+                    $newproducto->nombreProducto = $request->nombre;
+                    $newproducto->precio = $request->precio;
+                    $newproducto->marca = $request->marca;
+                    $newproducto->peso = $request->peso;
+                    $newproducto->stock = $request->stock;
+                    $newproducto->unidad = $request->unidad;
+                    $newproducto->descripcion = $request->descripcion;
+                    $newproducto->vistas ="";
+                    $newproducto->calificacion ="";
+                    if($request->file('imgfrontal')){
+                        $newproducto->imagen_f = $request->file('imgfrontal')->store('public/producto');
+                    }
+                    elseif($request->file('imgizquierda')){
+                        $newproducto->imagen_p = $request->file('imgposterior')->store('public/producto');
+                    }
+                    elseif($request->file('imgizquierda')){
+                        $newproducto->imagen_iz = $request->file('imgizquierda')->store('public/producto');
+                    }
+                    elseif($request->file('imgderecha')){
+                        $newproducto->imagen_d = $request->file('imgderecha')->store('public/producto');
+                    }
+                    elseif($request->file('imgsuperior')){
+                        $newproducto->imagen_s = $request->file('imgsuperior')->store('public/producto');
+                    }
+                    elseif($request->file('imginferior')){
+                        $newproducto->imagen_in = $request->file('imginferior')->store('public/producto');
+                    }
+                    
+                    $newproducto->idCategoria = $request->categoria;
+                    $newproducto->idEmpresa = $request->empresa;
+                    $newproducto->estado = '1';
+                    if($newproducto->save()){
+                        return back()->with('success','Producto Creado Correctamente.');
+                    }
+                    else{
+                        return back()->with('error','Ocurrió un error.');
+                    }
+                }
+                else{
+                    return back()->with('info','Superaste el límite de tu plan, Que esperas? Migra ya!');
+                }
+                //return $conteoderepisa;
+            }
+           else{
+                $empresauser = DB::table('empresa')->where('idUsuario',Auth::user()->id)->first();
+                $conteoderepisa = DB::table('producto')->where('idEmpresa',$empresauser->idEmpresa)->count();
+                if($conteoderepisa<=250){
+                    $newproducto = new Producto();
+                    $newproducto->nombreProducto = $request->nombre;
+                    $newproducto->precio = $request->precio;
+                    $newproducto->marca = $request->marca;
+                    $newproducto->peso = $request->peso;
+                    $newproducto->stock = $request->stock;
+                    $newproducto->unidad = $request->unidad;
+                    $newproducto->descripcion = $request->descripcion;
+                    $newproducto->vistas ="";
+                    $newproducto->calificacion ="";
+                    if($request->file('imgfrontal')){
+                        $newproducto->imagen_f = $request->file('imgfrontal')->store('public/producto');
+                    }
+                    elseif($request->file('imgizquierda')){
+                        $newproducto->imagen_p = $request->file('imgposterior')->store('public/producto');
+                    }
+                    elseif($request->file('imgizquierda')){
+                        $newproducto->imagen_iz = $request->file('imgizquierda')->store('public/producto');
+                    }
+                    elseif($request->file('imgderecha')){
+                        $newproducto->imagen_d = $request->file('imgderecha')->store('public/producto');
+                    }
+                    elseif($request->file('imgsuperior')){
+                        $newproducto->imagen_s = $request->file('imgsuperior')->store('public/producto');
+                    }
+                    elseif($request->file('imginferior')){
+                        $newproducto->imagen_in = $request->file('imginferior')->store('public/producto');
+                    }
+                    
+                    $newproducto->idCategoria = $request->categoria;
+                    $newproducto->idEmpresa = $request->empresa;
+                    $newproducto->estado = '1';
         if($newproducto->save()){
             return back()->with('success','Producto Creado Correctamente.');
         }
         else{
             return back()->with('error','Ocurrió un error.');
         }
+                }
+                else{
+                    return back()->with('info','Superaste el límite de tu plan');
+                }
+           }
+           
+        }
+        else {
+            
+            // Administradores
+            $newproducto = new Producto();
+            $newproducto->nombreProducto = $request->nombre;
+            $newproducto->precio = $request->precio;
+            $newproducto->marca = $request->marca;
+            $newproducto->peso = $request->peso;
+            $newproducto->stock = $request->stock;
+            $newproducto->unidad = $request->unidad;
+            $newproducto->descripcion = $request->descripcion;
+            $newproducto->vistas ="";
+            $newproducto->calificacion ="";
+            if($request->file('imgfrontal')){
+                $newproducto->imagen_f = $request->file('imgfrontal')->store('public/producto');
+            }
+            elseif($request->file('imgizquierda')){
+                $newproducto->imagen_p = $request->file('imgposterior')->store('public/producto');
+            }
+            elseif($request->file('imgizquierda')){
+                $newproducto->imagen_iz = $request->file('imgizquierda')->store('public/producto');
+            }
+            elseif($request->file('imgderecha')){
+                $newproducto->imagen_d = $request->file('imgderecha')->store('public/producto');
+            }
+            elseif($request->file('imgsuperior')){
+                $newproducto->imagen_s = $request->file('imgsuperior')->store('public/producto');
+            }
+            elseif($request->file('imginferior')){
+                $newproducto->imagen_in = $request->file('imginferior')->store('public/producto');
+            }
+            
+            $newproducto->idCategoria = $request->categoria;
+            $newproducto->idEmpresa = $request->empresa;
+            $newproducto->estado = '1';
+            if($newproducto->save()){
+                return back()->with('success','Producto Creado Correctamente.');
+            }
+            else{
+                return back()->with('error','Ocurrió un error.');
+            }
+        }
+        
       //  return $request->all();
     }
     public function update(Request $request){

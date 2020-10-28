@@ -70,9 +70,11 @@ class EmpresasController extends Controller
         }
     }
     public function iraregistro(){
+        $empresas = DB::table('empresa')->where('estado',1)->get();
+        $categorias = DB::table('categoria')->where('estado',1)->get();
         $planes=DB::table('plan')->where('estado','=','1')->get();
         $rubros= DB::table('rubro')->where('estado','=',1)->get();
-        return view('modulostienda.registrovendedor', compact('rubros','planes'));
+        return view('modulostienda.registrovendedor', compact('rubros','planes','empresas','categorias'));
     }
     public function registrovendedor(Request $request){
         $request->validate([
@@ -122,9 +124,9 @@ class EmpresasController extends Controller
             $empresa->logo_img_empresa = $request->file('logo')->store('public');
         }
        
-        $empresa->ruc = $request->ruc;
+        //$empresa->ruc = $request->ruc;
         $empresa->telefono = $request->telefono;
-        $empresa->razonSocial  = $request->razonsocial;
+        //$empresa->razonSocial  = $request->razonsocial;
         $empresa->fechaRegistro = $request->fecha;
         $empresa->calificacion = $request->calificacion;
         $empresa->idRubro  = $request->rubro;

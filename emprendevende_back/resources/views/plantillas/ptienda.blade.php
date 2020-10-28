@@ -238,16 +238,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu">
+                        @foreach ($categorias as $c)
+                            <option class="dropdown-item" value="Televisions">{{ $c->nombreCategoria }}</option>
+                        @endforeach
 
-                        <option class="dropdown-item" value="Televisions">Televisions</option>
-                        <option class="dropdown-item" value="Headphones">Headphones</option>
-                        <option class="dropdown-item" value="Computers">Computers</option>
-                        <option class="dropdown-item" value="Appliances">Appliances</option>
-                        <option class="dropdown-item" value="Mobiles">Mobiles</option>
-                        <option class="dropdown-item" value="Fruits &amp; Vegetables">Tv &amp; Video</option>
-                        <option class="dropdown-item" value="iPad & Tablets">iPad & Tablets</option>
-                        <option class="dropdown-item" value="Cameras & Camcorders">Cameras & Camcorders</option>
-                        <option class="dropdown-item" value="Home Audio & Theater">Home Audio & Theater</option>
+
                     </div>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -269,64 +264,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </a>
                             <div class="dropdown-menu">
                                 <div class="agile_inner_drop_nav_info p-4">
-                                    <h5 class="mb-3">Mobiles, Computers</h5>
+                                    <h5 class="mb-3">Todas las tiendas en línea</h5>
                                     <div class="row">
                                         <div class="col-sm-6 multi-gd-img">
                                             <ul class="multi-column-dropdown">
-                                                <li>
-                                                    <a href="product.html">All Mobile Phones</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">All Mobile Accessories</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Cases & Covers</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Screen Protectors</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Power Banks</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">All Certified Refurbished</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Tablets</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Wearable Devices</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Smart Home</a>
-                                                </li>
+                                                @foreach ($empresas as $key => $value)
+                                                <div class="col-sm-6">
+                                                    <li>
+                                                        <a href="product.html">{{ $value->nombreEmpresa }}</a>
+                                                    </li>
+
+                                                </div>
+                                                    
+                                                @endforeach
+
                                             </ul>
                                         </div>
-                                        <div class="col-sm-6 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                <li>
-                                                    <a href="product.html">Laptops</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Drives & Storage</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Printers & Ink</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Networking Devices</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Computer Accessories</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Game Zone</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Software</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -338,70 +292,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </a>
                             <div class="dropdown-menu">
                                 <div class="agile_inner_drop_nav_info p-4">
-                                    <h5 class="mb-3">TV, Appliances, Electronics</h5>
+                                    <h5 class="mb-3">Todas las Categorías</h5>
                                     <div class="row">
                                         <div class="col-sm-6 multi-gd-img">
                                             <ul class="multi-column-dropdown">
+                                                @foreach ($categorias as $c)
                                                 <li>
-                                                    <a href="product2.html">Televisores</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Home Entertainment Systems</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Headphones</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Speakers</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">MP3, Media Players & Accessories</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Audio & Video Accessories</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Cameras</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">DSLR Cameras</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Camera Accessories</a>
-                                                </li>
+                                                    <a href="product2.html">{{$c->nombreCategoria}}</a>
+                                                </li>   
+                                                @endforeach
+                                               
                                             </ul>
                                         </div>
-                                        <div class="col-sm-6 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                <li>
-                                                    <a href="product2.html">Musical Instruments</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Gaming Consoles</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">All Electronics</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Air Conditioners</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Refrigerators</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Washing Machines</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Kitchen & Home Appliances</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Heating & Cooling Appliances</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">All Appliances</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -806,7 +709,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             if (total < 3) {
                 alert(
                     'The minimum order quantity is 3. Please add more to your shopping cart before checking out'
-                    );
+                );
                 evt.preventDefault();
             }
         });

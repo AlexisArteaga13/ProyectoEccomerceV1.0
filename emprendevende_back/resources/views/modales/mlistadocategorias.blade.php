@@ -10,51 +10,11 @@
 				<div class="modal-body">
 					<ul class="list-group list-group-flush">
 					<div class="row">	
-						<div class="col-xs-6">
-							<li class="list-group-item"><a href="product2.html">Electronica</a></li>
-							<li class="list-group-item"><a href="product2.html">Fruta</a></li>
+						@foreach ($categorias as $c)
+					<li class="list-group-item"><a href="product2.html">{{$c->nombreCategoria}}</a></li>
 					
-						</div>
-						<div class="col-xs-6">
-							<li class="list-group-item"><a href="product2.html">Electronica</a></li>
-							<li class="list-group-item"><a href="product2.html">Fruta</a></li>
-					
-						</div>
-						<div class="col-xs-6">
-							<li class="list-group-item"><a href="product2.html">Electronica</a></li>
-							<li class="list-group-item"><a href="product2.html">Fruta</a></li>
-					
-						</div>
-						<div class="col-xs-6">
-							<li class="list-group-item"><a href="product2.html">Electronica</a></li>
-							<li class="list-group-item"><a href="product2.html">Fruta</a></li>
-					
-						</div>
-						<div class="col-xs-6">
-							<li class="list-group-item"><a href="product2.html">Electronica</a></li>
-							<li class="list-group-item"><a href="product2.html">Fruta</a></li>
-					
-						</div>
-						<div class="col-xs-6">
-							<li class="list-group-item"><a href="product2.html">Electronica</a></li>
-							<li class="list-group-item"><a href="product2.html">Fruta</a></li>
-					
-						</div>
-						<div class="col-xs-6">
-							<li class="list-group-item"><a href="product2.html">Medicinal</a></li>
-							<li class="list-group-item"><a href="product2.html">Comida de Animales</a></li>
-					
-						</div>
-						<div class="col-xs-6">
-							<li class="list-group-item"><a href="product2.html">Medicinal</a></li>
-							<li class="list-group-item"><a href="product2.html">Comida de Animales</a></li>
-					
-						</div>
-						<div class="col-xs-6">
-							<li class="list-group-item"><a href="product2.html">Medicinal</a></li>
-							<li class="list-group-item"><a href="product2.html">Comida de Animales</a></li>
-					
-						</div>
+						@endforeach
+						
 
 					</div>
 								

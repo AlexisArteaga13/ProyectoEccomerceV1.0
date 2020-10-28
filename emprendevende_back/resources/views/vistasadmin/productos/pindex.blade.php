@@ -9,18 +9,18 @@
     <!-- link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/css/fileinput-rtl.min.css" media="all" rel="stylesheet" type="text/css" /-->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- piexif.min.js is needed for auto orienting image files OR when restoring exif data in resized images and when you 
-                                wish to resize images before upload. This must be loaded before fileinput.min.js -->
+                                                wish to resize images before upload. This must be loaded before fileinput.min.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/js/plugins/piexif.min.js"
         type="text/javascript"></script>
     <!-- sortable.min.js is only needed if you wish to sort / rearrange files in initial preview. 
-                                This must be loaded before fileinput.min.js -->
+                                                This must be loaded before fileinput.min.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/js/plugins/sortable.min.js"
         type="text/javascript"></script>
     <!-- popper.min.js below is needed if you use bootstrap 4.x. You can also use the bootstrap js 
-                               3.3.x versions without popper.min.js. -->
+                                               3.3.x versions without popper.min.js. -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <!-- bootstrap.min.js below is needed if you wish to zoom and preview file content in a detail modal
-                                dialog. bootstrap 4.x is supported. You can also use the bootstrap js 3.3.x versions. -->
+                                                dialog. bootstrap 4.x is supported. You can also use the bootstrap js 3.3.x versions. -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- the main fileinput plugin file -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/js/fileinput.min.js"></script>
@@ -220,11 +220,11 @@
                                     </tbody>
                                     <tfoot>
                                         <!-- <tr>
-                                                                        <th style="width:10px">#</th>
-                                                                        <th>Nombre de Rubro</th>
-                                                                        <th>Detalles</th>
-                                                                        <th>Opciones</th>
-                                                                    </tr> -->
+                                                                                        <th style="width:10px">#</th>
+                                                                                        <th>Nombre de Rubro</th>
+                                                                                        <th>Detalles</th>
+                                                                                        <th>Opciones</th>
+                                                                                    </tr> -->
                                     </tfoot>
                                 </table>
                             </div>
@@ -277,28 +277,28 @@
                                 <!--<input type="text" name="rubro" class="form-control" id="rubro">-->
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Empresa</label>
-                            <div class="col-sm-10">
+                        @can('administrador')
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Empresa</label>
+                                <div class="col-sm-10">
 
-                                @can('administrador')
-                                    <select id="empresa" name="empresa" class="form-control" >
+
+                                    <select id="empresa" name="empresa" class="form-control">
                                         <option value="" selected disabled>Eliga una Empresa</option>
                                         @foreach ($empresas as $e)
                                             <option value="{{ $e->idEmpresa }}">{{ $e->nombreEmpresa }}</option>
                                         @endforeach
-                                    @endcan
-                                    @can('vendedor')
-                                        <select id="empresa" name="empresa" class="form-control" disabled>
-                                            @foreach ($empresas as $e)
-                                                <option value="{{ $e->idEmpresa }}" selected>{{ $e->nombreEmpresa }}</option>
-                                            @endforeach
-                                        @endcan
-
                                     </select>
                                     <!--<input type="text" name="rubro" class="form-control" id="rubro">-->
+                                </div>
                             </div>
-                        </div>
+                        @endcan
+                        @can('vendedor')
+                            @foreach ($empresas as $e)
+                                <input type="hidden" name="empresa" id="empresa" value="{{ $e->idEmpresa }}">
+                            @endforeach
+                            </select>
+                        @endcan
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Precio</label>
                             <div class="col-sm-6">
@@ -378,20 +378,20 @@
                             </div>
                         </div>
                         <!--<div class="form-group row">
-                                                                            <label for="inputPassword" class="col-sm-2 col-form-label">Estado</label>
-                                                                            <div class="col-sm-10">
-                                                                                <div class="form-check form-check-inline">
-                                                                                    <input class="form-check-input" type="radio" name="opcion" id="inlineRadio1"
-                                                                                        value="1" active>
-                                                                                    <label class="form-check-label" for="inlineRadio1">Activo</label>
-                                                                                </div>
-                                                                                <div class="form-check form-check-inline">
-                                                                                    <input class="form-check-input" type="radio" name="opcion" id="inlineRadio2"
-                                                                                        value="0">
-                                                                                    <label class="form-check-label" for="inlineRadio2">Inactivo</label>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div> -->
+                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">Estado</label>
+                                                                                                <div class="col-sm-10">
+                                                                                                    <div class="form-check form-check-inline">
+                                                                                                        <input class="form-check-input" type="radio" name="opcion" id="inlineRadio1"
+                                                                                                            value="1" active>
+                                                                                                        <label class="form-check-label" for="inlineRadio1">Activo</label>
+                                                                                                    </div>
+                                                                                                    <div class="form-check form-check-inline">
+                                                                                                        <input class="form-check-input" type="radio" name="opcion" id="inlineRadio2"
+                                                                                                            value="0">
+                                                                                                        <label class="form-check-label" for="inlineRadio2">Inactivo</label>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div> -->
 
                 </div>
                 <div class="modal-footer">

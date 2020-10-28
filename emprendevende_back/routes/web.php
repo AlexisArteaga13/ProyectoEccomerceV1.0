@@ -19,12 +19,7 @@ Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider')->n
 Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
 /* ***************Fin de rutas autenticar de facebook*** */ 
 //****RUTAS SIN NECESIDAD DE CONTROLADOR */
-Route::get('/', function () {
-   /* Alert::success('Success Title', 'Success Message');
-;*/
-    return view('modulostienda.inicio');
-   //return view('vistasadmin/indexadmin');
-})->name('inicio');
+Route::get('/','TiendaController@index')->name('inicio');
 
 //******* */
 // E-mail verification

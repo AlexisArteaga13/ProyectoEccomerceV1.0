@@ -8,7 +8,7 @@ class Empresa extends Model
 {
     protected $table='empresa';
     protected $primaryKey='idEmpresa';
-    public $timestamps=false;
+    public $timestamps=true;
     protected $fillable = [
         'nombreEmpresa','cuenta_transferencia','descripcion','vision','mision',
         'logo_img_empresa','ruc','telefono','razonSocial','fechaRegistro',
