@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
+use Illuminate\Support\Facades\DB;
 class DesactivacionDeProductos extends Command
 {
     /**
@@ -11,14 +11,14 @@ class DesactivacionDeProductos extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'actualizacion:pagos';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Actualizamos los productos de acuerdo al plan';
 
     /**
      * Create a new command instance.
@@ -37,6 +37,18 @@ class DesactivacionDeProductos extends Command
      */
     public function handle()
     {
-        //
+        // Probamos para que actualice solo las empresas
+            $empresa = DB::table('empresa')
+            /*->select('user_id', DB::raw('count(*) as total_posts'))
+            ->groupBy('user_id')*/
+            ->get();
+        
+        // update statistics table
+        foreach($empresa as $e)
+        {
+            DB::table('empresa')
+            ->where('idEmpresa', $e->idEmpresa)
+            ->update(['estado' => 1]);
+        }
     }
 }
