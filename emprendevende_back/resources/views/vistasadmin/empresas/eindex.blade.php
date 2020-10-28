@@ -77,7 +77,13 @@
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $value->nombreEmpresa }}</td>
-                                                <td>{{ $value->cuenta_transferencia }}</td>
+                                                <td>
+                                                    @if ($value->cuenta_transferencia == null)
+                                                        <span class="badge badge-danger">Coloca una cuenta o nadie podrá comprarte</span>
+                                                    @else
+                                                    {{ $value->cuenta_transferencia }}
+                                                    @endif
+                                                   </td>
                                                 <td>{{ $value->descripcion }}</td>
                                                 <td>{{ $value->vision }}</td>
                                                 <td>{{ $value->mision }}</td>
@@ -264,7 +270,7 @@
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">RUC</label>
                             <div class="col-sm-10">
-                                <input type="text" name="ruc" class="form-control" id="ruc">
+                                <input type="text" name="ruc" class="form-control" id="ruc" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -276,7 +282,7 @@
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Razon Social</label>
                             <div class="col-sm-10">
-                                <input type="text" name="razonsocial" class="form-control" id="razonsocial">
+                                <input type="text" name="razonsocial" class="form-control" id="razonsocial" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
