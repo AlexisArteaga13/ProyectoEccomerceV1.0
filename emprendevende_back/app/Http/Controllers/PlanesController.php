@@ -48,7 +48,7 @@ class PlanesController extends Controller
             $actualizarplan->idPlan = $id;
             $actualizarplan->update();
             $fecha = Carbon::now();
-            return $fecha;
+            return $fecha->format('d-m-Y H:i:s');
            // return back()->with('success','Gracias por migrar de plan, no te arrepentiras.');
         }
        
