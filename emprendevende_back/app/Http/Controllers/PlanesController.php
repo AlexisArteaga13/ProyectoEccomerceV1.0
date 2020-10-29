@@ -40,28 +40,21 @@ class PlanesController extends Controller
     }
     public function escogerplan($id,Request $request){
         $plan = DB::table('users')->where('idPlan',$id)->first();
+        $idmax = DB::table('facturacion')->max('idFACTURACIÓN') + 1;
 
-        $request->validate([
+        $planelegido = DB::table('plan')->where('idPLAN',$id)->first();
+        $nplan = new Facturacion();
+        $nplan ->costoMensual= $planelegido->costoMensual;
+        
+
+       /*$request->validate([
             'nombre' => ['required', 'string', 'max:255'],
             'slogan' => ['string', 'max:255'],
             'detalle' => ['required', 'string', 'max:255'],
             'mensual' => ['required', 'string', 'max:255'],
             'anual' => ['required', 'string', 'max:255'],
             
-        ]);
-        $newplan = new Plan();
-        $newplan->nombrePlan = $request->nombre;
-        $newplan->slogan = $request->slogan;
-        $newplan->detalle = $request->detalle;
-        $newplan->costoMensual = $request->mensual;
-        $newplan->costoAnual = $request->anual;
-        $newplan->estado = '1';
-        if($newplan->save()){
-            return back()->with('success','Rubro Creado Correctamente.');
-        }
-        else{
-            return back()->with('error','Ocurrió un error.');
-        }
+        ]);*/
       //  
         if($plan){
             return back()->with('info','Actualmente estas con este plan.');
@@ -70,18 +63,56 @@ class PlanesController extends Controller
             $iduser = Auth::user()->id;
             $actualizarplan = User::findOrFail($iduser);
             $actualizarplan->idPlan = $id;
-            $actualizarplan->update();
-            $fecha = Carbon::now();
-            $empresa = DB::table('facturacion')->where('fechaPago','<',Carbon::now())
-            /*->select('user_id', DB::raw('count(*) as total_posts'))
-            ->groupBy('user_id)*/
-            ->get();
-            return json_decode($empresa);
-            //return $fecha->format('d-m-Y H:i:s');
+            
+           $fecha = Carbon::now();
+            $fechainicio = $fecha->format('Y-m-d');
+           // return $fecha->format('d-m-Y H:i:s');
            // return back()->with('success','Gracias por migrar de plan, no te arrepentiras.');
-        }
-       
+
+           $newfactura = new Facturacion();
+           $codigoL = "";
+           $codigoL = $idmax;
+
+            if(strlen($idmax)<6){
+                for ($i = 1; (6-strlen($idmax))-$i > 0 ; $i++) {
+                    $codigoL = "0" . $codigoL;
+                }
+            }
+            if ($idmax > 99999){
+                $newfactura->codigoLetra = 'F002';
+            }
+            else{
+                $newfactura->codigoLetra = 'F001';
+            }
+            
+            $newfactura->codigoFactura = $codigoL;
+           $newfactura->importe = $request->facturacion;
+           $newfactura->detalle = '';
+           $newfactura->descuento = '0';
+           $newfactura->idPlan = $id;
+           $newfactura->idMETODO_PAGO = $request->metodos;
+           $newfactura->idUsuario = Auth::user()->id;
+           $newfactura->estado = '1';
+           $newfactura->fechaEmision = $fechainicio;
+
+           if ($nplan ->costoMensual == $request->facturacion){
+            $endDate = $fecha->addMonth(); 
+            $newfactura->fechaPago = $endDate->format('Y-m-d');
+           }
+           else{
+            $endDate = $fecha->addYear(); 
+            $newfactura->fechaPago = $endDate->format('Y-m-d');
+           }
+           if($newfactura->save()){             
+               return back()->with('success','Gracias por migrar de plan, no te arrepentiras.');
+           }
+           else{
+               return back()->with('error','Ocurrió un error.');
+           }
+           
+           $actualizarplan->update();
     }
+}
     public function store(Request $request){
         $request->validate([
             'nombre' => ['required', 'string', 'max:255'],

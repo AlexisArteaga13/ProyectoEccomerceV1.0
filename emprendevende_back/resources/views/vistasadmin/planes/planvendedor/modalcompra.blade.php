@@ -26,13 +26,13 @@
                         <div style="text-align: center">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="facturacion" id="inlineRadio1"
-                                    value="option1" required>
+                                    value="{{ $p->costoMensual }}" required>
                                 <label class="form-check-label" for="inlineRadio1">Facturación Mensual S/.</label>
                                 <label class="form-check-label" for="inlineRadio1">{{ $p->costoMensual }}</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="facturacion" id="inlineRadio2"
-                                    value="option2" required>
+                                    value="{{ $p->costoAnual }}" required>
                                 <label class="form-check-label" for="inlineRadio2">Facturación Anual S/.</label>
                                 <label class="form-check-label" for="inlineRadio1">{{ $p->costoAnual }}</label>
                             </div>
@@ -60,7 +60,7 @@
                                     <label class="form-check-label" for="inlineRadio1">{{ $m->tipo }}</label>
                                 </div>
                             @endforeach
-
+                        
                         </div>
                     </div>
                     <div class="modal-footer">

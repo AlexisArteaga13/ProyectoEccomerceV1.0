@@ -69,7 +69,7 @@
                                         @foreach ($facturacion as $key => $value)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $value->codigoFactura}}</td>
+                                                <td>{{ $value->codigoLetra}} {{ $value->codigoFactura}} </td>
                                                 <td>{{ $value->nombrePlan}}</td>
                                                 <td>{{ $value->fechaEmision }}</td>
                                                 <td>{{ $value->fechaPago }}</td>

@@ -8,10 +8,10 @@ class Facturacion extends Model
 {
     //
     protected $table='facturacion';
-    protected $primaryKey='idFACTURACION';
+    protected $primaryKey='idFACTURACIÓN';
     public $timestamps=true;
     protected $fillable = [
         'codigoFactura','estado','fechaEmision','fechaPago',
-        'importe','detalle','descuento','idPLAN','idMETODO_PAGO','created_at','updated_at','idUsuario'
+        'importe','detalle','descuento','idPLAN','idMETODO_PAGO','created_at','idUsuario','codigoLetra'
     ];
 }
