@@ -7,6 +7,7 @@ use App\Plan;
 use App\User;
 use App\MetodoPago;
 use App\Facturacion;
+use App\Empresa;
 use Illuminate\Http\Request;
 use Carbon\Carbon; 
 class PlanesController extends Controller
@@ -40,8 +41,11 @@ class PlanesController extends Controller
     }
     public function escogerplan($id,Request $request){
         $plan = DB::table('users')->where('idPlan',$id)->first();
+        $empresa1 = DB::table('empresa')->where('idUsuario',Auth::user()->id)->first();
         $idmax = DB::table('facturacion')->max('idFACTURACIÓN') + 1;
 
+        $nombreempresa= new Empresa();
+        $nombreempresa->idEmpresa = $empresa1->idEmpresa;
         $planelegido = DB::table('plan')->where('idPLAN',$id)->first();
         $nplan = new Facturacion();
         $nplan ->costoMensual= $planelegido->costoMensual;
@@ -91,7 +95,7 @@ class PlanesController extends Controller
            $newfactura->descuento = '0';
            $newfactura->idPlan = $id;
            $newfactura->idMETODO_PAGO = $request->metodos;
-           $newfactura->idUsuario = Auth::user()->id;
+           $newfactura->idEmpresa =  $nombreempresa->idEmpresa;
            $newfactura->estado = '1';
            $newfactura->fechaEmision = $fechainicio;
 
@@ -103,14 +107,15 @@ class PlanesController extends Controller
             $endDate = $fecha->addYear(); 
             $newfactura->fechaPago = $endDate->format('Y-m-d');
            }
-           if($newfactura->save()){             
+           if($newfactura->save()){   
+            $actualizarplan->update();          
                return back()->with('success','Gracias por migrar de plan, no te arrepentiras.');
            }
            else{
                return back()->with('error','Ocurrió un error.');
            }
            
-           $actualizarplan->update();
+           
     }
 }
     public function store(Request $request){

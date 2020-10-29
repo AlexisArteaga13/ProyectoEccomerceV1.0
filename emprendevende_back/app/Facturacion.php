@@ -12,6 +12,6 @@ class Facturacion extends Model
     public $timestamps=true;
     protected $fillable = [
         'codigoFactura','estado','fechaEmision','fechaPago',
-        'importe','detalle','descuento','idPLAN','idMETODO_PAGO','created_at','idUsuario','codigoLetra'
+        'importe','detalle','descuento','idPLAN','idMETODO_PAGO','created_at','idEmpresa','codigoLetra'
     ];
 }

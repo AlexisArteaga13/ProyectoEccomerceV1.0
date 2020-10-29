@@ -60,7 +60,7 @@
                                             <th>Detalle</th>
                                             <th>Descuento</th>
                                             <th>Metodo Pago</th>
-                                            <th>Usuario</th>
+                                            <th>Empresa</th>
 
                                         </tr>
                                     </thead>
@@ -78,7 +78,7 @@
                                                 <td>{{ $value->detalle }}</td>
                                                 <td>{{ $value->descuento }}</td>
                                                 <td>{{ $value->tipo }}</td>
-                                                <td>{{ $value->name }}</td>
+                                                <td>{{ $value->nombreEmpresa }}</td>
                                             </tr>
                                         @endforeach
 
