@@ -227,17 +227,17 @@ class ProductosController extends Controller
                     $newproducto->idCategoria = $request->categoria;
                     $newproducto->idEmpresa = $request->empresa;
                     $newproducto->estado = '1';
-        if($newproducto->save()){
-            return back()->with('success','Producto Creado Correctamente.');
-        }
-        else{
-            return back()->with('error','Ocurrió un error.');
-        }
-                }
-                else{
-                    return back()->with('info','Superaste el límite de tu plan');
-                }
-           }
+                    if($newproducto->save()){
+                        return back()->with('success','Producto Creado Correctamente.');
+                    }
+                    else{
+                        return back()->with('error','Ocurrió un error.');
+                    }
+                            }
+                            else{
+                                return back()->with('info','Superaste el límite de tu plan');
+                            }
+                    }
            
         }
         else {
@@ -279,7 +279,7 @@ class ProductosController extends Controller
                 return back()->with('success','Producto Creado Correctamente.');
             }
             else{
-                return back()->with('error','Ocurrió un error.');
+                return redirect()->back()->with('error','Ocurrió un error.');
             }
         }
         
@@ -355,12 +355,13 @@ class ProductosController extends Controller
         }
         elseif(Auth::user()->idPlan == '1'){
             $empresa = DB::table('empresa')->where('idUsuario',Auth::user()->id)->first();
-            return json_decode($empresa);
+       
             $conteodeproductos = DB::table('producto')
-            ->where('idEmpresa',$empresa->id)
+            ->where('idEmpresa',$empresa->idEmpresa)
             ->where('estado','1')
             ->count();
-            if($conteodeproductos<=3){
+            
+            if($conteodeproductos <3){
                 $producto= Producto::findOrFail($request->id);
                 $producto->nombreProducto = $request->nombre;
                 $producto->estado = $request->estado;
@@ -406,7 +407,15 @@ class ProductosController extends Controller
                 }
             }
             else{
-                return back()->with('error','No puedes tener más de 3 productos activos a menos que cambies de plan.');
+                /*$empresasdeudoras= DB::table('empresa as e')
+        ->join('facturacion as f','f.idempresa','e.idEmpresa')
+        ->where('f.estado','2')
+        ->get();
+        return json_encode($empresasdeudoras);*/
+                alert()->warning('Limitado', 'Se encuentra límitado a tener sólo 3 productos activos, ve a planes y migra YA!');
+                return back();
+                    //return redirect()->back()->with('info','Su plan lo está limitando, cambiese YA!.');
+                
             }
         }
     }

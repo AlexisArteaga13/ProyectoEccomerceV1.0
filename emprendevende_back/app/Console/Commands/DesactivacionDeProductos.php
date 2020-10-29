@@ -39,7 +39,7 @@ class DesactivacionDeProductos extends Command
     public function handle()
     {
         // Probamos para que actualice solo las empresas
-        $facturacion = DB::table('facturacion')->where('fechaPago','=',Carbon::now())
+        $facturacion = DB::table('facturacion')->where('fechaPago','<=',Carbon::now())
             /*->select('user_id', DB::raw('count(*) as total_posts'))
             ->groupBy('user_id)*/
             ->get();
@@ -51,7 +51,10 @@ class DesactivacionDeProductos extends Command
             ->where('idFACTURACIÓN', $f->idFACTURACIÓN)
             ->update(['estado' => 2]);
         }
-        $empresasdeudoras= DB::table('empresa as e')->join('facturacion as f','f.idFACTURACIÓN')->where('f.estado','2')->get();
+        $empresasdeudoras= DB::table('empresa as e')
+        ->join('facturacion as f','f.idempresa','e.idEmpresa')
+        ->where('f.estado','2')
+        ->get();
         foreach($empresasdeudoras as $e){
             DB::table('users')
             ->where('id', $e->idUsuario)
@@ -59,7 +62,7 @@ class DesactivacionDeProductos extends Command
             $productos = DB::table('producto')->where('idEmpresa',$e->idEmpresa)->get();
             foreach($productos as $p){
                 DB::table('producto')
-                ->where('idPRODUCTO', $e->idPRODUCTO)
+                ->where('idPRODUCTO', $p->idPRODUCTO)
                 ->update(['estado' => 0]);
             }
         }
