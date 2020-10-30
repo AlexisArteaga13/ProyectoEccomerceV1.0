@@ -781,7 +781,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     </script>
     <!-- //smooth-scrolling-of-move-up -->
-
+    <script type="text/javascript">
+        window.CSRF_TOKEN = '{{ csrf_token() }}';
+    </script>
     <!-- for bootstrap working -->
     @yield('scripts')
     <script src="{{ asset('js/bootstrap.js') }}"></script>
@@ -798,6 +800,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   crossorigin="anonymous"></script>-->
     <!-- //for bootstrap working -->
     <!-- //js-files -->
+
 
 </body>
 
