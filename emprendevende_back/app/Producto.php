@@ -14,6 +14,6 @@ class Producto extends Model
         'nombreProducto','precio','marca','peso',
         'stock','unidad','descripcion','vistas','calificacion',
         'imagen_f','imagen_p','imagen_iz','imagen_d','imagen_s','imagen_in',
-        'idCategoria','idEmpresa','estado',
+        'idCategoria','idEmpresa','estado','destacado',
     ];
 }

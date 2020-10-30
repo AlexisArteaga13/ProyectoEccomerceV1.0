@@ -182,10 +182,17 @@
                                                 <td>
                                                     @if ($value->estado == '1')
                                                         <button class="btn btn-success">Activo</button>
+
+                                                        @if ($value->destacado == '0' || $value->destacado == NULL )
+                                                        <button type="button" class="btn btn-outline-danger" data-toggle="modal"
+                                                        data-target="#ModalDestacar-{{ $value->idPRODUCTO }}">Destacar</button>
+                                                        @else
+                                                            <button class="btn btn-success">Destacado</button>
+                                                        @endif
                                                     @else
                                                         <button class="btn btn-danger">Inactivo</button>
                                                     @endif
-
+                                                    
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-outline-warning"
@@ -215,6 +222,7 @@
 
                                             </tr>
                                             @include('vistasadmin.productos.modal')
+                                            @include('vistasadmin.productos.mdestacar')
                                         @endforeach
 
                                     </tbody>
@@ -552,6 +560,7 @@
 
     <!--Modal Elimiar -->
 
+   
     @include('vistasadmin.modulosadmin.llamadoscript.scripttable')
     <script src="{{ asset('jsadmin/productos.js') }}"></script>
 

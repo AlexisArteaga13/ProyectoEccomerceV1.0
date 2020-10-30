@@ -156,6 +156,7 @@ class ProductosController extends Controller
                     $newproducto->unidad = $request->unidad;
                     $newproducto->descripcion = $request->descripcion;
                     $newproducto->vistas ="";
+                    $newproducto->destacado ="0";
                     $newproducto->calificacion ="";
                     if($request->file('imgfrontal')){
                         $newproducto->imagen_f = $request->file('imgfrontal')->store('public/producto');
@@ -205,6 +206,7 @@ class ProductosController extends Controller
                     $newproducto->descripcion = $request->descripcion;
                     $newproducto->vistas ="";
                     $newproducto->calificacion ="";
+                    $newproducto->destacado ="0";
                     if($request->file('imgfrontal')){
                         $newproducto->imagen_f = $request->file('imgfrontal')->store('public/producto');
                     }
@@ -253,6 +255,7 @@ class ProductosController extends Controller
             $newproducto->descripcion = $request->descripcion;
             $newproducto->vistas ="";
             $newproducto->calificacion ="";
+            $newproducto->destacado ="0";
             if($request->file('imgfrontal')){
                 $newproducto->imagen_f = $request->file('imgfrontal')->store('public/producto');
             }
@@ -424,8 +427,21 @@ class ProductosController extends Controller
         //return $id;
         $productos = Producto::FindOrFail($id);
         $productos->estado = '0';
+        $productos->destacado = '0';
         if($productos->update()){
             return back()->with('success','Producto Desactivado Correctamente.');
+        }
+        else{
+            return back()->with('error','Ocurrió un error.');
+        }
+    }
+    public function destacar($id)
+    {
+        //return $id;
+        $productos = Producto::FindOrFail($id);
+        $productos->destacado = '1';
+        if($productos->update()){
+            return back()->with('success','Producto Destacado Correctamente.');
         }
         else{
             return back()->with('error','Ocurrió un error.');

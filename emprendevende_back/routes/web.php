@@ -70,6 +70,7 @@ Route::get('/login/productos','ProductosController@index')->name('productos.inde
 Route::post('/login/productos/store','ProductosController@store')->name('productos.store');
 Route::post('/login/productos/update','ProductosController@update')->name('productos.update');
 Route::delete('/login/productos/delete/{id}','ProductosController@destroy')->name('productos.delete');
+Route::post('/login/productos/update/{id}','ProductosController@destacar')->name('productos.destacar');
 
 //ruta de facturacion de planes
 Route::get('/login/facturacion','FacturacionController@index')->name('facturacion.index');
