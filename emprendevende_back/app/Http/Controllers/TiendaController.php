@@ -13,5 +13,12 @@ class TiendaController extends Controller
         $categorias = DB::table('categoria')->where('estado',1)->get();
         return view('modulostienda.inicio',compact('categorias','empresas'));
     }
+    public function checkout(Request $request){
+        return $request->all();
+        $empresas = DB::table('empresa')->where('estado',1)->get();
+        $categorias = DB::table('categoria')->where('estado',1)->get();
+        
+        return view('modulostienda.checkout');
+    }
 
 }
