@@ -167,8 +167,7 @@
                         <span class="badge badge-warning navbar-badge">{{ Auth::user()->name }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
+                        <a class="dropdown-item" href="{{ route('micuenta') }}">
                             {{ __('Configurar cuenta') }}
                         </a>
                         <hr>

@@ -73,7 +73,15 @@
                                                 <td>{{ $value->nombrePlan}}</td>
                                                 <td>{{ $value->fechaEmision }}</td>
                                                 <td>{{ $value->fechaPago }}</td>
-                                                <td>{{ $value->estado }}</td>
+                                                <td>
+                                                    @if ( $value->estado == '1')
+                                                        <span class="badge badge-success">En curso</span>
+                                                    
+                                                    @endif
+                                                    @if ( $value->estado == '2')
+                                                    <span class="badge badge-danger">En deuda</span>
+                                                    @endif
+                                                   </td>
                                                 <td>{{ $value->importe }}</td>
                                                 <td>{{ $value->detalle }}</td>
                                                 <td>{{ $value->descuento }}</td>
