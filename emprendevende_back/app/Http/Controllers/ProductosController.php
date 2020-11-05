@@ -161,7 +161,7 @@ class ProductosController extends Controller
                     if($request->file('imgfrontal')){
                         $newproducto->imagen_f = $request->file('imgfrontal')->store('public/producto');
                     }
-                    elseif($request->file('imgizquierda')){
+                    elseif($request->file('imgposterior')){
                         $newproducto->imagen_p = $request->file('imgposterior')->store('public/producto');
                     }
                     elseif($request->file('imgizquierda')){
