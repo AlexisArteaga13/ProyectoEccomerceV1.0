@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 class HomeController extends Controller
 {
     /**
@@ -30,6 +31,13 @@ class HomeController extends Controller
     public function indexadmin()
     {
         return view('vistasadmin.modulosadmin.principal');
+    }
+    public function micuenta()
+    {
+        
+        $usuario=DB::table('users')->where('id',Auth::user()->id)->first();
+        $planes = DB::table('plan')->get();
+        return view('vistasadmin.modulosadmin.cuenta',compact('usuario','planes'));
     }
    
 }

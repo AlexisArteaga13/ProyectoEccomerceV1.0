@@ -96,7 +96,7 @@
                                                 <td>{{ $value->ruc }}</td>
                                                 <td>{{ $value->telefono }}</td>
                                                 <td>{{ $value->razonSocial }}</td>
-                                                <td>{{ $value->fechaRegistro }}</td> 
+                                                <td>{{ $value->created_at }}</td> 
                                                 <td>{{ $value->calificacion }}</td> 
                                                 <td>{{ $value->nombreRubro }}</td> 
                                             <td>{{ $value->name }} {{$value->apellidos}}</td> 
