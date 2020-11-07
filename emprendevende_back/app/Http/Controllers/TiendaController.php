@@ -43,5 +43,9 @@ class TiendaController extends Controller
         
         return view('modulostienda.checkout');
     }
-
+        public function vitrina(){
+            $empresas = DB::table('empresa')->where('estado',1)->get();
+            $categorias = DB::table('categoria')->where('estado',1)->get();
+            return view('modulostienda.single.single',compact('empresas','categorias'));
+        }
 }
