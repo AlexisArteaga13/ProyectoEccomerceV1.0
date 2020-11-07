@@ -298,7 +298,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                             <ul class="multi-column-dropdown">
                                                 @foreach ($categorias as $c)
                                                 <li>
-                                                    <a href="product2.html">{{$c->nombreCategoria}}</a>
+                                                <a href="{{route('tienda.categoria', $c->idCategoria)}}">{{$c->nombreCategoria}}</a>
                                                 </li>   
                                                 @endforeach
                                                

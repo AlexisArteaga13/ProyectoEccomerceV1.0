@@ -48,4 +48,23 @@ class TiendaController extends Controller
             $categorias = DB::table('categoria')->where('estado',1)->get();
             return view('modulostienda.single.single',compact('empresas','categorias'));
         }
+        public function categoria($id){
+            //Productos de esta categoria
+            $productos  = DB::table('producto as p')
+            ->join('categoria as c','p.idCategoria','c.idCategoria')
+            ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+            ->where('p.estado','1')
+            ->where('e.estado','1')      
+            ->where('c.idCategoria',$id)
+            ->paginate(16);
+
+            ///*********************** */
+            $catselect = DB::table('categoria')
+            ->where('estado',1)
+            ->where('idCategoria',$id)->first();
+            //************ */
+            $empresas = DB::table('empresa')->where('estado',1)->get();
+            $categorias = DB::table('categoria')->where('estado',1)->get();
+            return view('modulostienda.single.categoria',compact('empresas','categorias','catselect','productos'));
+        }
 }
