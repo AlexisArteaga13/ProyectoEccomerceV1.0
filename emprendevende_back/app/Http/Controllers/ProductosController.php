@@ -52,8 +52,9 @@ class ProductosController extends Controller
             $categorias= DB::table('categoria')->where('estado','=',1)->get();
             $productos = DB::table('producto as p')
             ->join('empresa as e','p.idEmpresa','=','e.idEmpresa')
+            ->join('users as u','e.idUsuario','=','u.id')
             ->join('categoria as c','p.idCategoria','=','c.idCategoria')
-            ->select('p.*','e.nombreEmpresa','c.nombreCategoria')
+            ->select('p.*','e.nombreEmpresa','c.nombreCategoria','u.idPlan')
             ->get();
             
            return view('vistasadmin.productos.pindex',compact('productos','categorias','empresas'));
@@ -64,8 +65,9 @@ class ProductosController extends Controller
             $productos = DB::table('producto as p')
             ->join('empresa as e','p.idEmpresa','=','e.idEmpresa')
             ->join('categoria as c','p.idCategoria','=','c.idCategoria')
+            ->join('users as u','e.idUsuario','=','u.id')
             ->where('e.idUsuario',Auth::user()->id)
-            ->select('p.*','e.nombreEmpresa','c.nombreCategoria')
+            ->select('p.*','e.nombreEmpresa','c.nombreCategoria','u.idPlan')
             ->get();
             
            return view('vistasadmin.productos.pindex',compact('productos','categorias','empresas'));

@@ -12,7 +12,7 @@ class Empresa extends Model
     protected $fillable = [
         'nombreEmpresa','cuenta_transferencia','descripcion','vision','mision',
         'logo_img_empresa','ruc','telefono','razonSocial','fechaRegistro',
-        'calificacion','idRubro','idUsuario',
+        'calificacion','idRubro','idUsuario','created_at','updated_at',
     ];
     
 }
