@@ -180,6 +180,22 @@
                                                 <td>{{ $value->vistas }}</td>
                                                 <td>{{ $value->calificacion }}</td>
                                                 <td>
+                                                @can('administrador')
+                                                @if ($value->estado == '1')
+                                                        <button class="btn btn-success">Activo</button>
+
+                                                        @if ($value->destacado == '0' || $value->destacado == NULL )
+                                                        <button type="button" class="btn btn-outline-danger" data-toggle="modal"
+                                                        data-target="#ModalDestacar-{{ $value->idPRODUCTO }}">Destacar</button>
+                                                        @else
+                                                            <button class="btn btn-success">Destacado</button>
+                                                        @endif
+                                                    @else
+                                                        <button class="btn btn-danger">Inactivo</button>
+                                                    @endif
+                                                @endcan
+                                                @if ($value->idPlan == '2')
+
                                                     @if ($value->estado == '1')
                                                         <button class="btn btn-success">Activo</button>
 
@@ -192,7 +208,7 @@
                                                     @else
                                                         <button class="btn btn-danger">Inactivo</button>
                                                     @endif
-                                                    
+                                                @endif
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-outline-warning"
