@@ -43,11 +43,27 @@ class TiendaController extends Controller
         
         return view('modulostienda.checkout');
     }
-        public function vitrina(){
-            $empresas = DB::table('empresa')->where('estado',1)->get();
+
+    public function vitrina(){
+           $empresas = DB::table('empresa')->where('estado',1)->get();
             $categorias = DB::table('categoria')->where('estado',1)->get();
             return view('modulostienda.single.single',compact('empresas','categorias'));
+           //return view('modulostienda.single.single');
         }
+<<<<<<< HEAD
+        public function descripcionProducto($id){
+            $productos = DB::table('producto')->where('idPRODUCTO',$id)
+            ->join('empresa as e','producto.idEmpresa','=','e.idEmpresa')
+            ->join('users as u','e.idUsuario','=','u.id')
+            ->join('categoria as c','producto.idCategoria','=','c.idCategoria')
+            ->select('producto.*','e.nombreEmpresa','c.nombreCategoria','u.idPlan')
+            ->get();
+            $empresas = DB::table('empresa')->where('estado',1)->get();
+            $categorias = DB::table('categoria')->where('estado',1)->get();
+             return view('modulostienda.single.singles',compact('productos','empresas','categorias'));
+            //return view('modulostienda.single.single');
+         }
+=======
         public function categoria($id, Request $request){
             
             if(empty($request->all())){
@@ -108,4 +124,5 @@ class TiendaController extends Controller
             
             }
         }
+>>>>>>> 12447c1e24389c1bb869e5b4d446b20b471f08a4
 }

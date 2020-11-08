@@ -480,6 +480,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 	<!-- //shop locator (popup) -->
 	<!-- modals -->
+
+
+	
 	<!-- log in -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog" role="document">

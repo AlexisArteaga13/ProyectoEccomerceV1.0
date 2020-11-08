@@ -117,8 +117,12 @@
                                                     <p class="card-text">{{ $value->marca }}</p>
                                                     <p class="card-text"><small
                                                             class="text-muted">{{ $value->descripcion }}</small></p>
-                                                    <a href="single.html" class="btn btn-primary">Ver producto</a>
-
+                                                 <!--  <a href="{{ route('vitrina') }}" class="btn btn-primary">Ver producto</a> -->
+                                                    <form action="{{ route('descripcion', $value->idPRODUCTO) }}" method="post">
+                                                         <button type="submit" class="btn btn-primary">Continuar</button>
+                                                         @csrf
+                                                      </form>
+                                                    
                                                 </div>
 
                                             </div>

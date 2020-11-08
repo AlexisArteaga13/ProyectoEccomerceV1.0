@@ -79,3 +79,4 @@ Route::post('/login/productos/update/{id}','ProductosController@destacar')->name
 Route::get('/login/facturacion','FacturacionController@index')->name('facturacion.index');
 Route::get('/login/facturacion/store','FacturacionController@store')->name('facturacion.store');
 
+Route::post('/descripcion/{id}','TiendaController@descripcionProducto')->name('descripcion');
