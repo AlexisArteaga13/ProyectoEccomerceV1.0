@@ -26,7 +26,7 @@
             <!-- //tittle heading -->
 
             <!--<div class="side-bar p-sm-4 p-3">-->
-           
+
             <div class="row">
                 <!-- product left -->
                 <div class="agileinfo-ads-display col-lg-9">
@@ -89,20 +89,40 @@
                                         <ul class="pagination">
 
                                             <!--
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                </li>-->
-                                            {{ $productos->links() }}
+                                                                                    <li class="page-item">
+                                                                                        <a class="page-link" href="#" aria-label="Previous">
+                                                                                            <span aria-hidden="true">&laquo;</span>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                                                    <li class="page-item">
+                                                                                        <a class="page-link" href="#" aria-label="Next">
+                                                                                            <span aria-hidden="true">&raquo;</span>
+                                                                                        </a>
+                                                                                    </li>-->
+                                            @if (!isset($_GET['buscador']) && !isset($_GET['empresas']) && !isset($_GET['selector']))
+                                                {{ $productos->links() }}
+                                            @else
+                                                @if (isset($_GET['buscador']) && isset($_GET['empresas']) && isset($_GET['selector']))
+                                                    {{ $productos->appends(['buscador' => $_GET['buscador'], 'empresas' => $_GET['empresas'], 'selector' => $_GET['selector']])->links() }}
+                                                @else
+                                                    @if (isset($_GET['buscador']) && isset($_GET['empresas']) && !isset($_GET['selector']))
+                                                        {{ $productos->appends(['buscador' => $_GET['buscador'], 'empresas' => $_GET['empresas']])->links() }}
+
+                                                    @else
+                                                        @if (isset($_GET['buscador']) && !isset($_GET['empresas']) && !isset($_GET['selector']))
+                                                            {{ $productos->appends(['buscador' => $_GET['buscador']])->links() }}
+
+                                                        @else
+                                                            {{ $productos->appends(['buscador' => $_GET['buscador']])->links() }}
+                                                        @endif
+                                                    @endif
+                                                @endif
+
+                                            @endif
+
                                         </ul>
                                     </nav>
 
@@ -126,267 +146,345 @@
                         <div class="search-hotel border-bottom py-2">
                             <h3 class="agileits-sear-head mb-3">Buscar producto</h3>
                             <form action="{{ route('tienda.categoria', $catselect->idCategoria) }}" method="get">
-                                <input type="search" placeholder="Buscar producto..." name="buscador" required="">
-                                <input type="submit" value=" ">
-                           
-                            <div class="left-side py-2">
-                                <span class="badge badge-success">Busca tu producto por empresa</span>
-                                <ul>
-                                    <li>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="empresas" id="opcion1"
-                                                value="todo">
-                                            <label class="form-check-label" for="inlineRadio1">
-                                                Todos</label>
-                                        </div>
-                                    </li>
-                                    @foreach ($empresas as $key => $value)
-                                        <li>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="empresas" id="opcion1"
-                                                    value="{{ $value->idEmpresa }}">
-                                                <label class="form-check-label" for="inlineRadio1">
-                                                    {{ $value->nombreEmpresa }}</label>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <div class="range border-bottom py-2">
-                                <h3 class="agileits-sear-head mb-3">Precio</h3>
-                                <div class="w3l-range">
+
+                                @if (isset($_GET['buscador']))
+                                    <input type="search" placeholder="Buscar producto..." name="buscador" required=""
+                                        value="{{ $_GET['buscador'] }}">
+                                    <input type="submit" value=" ">
+                                @else
+                                    <input type="search" placeholder="Buscar producto..." name="buscador" required=""
+                                        value="">
+                                    <input type="submit" value=" ">
+                                @endif
+
+
+                                <div class="left-side py-2">
+                                    <span class="badge badge-success">Busca tu producto por empresa</span>
                                     <ul>
                                         <li>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="precios" id="opcion1"
-                                                    value="todo">
-                                                <label class="form-check-label" for="inlineRadio1">
-                                                    Menor a 10</label>
-                                            </div>
+                                            @if (!isset($_GET['empresas']))
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="empresas"
+                                                        id="opcion1" value="todo">
+                                                    <label class="form-check-label" for="inlineRadio1">
+                                                        Todos</label>
+                                                </div>
                                         </li>
-                                        <li class="my-1">
+                                        @foreach ($empresas as $key => $value)
+                                            <li>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="empresas"
+                                                        id="opcion1" value="{{ $value->idEmpresa }}">
+                                                    <label class="form-check-label" for="inlineRadio1">
+                                                        {{ $value->nombreEmpresa }}</label>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        @if ($_GET['empresas'] == 'todo')
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="precios" id="opcion1"
-                                                    value="todo">
+                                                <input class="form-check-input" type="radio" name="empresas" id="opcion1"
+                                                    value="todo" checked>
                                                 <label class="form-check-label" for="inlineRadio1">
-                                                    Menor a 50</label>
+                                                    Todos</label>
                                             </div>
-                                        </li>
-                                        <li>
+                                            </li>
+                                            @foreach ($empresas as $key => $value)
+                                                <li>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="empresas"
+                                                            id="opcion1" value="{{ $value->idEmpresa }}">
+                                                        <label class="form-check-label" for="inlineRadio1">
+                                                            {{ $value->nombreEmpresa }}</label>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        @endif
+                                        @if ($_GET['empresas'] != 'todo')
+
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="precios" id="opcion1"
-                                                    value="todo">
+                                                <input class="form-check-input" type="radio" name="empresas" id="opcion1"
+                                                    value="todo" checked>
                                                 <label class="form-check-label" for="inlineRadio1">
-                                                    Menor a 100</label>
+                                                    Todos</label>
                                             </div>
-                                        </li>
-                                        <li class="my-1">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="precios" id="opcion1"
-                                                    value="todo">
-                                                <label class="form-check-label" for="inlineRadio1">
-                                                    Menor a 200</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="precios" id="opcion1"
-                                                    value="todo">
-                                                <label class="form-check-label" for="inlineRadio1">
-                                                    Menor a 350</label>
-                                            </div>
-                                        </li>
-                                        <li class="mt-1">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="precios" id="opcion1"
-                                                    value="todo">
-                                                <label class="form-check-label" for="inlineRadio1">
-                                                    Mayor a 350</label>
-                                            </div>
-                                        </li>
+                                            </li>
+                                            @foreach ($empresas as $key => $value)
+                                                @if ($_GET['empresas'] == $value->idEmpresa)
+                                                    <li>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="empresas"
+                                                                id="opcion1" value="{{ $value->idEmpresa }}" checked>
+                                                            <label class="form-check-label" for="inlineRadio1">
+                                                                {{ $value->nombreEmpresa }}</label>
+                                                        </div>
+                                                    </li>
+                                                @else
+                                                    <li>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="empresas"
+                                                                id="opcion1" value="{{ $value->idEmpresa }}">
+                                                            <label class="form-check-label" for="inlineRadio1">
+                                                                {{ $value->nombreEmpresa }}</label>
+                                                        </div>
+                                                    </li>
+                                                @endif
+
+                                            @endforeach
+                                        @endif
+                                        @endif
+
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="search-hotel border-bottom py-2">
-                             
+                                <!--
+                                                                <div class="range border-bottom py-2">
+                                                                    <h3 class="agileits-sear-head mb-3">Precio</h3>
+                                                                    <div class="w3l-range">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <div class="form-check form-check-inline">
+                                                                                    <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                                                        value="10">
+                                                                                    <label class="form-check-label" for="inlineRadio1">
+                                                                                        Menor a 10</label>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="my-1">
+                                                                                <div class="form-check form-check-inline">
+                                                                                    <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                                                        value="50">
+                                                                                    <label class="form-check-label" for="inlineRadio1">
+                                                                                        Menor a 50</label>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="form-check form-check-inline">
+                                                                                    <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                                                        value=100>
+                                                                                    <label class="form-check-label" for="inlineRadio1">
+                                                                                        Menor a 100</label>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="my-1">
+                                                                                <div class="form-check form-check-inline">
+                                                                                    <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                                                        value="200">
+                                                                                    <label class="form-check-label" for="inlineRadio1">
+                                                                                        Menor a 200</label>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="form-check form-check-inline">
+                                                                                    <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                                                        value="350">
+                                                                                    <label class="form-check-label" for="inlineRadio1">
+                                                                                        Menor a 350</label>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="mt-1">
+                                                                                <div class="form-check form-check-inline">
+                                                                                    <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                                                        value="todo">
+                                                                                    <label class="form-check-label" for="inlineRadio1">
+                                                                                        Cualquiera</label>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div> -->
+                                <div class="search-hotel border-bottom py-2">
+
                                     <span class="agileits-sear-head mb-3">Ordenar por </span>
                                     <select name="selector" id="">
-                                        <option selected="select" disabled> -- Seleccione -- </option>
-                                        <option value="asc">Precio: Menor a Mayor</option>
-                                        <option value="desc">Precio: Mayor a Menor</option>
+                                        @if (!isset($_GET['selector']))
+                                            <option selected disabled> -- Seleccione -- </option>
+                                            <option value="asc">Precio: Menor a Mayor</option>
+                                            <option value="desc">Precio: Mayor a Menor</option>
+                                        @else
+                                            @if ($_GET['selector'] == 'asc')
+                                                <option disabled> -- Seleccione -- </option>
+                                                <option value="asc" selected>Precio: Menor a Mayor</option>
+                                                <option value="desc">Precio: Mayor a Menor</option>
+                                            @endif
+                                            @if ($_GET['selector'] == 'desc')
+                                                <option disabled> -- Seleccione -- </option>
+                                                <option value="asc">Precio: Menor a Mayor</option>
+                                                <option value="desc" selected>Precio: Mayor a Menor</option>
+                                            @endif
+                                        @endif
                                     </select>
                                     <br>
                                     <button class="btn btn-success"> Buscar</button>
-                                </form>
-                            </div>
+                            </form>
                         </div>
-                        <!-- reviews -->
-                        <!--
-                        <div class="customer-rev border-bottom left-side py-2">
-                            <h3 class="agileits-sear-head mb-3">Puntuación de vendedor</h3>
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <span>5.0</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <span>4.0</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <span>3.5</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <span>3.0</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <span>2.5</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    -->
-                        <!-- //reviews -->
-                        <!-- price -->
-                        
-                        <!-- //price -->
-                        <!-- discounts
-                            <div class="left-side border-bottom py-2">
-                                <h3 class="agileits-sear-head mb-3">Descuento</h3>
-                                <ul>
-                                    <li>
-                                        <input type="checkbox" class="checked">
-                                        <span class="span">5% o Más</span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" class="checked">
-                                        <span class="span">10% o Más</span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" class="checked">
-                                        <span class="span">20% o Más</span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" class="checked">
-                                        <span class="span">30% o Más</span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" class="checked">
-                                        <span class="span">50% o Más</span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" class="checked">
-                                        <span class="span">60% o Más</span>
-                                    </li>
-                                </ul>
-                            </div> -->
-                        <!-- //discounts -->
-                        <!-- offers -->
-                        <!--
-                        <div class="left-side border-bottom py-2">
-                            <h3 class="agileits-sear-head mb-3">Ofertas</h3>
-                            <ul>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span"></span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span"></span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span"></span>
-                                </li>
-                            </ul>
-                        </div>
-                    -->
-                        <!-- //offers -->
-                        <!-- delivery -->
-                        <!--
-                            <div class="left-side border-bottom py-2">
-                                <h3 class="agileits-sear-head mb-3">Color</h3>
-                                <ul>
-                                    <li>
-                                        <input type="checkbox" class="checked">
-                                        <span class="span">Blanco</span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" class="checked">
-                                        <span class="span">Negro</span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" class="checked">
-                                        <span class="span">Gris</span>
-                                    </li>
-                                </ul>
-                            </div> -->
-                        <!-- //delivery -->
-                        <!-- arrivals -->
-                        <!--
-                        <div class="left-side border-bottom py-2">
-                            <h3 class="agileits-sear-head mb-3">Los mas Nuevos</h3>
-                            <ul>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Últimos 30 días</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Últimos 90 días</span>
-                                </li>
-                            </ul>
-                        </div>
-                    -->
-                        <!-- //arrivals -->
-                        <!-- Availability -->
-                        <!--
-                        <div class="left-side py-2">
-                            <h3 class="agileits-sear-head mb-3">Disponibilidad</h3>
-                            <ul>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Excluir Agotados</span>
-                                </li>
-                            </ul>
-                        </div>-->
-                        <!-- //Availability -->
                     </div>
+                    <!-- reviews -->
+                    <!--
+                                                            <div class="customer-rev border-bottom left-side py-2">
+                                                                <h3 class="agileits-sear-head mb-3">Puntuación de vendedor</h3>
+                                                                <ul>
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <span>5.0</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                                            <span>4.0</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                                            <span>3.5</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                                            <span>3.0</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                                            <span>2.5</span>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        -->
+                    <!-- //reviews -->
+                    <!-- price -->
+
+                    <!-- //price -->
+                    <!-- discounts
+                                                                <div class="left-side border-bottom py-2">
+                                                                    <h3 class="agileits-sear-head mb-3">Descuento</h3>
+                                                                    <ul>
+                                                                        <li>
+                                                                            <input type="checkbox" class="checked">
+                                                                            <span class="span">5% o Más</span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <input type="checkbox" class="checked">
+                                                                            <span class="span">10% o Más</span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <input type="checkbox" class="checked">
+                                                                            <span class="span">20% o Más</span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <input type="checkbox" class="checked">
+                                                                            <span class="span">30% o Más</span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <input type="checkbox" class="checked">
+                                                                            <span class="span">50% o Más</span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <input type="checkbox" class="checked">
+                                                                            <span class="span">60% o Más</span>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div> -->
+                    <!-- //discounts -->
+                    <!-- offers -->
+                    <!--
+                                                            <div class="left-side border-bottom py-2">
+                                                                <h3 class="agileits-sear-head mb-3">Ofertas</h3>
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="checkbox" class="checked">
+                                                                        <span class="span"></span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <input type="checkbox" class="checked">
+                                                                        <span class="span"></span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <input type="checkbox" class="checked">
+                                                                        <span class="span"></span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        -->
+                    <!-- //offers -->
+                    <!-- delivery -->
+                    <!--
+                                                                <div class="left-side border-bottom py-2">
+                                                                    <h3 class="agileits-sear-head mb-3">Color</h3>
+                                                                    <ul>
+                                                                        <li>
+                                                                            <input type="checkbox" class="checked">
+                                                                            <span class="span">Blanco</span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <input type="checkbox" class="checked">
+                                                                            <span class="span">Negro</span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <input type="checkbox" class="checked">
+                                                                            <span class="span">Gris</span>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div> -->
+                    <!-- //delivery -->
+                    <!-- arrivals -->
+                    <!--
+                                                            <div class="left-side border-bottom py-2">
+                                                                <h3 class="agileits-sear-head mb-3">Los mas Nuevos</h3>
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="checkbox" class="checked">
+                                                                        <span class="span">Últimos 30 días</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <input type="checkbox" class="checked">
+                                                                        <span class="span">Últimos 90 días</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        -->
+                    <!-- //arrivals -->
+                    <!-- Availability -->
+                    <!--
+                                                            <div class="left-side py-2">
+                                                                <h3 class="agileits-sear-head mb-3">Disponibilidad</h3>
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="checkbox" class="checked">
+                                                                        <span class="span">Excluir Agotados</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>-->
+                    <!-- //Availability -->
                 </div>
-                <!-- //product right -->
             </div>
+            <!-- //product right -->
         </div>
+    </div>
     </div>
 @endsection

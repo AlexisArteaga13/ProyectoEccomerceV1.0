@@ -49,9 +49,8 @@ class TiendaController extends Controller
             $categorias = DB::table('categoria')->where('estado',1)->get();
             return view('modulostienda.single.single',compact('empresas','categorias'));
            //return view('modulostienda.single.single');
-        }
-<<<<<<< HEAD
-        public function descripcionProducto($id){
+    }
+    public function descripcionProducto($id){
             $productos = DB::table('producto')->where('idPRODUCTO',$id)
             ->join('empresa as e','producto.idEmpresa','=','e.idEmpresa')
             ->join('users as u','e.idUsuario','=','u.id')
@@ -62,10 +61,10 @@ class TiendaController extends Controller
             $categorias = DB::table('categoria')->where('estado',1)->get();
              return view('modulostienda.single.singles',compact('productos','empresas','categorias'));
             //return view('modulostienda.single.single');
-         }
-=======
-        public function categoria($id, Request $request){
-            
+    }
+    public function categoria($id, Request $request){
+            $parametros = $request->all();
+           
             if(empty($request->all())){
             //Productos de esta categoria
             $productos  = DB::table('producto as p')
@@ -74,7 +73,7 @@ class TiendaController extends Controller
             ->where('p.estado','1')
             ->where('e.estado','1')      
             ->where('c.idCategoria',$id)
-            ->paginate(16);
+            ->paginate(2);
 
             ///*********************** */
             $catselect = DB::table('categoria')
@@ -86,8 +85,34 @@ class TiendaController extends Controller
             return view('modulostienda.single.categoria',compact('empresas','categorias','catselect','productos'));
             }
             elseif($request->all()){
-               return $request->all();
-              if(!empty($request->selector)){
+              
+              if(!empty($request->selector) && !empty($request->buscador) && !empty($request->empresas)){
+                 if($request->empresas != 'todo'){
+                    $productos  = DB::table('producto as p')
+                    ->join('categoria as c','p.idCategoria','c.idCategoria')
+                    ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                    ->where('p.estado','1')
+                    ->where('e.estado','1')    
+                    ->where('c.idCategoria',$id)
+                    ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')
+                    ->Where('e.idEmpresa','LIKE','%'.$request->empresas.'%')
+                    ->orderBy('p.precio',$request->selector)
+                    ->paginate(2);
+                }
+                elseif($request->empresas == 'todo'){                
+                    $productos  = DB::table('producto as p')
+                    ->join('categoria as c','p.idCategoria','c.idCategoria')
+                    ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                    ->where('p.estado','1')
+                    ->where('e.estado','1')      
+                    ->where('c.idCategoria',$id)
+                    ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')   
+                    ->orderBy('p.precio',$request->selector)
+                    ->paginate(2);
+                }
+              }
+              elseif(empty($request->selector) && !empty($request->buscador) && !empty($request->empresas) ){
+                if($request->empresas != 'todo'){
                 $productos  = DB::table('producto as p')
                 ->join('categoria as c','p.idCategoria','c.idCategoria')
                 ->join('empresa as e','e.idEmpresa','p.idEmpresa')
@@ -96,10 +121,45 @@ class TiendaController extends Controller
                 ->where('c.idCategoria',$id)
                 ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')
                 ->Where('e.idEmpresa','LIKE','%'.$request->empresas.'%')
-                ->orderBy('p.precio',$request->selector)
-                ->paginate(16);
+                ->paginate(2);
+                }
+                else{
+                    $productos  = DB::table('producto as p')
+                    ->join('categoria as c','p.idCategoria','c.idCategoria')
+                    ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                    ->where('p.estado','1')
+                    ->where('e.estado','1')      
+                    ->where('c.idCategoria',$id)
+                    ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')
+                    
+                    ->paginate(2);
+                }
               }
-              else{
+              elseif(empty($request->selector) && empty($request->buscador) && !empty($request->empresas) ){
+                
+                $productos  = DB::table('producto as p')
+                ->join('categoria as c','p.idCategoria','c.idCategoria')
+                ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                ->where('p.estado','1')
+                ->where('e.estado','1')      
+                ->where('c.idCategoria',$id)
+                
+                ->Where('e.idEmpresa','LIKE','%'.$request->empresas.'%')
+               
+                ->paginate(2);
+              }
+            elseif(empty($request->selector) && empty($request->buscador) && empty($request->empresas)){
+                $productos  = DB::table('producto as p')
+                ->join('categoria as c','p.idCategoria','c.idCategoria')
+                ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                ->where('p.estado','1')
+                ->where('e.estado','1')      
+                ->where('c.idCategoria',$id)
+                
+               
+                ->paginate(2);
+            }
+            else{
                 $productos  = DB::table('producto as p')
                 ->join('categoria as c','p.idCategoria','c.idCategoria')
                 ->join('empresa as e','e.idEmpresa','p.idEmpresa')
@@ -110,19 +170,18 @@ class TiendaController extends Controller
                 ->Where('e.idEmpresa','LIKE','%'.$request->empresas.'%')
                 
                 ->paginate(2);
-              }
+            }
                 
 
                 ///*********************** */
-                $catselect = DB::table('categoria')
-                ->where('estado',1)
-                ->where('idCategoria',$id)->first();
+            $catselect = DB::table('categoria')
+            ->where('estado',1)
+            ->where('idCategoria',$id)->first();
                 //************ */
-                $empresas = DB::table('empresa')->where('estado',1)->get();
-                $categorias = DB::table('categoria')->where('estado',1)->get();
-                return view('modulostienda.single.categoria',compact('empresas','categorias','catselect','productos'));
+            $empresas = DB::table('empresa')->where('estado',1)->get();
+            $categorias = DB::table('categoria')->where('estado',1)->get();
+            return view('modulostienda.single.categoria',compact('empresas','categorias','catselect','productos','parametros'));
             
-            }
         }
->>>>>>> 12447c1e24389c1bb869e5b4d446b20b471f08a4
+    }
 }
