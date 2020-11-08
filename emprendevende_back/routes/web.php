@@ -21,6 +21,7 @@ Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProvider
 //****RUTAS SIN NECESIDAD DE CONTROLADOR */
 Route::get('/','TiendaController@index')->name('inicio');
 Route::get('/vitrina','TiendaController@vitrina')->name('vitrina');
+Route::get('/categorias/{id?}','TiendaController@categoria')->name('tienda.categoria');
 Route::get('/login/micuenta','HomeController@micuenta')->name('micuenta');
 Route::post('/verificar/vendedor/vendedor/checkout','TiendaController@checkout')->name('checkout');
 //******* */
