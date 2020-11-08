@@ -271,7 +271,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                 @foreach ($empresas as $key => $value)
                                                 <div class="col-sm-6">
                                                     <li>
-                                                        <a href="product.html">{{ $value->nombreEmpresa }}</a>
+                                                    <a href="{{route('tienda.tienda',$value->idEmpresa)}}">{{ $value->nombreEmpresa }}</a>
                                                     </li>
 
                                                 </div>
@@ -309,12 +309,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+                        <!--<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
                             <a class="nav-link" href="portuzona.html" style="color:white;">Por tu zona</a>
                         </li>
                         <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
                             <a class="nav-link" href="ofertas.html" style="color:white;">Ofertas</a>
-                        </li>
+                        </li>-->
                         <!--
       <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
        <a class="nav-link dropdown-toggle" href="#" style="color:white;" role="button"
@@ -334,7 +334,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
       </li>
       -->
                         <li class="nav-item">
-                            <a class="nav-link" href="destacados.html" style="color:white;">Destacados</a>
+                        <a class="nav-link" href="{{route('destacados')}}" style="color:white;">Destacados</a>
                         </li>
                     </ul>
                 </div>
