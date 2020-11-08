@@ -157,29 +157,52 @@
                                 <div class="w3l-range">
                                     <ul>
                                         <li>
-                                            <input type="checkbox" name="cb-costo" value="menor_10">
-                                            Debajo S/. 10.00
-                                            
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                    value="todo">
+                                                <label class="form-check-label" for="inlineRadio1">
+                                                    Menor a 10</label>
+                                            </div>
                                         </li>
                                         <li class="my-1">
-                                            <input type="checkbox" name="cb-costo" value="mayor_10_menor_50">
-                                            S/. 10.00 - S/. 50.00
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                    value="todo">
+                                                <label class="form-check-label" for="inlineRadio1">
+                                                    Menor a 50</label>
+                                            </div>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="cb-costo" value="mayor_50_menor_100">
-                                            S/. 50.00 - S/. 100.00
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                    value="todo">
+                                                <label class="form-check-label" for="inlineRadio1">
+                                                    Menor a 100</label>
+                                            </div>
                                         </li>
                                         <li class="my-1">
-                                            <input type="checkbox" name="cb-costo" value="mayor_100_menor_200">
-                                            S/. 100.00 - S/. 200.00
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                    value="todo">
+                                                <label class="form-check-label" for="inlineRadio1">
+                                                    Menor a 200</label>
+                                            </div>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="cb-costo" value="mayor_200_menor_350">
-                                           S/. 200.00 - S/. 350.00
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                    value="todo">
+                                                <label class="form-check-label" for="inlineRadio1">
+                                                    Menor a 350</label>
+                                            </div>
                                         </li>
                                         <li class="mt-1">
-                                            <input type="checkbox" name="cb-costo" value="mayor_350">
-                                            Más de S/. 350.00
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                    value="todo">
+                                                <label class="form-check-label" for="inlineRadio1">
+                                                    Mayor a 350</label>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>

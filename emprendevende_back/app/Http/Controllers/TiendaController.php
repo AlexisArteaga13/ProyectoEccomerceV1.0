@@ -70,7 +70,7 @@ class TiendaController extends Controller
             return view('modulostienda.single.categoria',compact('empresas','categorias','catselect','productos'));
             }
             elseif($request->all()){
-              // return $request->all();
+               return $request->all();
               if(!empty($request->selector)){
                 $productos  = DB::table('producto as p')
                 ->join('categoria as c','p.idCategoria','c.idCategoria')
