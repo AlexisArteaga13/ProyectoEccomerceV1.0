@@ -48,7 +48,9 @@ class TiendaController extends Controller
             $categorias = DB::table('categoria')->where('estado',1)->get();
             return view('modulostienda.single.single',compact('empresas','categorias'));
         }
-        public function categoria($id){
+        public function categoria($id, Request $request){
+            
+            if(empty($request->all())){
             //Productos de esta categoria
             $productos  = DB::table('producto as p')
             ->join('categoria as c','p.idCategoria','c.idCategoria')
@@ -66,5 +68,44 @@ class TiendaController extends Controller
             $empresas = DB::table('empresa')->where('estado',1)->get();
             $categorias = DB::table('categoria')->where('estado',1)->get();
             return view('modulostienda.single.categoria',compact('empresas','categorias','catselect','productos'));
+            }
+            elseif($request->all()){
+              // return $request->all();
+              if(!empty($request->selector)){
+                $productos  = DB::table('producto as p')
+                ->join('categoria as c','p.idCategoria','c.idCategoria')
+                ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                ->where('p.estado','1')
+                ->where('e.estado','1')      
+                ->where('c.idCategoria',$id)
+                ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')
+                ->Where('e.idEmpresa','LIKE','%'.$request->empresas.'%')
+                ->orderBy('p.precio',$request->selector)
+                ->paginate(16);
+              }
+              else{
+                $productos  = DB::table('producto as p')
+                ->join('categoria as c','p.idCategoria','c.idCategoria')
+                ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                ->where('p.estado','1')
+                ->where('e.estado','1')      
+                ->where('c.idCategoria',$id)
+                ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')
+                ->Where('e.idEmpresa','LIKE','%'.$request->empresas.'%')
+                
+                ->paginate(2);
+              }
+                
+
+                ///*********************** */
+                $catselect = DB::table('categoria')
+                ->where('estado',1)
+                ->where('idCategoria',$id)->first();
+                //************ */
+                $empresas = DB::table('empresa')->where('estado',1)->get();
+                $categorias = DB::table('categoria')->where('estado',1)->get();
+                return view('modulostienda.single.categoria',compact('empresas','categorias','catselect','productos'));
+            
+            }
         }
 }
