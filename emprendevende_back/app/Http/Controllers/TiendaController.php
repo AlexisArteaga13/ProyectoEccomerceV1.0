@@ -50,7 +50,6 @@ class TiendaController extends Controller
             return view('modulostienda.single.single',compact('empresas','categorias'));
            //return view('modulostienda.single.single');
         }
-<<<<<<< HEAD
         public function descripcionProducto($id){
             $productos = DB::table('producto')->where('idPRODUCTO',$id)
             ->join('empresa as e','producto.idEmpresa','=','e.idEmpresa')
@@ -63,7 +62,6 @@ class TiendaController extends Controller
              return view('modulostienda.single.singles',compact('productos','empresas','categorias'));
             //return view('modulostienda.single.single');
          }
-=======
         public function categoria($id, Request $request){
             
             if(empty($request->all())){
@@ -124,5 +122,4 @@ class TiendaController extends Controller
             
             }
         }
->>>>>>> 12447c1e24389c1bb869e5b4d446b20b471f08a4
 }

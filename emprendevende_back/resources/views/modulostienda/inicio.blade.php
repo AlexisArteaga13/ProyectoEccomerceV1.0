@@ -385,7 +385,10 @@
                                                     alt="{{ $p->nombreProducto }}">
                                                 <div class="men-cart-pro">
                                                     <div class="inner-men-cart-pro">
-                                                        <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                                    <form action="{{ route('descripcion', $p->idPRODUCTO) }}" method="post">
+                                                         <button type="submit" class="btn btn-primary">Continuar</button>
+                                                         @csrf
+                                                      </form>
                                                     </div>
                                                 </div>
                                             </div>
