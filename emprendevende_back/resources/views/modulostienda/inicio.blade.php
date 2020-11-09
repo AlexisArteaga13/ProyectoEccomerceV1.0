@@ -411,7 +411,7 @@
                                                             <input type="hidden" name="business" value=" " />
                                                             <input type="hidden" name="id" value="{{ $p->idPRODUCTO }}" />
                                                             <input type="hidden" name="item_name"
-                                                                value="{{ $p->nombreProducto }}" />
+                                                        value="{{ $p->nombreProducto }} - {{ $p->nombreEmpresa }}" />
                                                             <input type="hidden" name="amount" value="{{ $p->precio }}" />
                                                             <input type="hidden" name="discount_amount" value="0.00" />
                                                             <input type="hidden" name="currency_code" value="PEN" />

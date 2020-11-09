@@ -37,11 +37,11 @@ class TiendaController extends Controller
         return view('modulostienda.inicio',compact('categorias','empresas','productos','destacados','vendedores'));
     }
     public function checkout(Request $request){
-        return $request->all();
+        //return $request->all();
         $empresas = DB::table('empresa')->where('estado',1)->get();
         $categorias = DB::table('categoria')->where('estado',1)->get();
         
-        return view('modulostienda.checkout');
+        return view('modulostienda.checkout',compact('empresas','categorias'));
     }
 
     public function vitrina(){

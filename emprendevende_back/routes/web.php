@@ -25,7 +25,7 @@ Route::get('/destacados','TiendaController@destacados')->name('destacados');
 Route::get('/categorias/{id?}','TiendaController@categoria')->name('tienda.categoria');
 Route::get('/tiendas/{id?}','TiendaController@tienda')->name('tienda.tienda');
 Route::get('/login/micuenta','HomeController@micuenta')->name('micuenta');
-Route::post('/verificar/vendedor/vendedor/checkout','TiendaController@checkout')->name('checkout');
+Route::get('/checkout','TiendaController@checkout')->name('checkout');
 //******* */
 // E-mail verification
 Route::get('/register/verify/{code}', 'CorreosController@verify');

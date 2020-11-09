@@ -11,11 +11,11 @@
                 <ul class="list-group list-group-flush">
                     <div class="row">
                         @foreach ($empresas as $e)
-                            <li class="list-group-item"><a href="faqs.html"><img src="{{asset('../storage/app/'.$e->logo_img_empresa)}}"
+                    <li class="list-group-item"><a href="{{route('tienda.tienda',$e->idEmpresa)}}"><img src="{{asset('../storage/app/'.$e->logo_img_empresa)}}"
                                         width="100px" height="100px" class="rounded"></a></li>
 
 						@endforeach
-						
+						<!--
                         <div class="col-xs-6">
                             <li class="list-group-item"><a href="faqs.html"><img src="images/logo2.png" alt="img-fluid"
                                         class="rounded"></a></li>
@@ -23,14 +23,8 @@
                                         class="rounded"></a></li>
 
                         </div>
-                        <div class="col-xs-6">
-                            <li class="list-group-item"><a href="faqs.html"><img src="images/logo2.png" alt="img-fluid"
-                                        class="rounded"></a></li>
-                            <li class="list-group-item"><a href="faqs.html"><img src="images/logo2.png" alt="img-fluid"
-                                        class="rounded"></a></li>
-
-
-                        </div>
+                    -->
+                        <!--
                         <div class="col-xs-6">
                             <li class="list-group-item"><a href="faqs.html"><img src="images/logo2.png" alt="img-fluid"
                                         class="rounded"></a></li>
@@ -40,10 +34,10 @@
 
                         </div>
                         <div class="col-xs-6">
-                            <li class="list-group-item"><a href="./about.html"><img src="images/logo2.png"
-                                        alt="img-fluid" class="rounded"></a></li>
-                            <li class="list-group-item"><a href="./about.html"><img src="images/logo2.png"
-                                        alt="img-fluid" class="rounded"></a></li>
+                            <li class="list-group-item"><a href="faqs.html"><img src="images/logo2.png" alt="img-fluid"
+                                        class="rounded"></a></li>
+                            <li class="list-group-item"><a href="faqs.html"><img src="images/logo2.png" alt="img-fluid"
+                                        class="rounded"></a></li>
 
 
                         </div>
@@ -69,6 +63,14 @@
                             <li class="list-group-item"><a href="./about.html"><img src="images/logo2.png"
                                         alt="img-fluid" class="rounded"></a></li>
 
+
+                        </div>
+                        <div class="col-xs-6">
+                            <li class="list-group-item"><a href="./about.html"><img src="images/logo2.png"
+                                        alt="img-fluid" class="rounded"></a></li>
+                            <li class="list-group-item"><a href="./about.html"><img src="images/logo2.png"
+                                        alt="img-fluid" class="rounded"></a></li>
+
                         </div>
                         <div class="col-xs-6">
                             <li class="list-group-item"><a href="./about.html"><img src="images/logo2.png"
@@ -86,7 +88,7 @@
 
                         </div>
 
-                    </div>
+                    </div>-->
 
                 </ul>
             </div>

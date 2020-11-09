@@ -1,5 +1,5 @@
 @extends('plantillas.ptienda')
-@section('titulo', 'La vitrina')
+@section('titulo', 'La vitrina de tienda')
 @section('contenido')
     <div class="page-head_agile_info_w3l page-head_agile_info_w3l-2">
 
@@ -58,26 +58,26 @@
                                                 </div>
                                                 <span class="badge badge-warning">{{ $p->nombreEmpresa }}</span>
                                                 <div
-                                                    class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                                    <form action="#" method="post">
-                                                        @csrf
-                                                        <fieldset>
-                                                            <input type="hidden" name="cmd" value="_cart" />
-                                                            <input type="hidden" name="add" value="1" />
-                                                            <input type="hidden" name="business" value=" " />
-                                                            <input type="hidden" name="id" value="{{ $p->idPRODUCTO }}" />
-                                                            <input type="hidden" name="item_name"
-                                                                value="{{ $p->nombreProducto }} - {{ $p->nombreEmpresa }}" />
-                                                            <input type="hidden" name="amount" value="{{ $p->precio }}" />
-                                                            <input type="hidden" name="discount_amount" value="0.00" />
-                                                            <input type="hidden" name="currency_code" value="PEN" />
-                                                            <input type="hidden" name="return" value=" " />
-                                                            <input type="hidden" name="cancel_return" value=" " />
-                                                            <input type="submit" name="submit" value="Añadir a carrito"
-                                                                class="button btn" />
-                                                        </fieldset>
-                                                    </form>
-                                                </div>
+                                                class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                                <form action="#" method="post">
+                                                   
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="id" value="{{ $p->idPRODUCTO }}" />
+                                                        <input type="hidden" name="item_name"
+                                                            value="{{ $p->nombreProducto }} - {{ $p->nombreEmpresa }}" />
+                                                        <input type="hidden" name="amount" value="{{ $p->precio }}" />
+                                                        <input type="hidden" name="discount_amount" value="0.00" />
+                                                        <input type="hidden" name="currency_code" value="PEN" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Añadir a carrito"
+                                                            class="button btn" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>

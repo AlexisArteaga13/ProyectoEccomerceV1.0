@@ -12,8 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <meta charset="UTF-8" />
     <!-- Meta tag Keywords -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
+    
     <meta name="keywords"
         content="Electro Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
     <script>
@@ -231,6 +230,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
       </select>
      </form>
     </div> -->
+    <!--
                 <div class="btn-group">
                     <button type="button" class="btn btn-primary">Todas las categorías</button>
                     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
@@ -244,7 +244,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
                     </div>
-                </div>
+                </div>-->
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">

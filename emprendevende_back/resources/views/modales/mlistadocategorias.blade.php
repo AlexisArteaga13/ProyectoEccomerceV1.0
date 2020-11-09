@@ -11,7 +11,7 @@
 					<ul class="list-group list-group-flush">
 					<div class="row">	
 						@foreach ($categorias as $c)
-					<li class="list-group-item"><a href="product2.html">{{$c->nombreCategoria}}</a></li>
+					<li class="list-group-item"><a href="{{route('tienda.categoria',$c->idCategoria)}}">{{$c->nombreCategoria}}</a></li>
 					
 						@endforeach
 						
