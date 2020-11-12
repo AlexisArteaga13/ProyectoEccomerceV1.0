@@ -119,7 +119,7 @@
                                                             class="text-muted">{{ $value->descripcion }}</small></p>
                                                  <!--  <a href="{{ route('vitrina') }}" class="btn btn-primary">Ver producto</a> -->
                                                     <form action="{{ route('descripcion', $value->idPRODUCTO) }}" method="post">
-                                                         <button type="submit" class="btn btn-primary">Continuar</button>
+                                                         <button type="submit" class="btn btn-primary">Ver Producto</button>
                                                          @csrf
                                                       </form>
                                                     
@@ -386,7 +386,7 @@
                                                 <div class="men-cart-pro">
                                                     <div class="inner-men-cart-pro">
                                                     <form action="{{ route('descripcion', $p->idPRODUCTO) }}" method="post">
-                                                         <button type="submit" class="btn btn-primary">Continuar</button>
+                                                         <button type="submit" class="btn btn-primary">Ver Producto</button>
                                                          @csrf
                                                       </form>
                                                     </div>

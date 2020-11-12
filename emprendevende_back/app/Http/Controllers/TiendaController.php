@@ -37,11 +37,30 @@ class TiendaController extends Controller
         return view('modulostienda.inicio',compact('categorias','empresas','productos','destacados','vendedores'));
     }
     public function checkout(Request $request){
-        //return $request->all();
+       // return $request->all();
+       $contador=9999999;
+       $i = 1;
+        $cadena_id=array();
+        $cadena_cantidad=array();
+       while ($contador>0){
+       $id = $request->input('id_'.$i);
+        if(is_null($id)){
+            break;
+        }
+        else{
+            array_push($cadena_id,$request->input('id_'.$i));
+            array_push($cadena_cantidad,$request->input('quantity_'.$i));
+        }
+        $i = $i + 1;
+        }
+
+  
+       $productosSelecionados = DB::table('producto')->whereIn('idPRODUCTO',$cadena_id)->get();
+       
         $empresas = DB::table('empresa')->where('estado',1)->get();
         $categorias = DB::table('categoria')->where('estado',1)->get();
         
-        return view('modulostienda.checkout',compact('empresas','categorias'));
+        return view('modulostienda.checkout',compact('empresas','categorias','productosSelecionados','cadena_id','cadena_cantidad'));
     }
 
     public function vitrina(){
@@ -60,7 +79,7 @@ class TiendaController extends Controller
             ->get();
             $empresas = DB::table('empresa')->where('estado',1)->get();
             $categorias = DB::table('categoria')->where('estado',1)->get();
-             return view('modulostienda.single.singles',compact('productos','empresas','categorias'));
+            return view('modulostienda.single.singles',compact('productos','empresas','categorias'));
             //return view('modulostienda.single.single');
     }
     
@@ -301,7 +320,7 @@ class TiendaController extends Controller
         return view('modulostienda.single.destacados',compact('empresas','categorias','productos'));
         
     }}
-    public function tienda($id, Request $request){
+    public function tienda($id, Request $request){  
             
         if(empty($request->all())){
         //Productos de esta categoria
@@ -422,4 +441,5 @@ class TiendaController extends Controller
         
     }
 }
+
 }

@@ -1,7 +1,7 @@
 	<!-- page -->
 	@extends('plantillas.ptienda')
-@section('titulo', 'La vitrina')
-@section('contenido')
+    @section('titulo', 'La vitrina')
+    @section('contenido')
 	<div class="services-breadcrumb">
 		<div class="agile_inner_breadcrumb">
 			<div class="container">
@@ -10,7 +10,7 @@
 						<a href="index.html">Home</a>
 						<i>|</i>
 					</li>
-					<li>Checkout</li>
+					<li>Carrito</li>
 				</ul>
 			</div>
 		</div>
@@ -42,8 +42,13 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="rem1">
-								<td class="invert">1</td>
+						@foreach ($cadena_id as $key => $id)
+						@foreach ($cadena_cantidad as $key2 => $cantidad)
+						@if ($key == $key2)
+						@foreach ($productosSelecionados as $value)
+						@if ($id == $value->idPRODUCTO)
+							<tr class="rem{{ $key + 1 }}">
+								<td class="invert">{{ $key + 1 }}</td>
 								<td class="invert-image">
 									<a href="single.html">
 										<img src="images/a.jpg" alt=" " class="img-responsive">
@@ -54,21 +59,27 @@
 										<div class="quantity-select">
 											<div class="entry value-minus">&nbsp;</div>
 											<div class="entry value">
-												<span>1</span>
+												<span>{{ $cantidad}}</span>
 											</div>
 											<div class="entry value-plus active">&nbsp;</div>
 										</div>
 									</div>
 								</td>
-								<td class="invert">Back Cover</td>
-								<td class="invert">$259</td>
+								
+								<td class="invert">{{ $value->nombreProducto }}</td>
+								<td class="invert">S/.{{ $value->precio }}</td>
 								<td class="invert">
 									<div class="rem">
-										<div class="close1"> </div>
+										<div class="close{{ $key + 1 }}"> </div>
 									</div>
 								</td>
 							</tr>
-							<tr class="rem2">
+							@endif
+							@endforeach
+							@endif
+							@endforeach
+							@endforeach
+							<!--<tr class="rem2">
 								<td class="invert">2</td>
 								<td class="invert-image">
 									<a href="single2.html">
@@ -119,7 +130,7 @@
 										<div class="close3"> </div>
 									</div>
 								</td>
-							</tr>
+							</tr>-->
 						</tbody>
 					</table>
 				</div>
@@ -258,13 +269,13 @@
 			len = items.length,
 			total = 0,
 			i;
-
+		
 		// Count the number of each item in the cart
 		for (i = 0; i < len; i++) {
 			total += items[i].get('quantity');
 		}
 
-		if (total < 3) {
+		if (total < 3 ) {
 			alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
 			evt.preventDefault();
 		}
@@ -329,6 +340,249 @@
 		$('.close3').on('click', function (c) {
 			$('.rem3').fadeOut('slow', function (c) {
 				$('.rem3').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close4').on('click', function (c) {
+			$('.rem4').fadeOut('slow', function (c) {
+				$('.rem4').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close5').on('click', function (c) {
+			$('.rem5').fadeOut('slow', function (c) {
+				$('.rem5').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close6').on('click', function (c) {
+			$('.rem6').fadeOut('slow', function (c) {
+				$('.rem6').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close7').on('click', function (c) {
+			$('.rem7').fadeOut('slow', function (c) {
+				$('.rem7').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close8').on('click', function (c) {
+			$('.rem8').fadeOut('slow', function (c) {
+				$('.rem8').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close9').on('click', function (c) {
+			$('.rem9').fadeOut('slow', function (c) {
+				$('.rem9').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close10').on('click', function (c) {
+			$('.rem10').fadeOut('slow', function (c) {
+				$('.rem10').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close11').on('click', function (c) {
+			$('.rem11').fadeOut('slow', function (c) {
+				$('.rem11').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close12').on('click', function (c) {
+			$('.rem12').fadeOut('slow', function (c) {
+				$('.rem12').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close13').on('click', function (c) {
+			$('.rem13').fadeOut('slow', function (c) {
+				$('.rem13').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close14').on('click', function (c) {
+			$('.rem14').fadeOut('slow', function (c) {
+				$('.rem14').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close15').on('click', function (c) {
+			$('.rem15').fadeOut('slow', function (c) {
+				$('.rem15').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close16').on('click', function (c) {
+			$('.rem16').fadeOut('slow', function (c) {
+				$('.rem16').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close17').on('click', function (c) {
+			$('.rem17').fadeOut('slow', function (c) {
+				$('.rem17').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close18').on('click', function (c) {
+			$('.rem18').fadeOut('slow', function (c) {
+				$('.rem18').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close19').on('click', function (c) {
+			$('.rem19').fadeOut('slow', function (c) {
+				$('.rem19').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close20').on('click', function (c) {
+			$('.rem20').fadeOut('slow', function (c) {
+				$('.rem20').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close21').on('click', function (c) {
+			$('.rem21').fadeOut('slow', function (c) {
+				$('.rem21').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close22').on('click', function (c) {
+			$('.rem22').fadeOut('slow', function (c) {
+				$('.rem22').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close23').on('click', function (c) {
+			$('.rem23').fadeOut('slow', function (c) {
+				$('.rem23').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close24').on('click', function (c) {
+			$('.rem24').fadeOut('slow', function (c) {
+				$('.rem24').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close25').on('click', function (c) {
+			$('.rem25').fadeOut('slow', function (c) {
+				$('.rem25').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close26').on('click', function (c) {
+			$('.rem26').fadeOut('slow', function (c) {
+				$('.rem26').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close27').on('click', function (c) {
+			$('.rem27').fadeOut('slow', function (c) {
+				$('.rem27').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close28').on('click', function (c) {
+			$('.rem28').fadeOut('slow', function (c) {
+				$('.rem28').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close29').on('click', function (c) {
+			$('.rem29').fadeOut('slow', function (c) {
+				$('.rem29').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function (c) {
+		$('.close30').on('click', function (c) {
+			$('.rem30').fadeOut('slow', function (c) {
+				$('.rem30').remove();
 			});
 		});
 	});
