@@ -38,7 +38,7 @@ class PlanesController extends Controller
        
     }
     public function escogerplan($id,Request $request){
-        $plan = DB::table('users')->where('idPlan',$id)->first();
+        $plan = DB::table('users')->where('id',Auth::user()->id)->where('idPlan',$id)->first();
         if($plan){
             return back()->with('info','Actualmente estas con este plan.');
         }
