@@ -172,7 +172,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <!-- logo -->
                 <div class="col-md-3 logo_agile">
                     <h1 class="text-center">
-                        <a href="index.html" class="font-weight-bold font-italic">
+                        <a href="{{ route('inicio') }}" class="font-weight-bold font-italic">
                             <img src="images/logo2.png" alt=" " class="img-fluid ">Emprende
                         </a>
                     </h1>
