@@ -173,7 +173,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="col-md-3 logo_agile">
                     <h1 class="text-center">
                         <a href="{{ route('inicio') }}" class="font-weight-bold font-italic">
-                            <img src="images/logo2.png" alt=" " class="img-fluid ">Emprende
+                            <!--<img src="images/logo3.png" alt=" " class="img-fluid ">&nbsp; Emprende-->
+                            <img src="{{asset('images/logo3.png')}}" alt=" " class="img-fluid ">&nbsp; Emprende
                         </a>
                     </h1>
                 </div>
@@ -484,10 +485,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <h3 class="text-white font-weight-bold mb-3">Mi cuenta</h3>
                         <ul>
                             <li class="mb-3">
-                                <a href="product.html">Registrate </a>
+                                <a href="{{ route('registrovendedor') }}">Registrate </a>
                             </li>
                             <li class="mb-3">
-                                <a href="product.html">Vende con nosotros</a>
+                                <a href="{{ route('registrovendedor') }}">Vende con nosotros</a>
                             </li>
                             <!--<li class="mb-3">
         <a href="product.html">TV, Audio</a>
@@ -509,13 +510,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <h3 class="text-white font-weight-bold mb-3">Servicio al Cliente</h3>
                         <ul>
                             <li class="mb-3">
-                                <a href="about.html">Nosotros</a>
+                                <a href="{{ route('nosotros') }}">Nosotros</a>
                             </li>
                             <li class="mb-3">
                                 <a href="contact.html">Preguntas frecuentes</a>
                             </li>
                             <li class="mb-3">
-                                <a href="help.html">Términos y condiciones</a>
+                                <a href="{{ route('terminos') }}">Términos y condiciones</a>
                             </li>
                             <li class="mb-3">
                                 <a href="faqs.html">Tiendas</a>
@@ -524,7 +525,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <a href="terms.html">Categorías</a>
                             </li>
                             <li>
-                                <a href="privacy.html">Política de privacidad</a>
+                                <a href="{{ route('politicas') }}">Política de privacidad</a>
                             </li>
                         </ul>
                     </div>

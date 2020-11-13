@@ -21,7 +21,7 @@
                                 <span>Big</span>
                                 Sale
                             </h3>
-                            <a class="button2" href="product.html">Compra ahora </a>
+                            <a class="button2" href="{{route('inicio')}}">Compra ahora </a>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                             <h3 class="font-weight-bold pt-2 pb-lg-5 pb-4">Best
                                 <span>Headphone</span>
                             </h3>
-                            <a class="button2" href="product.html">Compra ahora </a>
+                            <a class="button2" href="{{route('inicio')}}">Compra ahora </a>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                             <h3 class="font-weight-bold pt-2 pb-lg-5 pb-4">New
                                 <span>Standard</span>
                             </h3>
-                            <a class="button2" href="product.html">Compra ahora </a>
+                            <a class="button2" href="{{route('inicio')}}">Compra ahora </a>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                             <h3 class="font-weight-bold pt-2 pb-lg-5 pb-4">Today
                                 <span>Discount</span>
                             </h3>
-                            <a class="button2" href="product.html">Compra ahora </a>
+                            <a class="button2" href="{{route('inicio')}}">Compra ahora </a>
                         </div>
                     </div>
                 </div>
@@ -349,10 +349,10 @@
     <!-- third section -->
     <div class="product-sec1 product-sec2 px-sm-5 px-3">
         <div class="row">
-            <h3 class="col-md-4 effect-bg">Summer Carnival</h3>
+            <h3 class="col-md-4 effect-bg">Emprende Vende</h3>
             <p class="w3l-nut-middle">Get Extra 10% Off</p>
             <div class="col-md-8 bg-right-nut">
-                <img src="images/image1.png" alt="">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/auY_IR4UdCk?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>

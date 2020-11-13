@@ -118,20 +118,20 @@
                                     {{ $value->descripcion }}
                                 @endforeach
                             </li>
-                            <li class="mb-3">
+                           <!-- <li class="mb-3">
                                 EMIs from $655/month.
                             </li>
                             <li class="mb-3">
                                 Bank OfferExtra 5% off* with Axis Bank Buzz Credit CardT&C
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                     <div class="product-single-w3l">
                         <p class="my-3">
                             <i class="far fa-hand-point-right mr-2"></i>
-                            <label>1 Year</label>Manufacturer Warranty
+                            <label>Com</label>pralo antes que te lo ganen
                         </p>
-                        <ul>
+                       <!-- <ul>
                             <li class="mb-1">
                                 3 GB RAM | 16 GB ROM | Expandable Upto 256 GB
                             </li>
@@ -147,9 +147,9 @@
                             <li class="mb-1">
                                 Exynos 7870 Octa Core 1.6GHz Processor
                             </li>
-                        </ul>
+                        </ul>-->
                         <p class="my-sm-4 my-3">
-                            <i class="fas fa-retweet mr-3"></i>Net banking & Credit/ Debit/ ATM card
+                            <i class="fas fa-retweet mr-3"></i>Aceptamos Tarjetas de Crediti &Debito  
                         </p>
                     </div>
                     <div class="occasion-cart">
