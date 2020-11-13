@@ -43,7 +43,7 @@
                                                     alt="{{ $p->nombreProducto }}">
                                                 <div class="men-cart-pro">
                                                     <div class="inner-men-cart-pro">
-                                                    <form action="{{ route('descripcion', $p->idPRODUCTO) }}" method="post">
+                                                    <form action="{{ route('descripcion', $p->idPRODUCTO) }}" method="get">
                                                          <button type="submit" class="btn btn-primary">Ver Producto</button>
                                                          @csrf
                                                       </form>

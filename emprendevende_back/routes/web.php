@@ -28,6 +28,9 @@ Route::get('/categorias/{id?}','TiendaController@categoria')->name('tienda.categ
 Route::get('/tiendas/{id?}','TiendaController@tienda')->name('tienda.tienda');
 Route::get('/login/micuenta','HomeController@micuenta')->name('micuenta');
 Route::get('/checkout','TiendaController@checkout')->name('checkout');
+Route::get('/politicas','TiendaController@politicas')->name('politicas');
+Route::get('/terminosycondiciones','TiendaController@terminos')->name('terminos');
+Route::get('/nosotros','TiendaController@nosotros')->name('nosotros');
 //******* */
 // E-mail verification
 Route::get('/register/verify/{code}', 'CorreosController@verify');
