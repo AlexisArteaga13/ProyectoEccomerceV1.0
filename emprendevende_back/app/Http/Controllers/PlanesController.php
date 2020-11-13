@@ -39,6 +39,7 @@ class PlanesController extends Controller
        
     }
     public function escogerplan($id,Request $request){
+       
         $plan = DB::table('users')->where('id',Auth::user()->id)->where('idPlan',$id)->first();
         $empresa = DB::table('users as u')
         ->join('empresa as e','u.id','e.idUsuario')

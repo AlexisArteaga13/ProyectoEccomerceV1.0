@@ -1902,8 +1902,8 @@ var defaults = module.exports = {
     name: 'PPminicarts',
 
     parent: (typeof document !== 'undefined') ? document.body : null,
-   
-    action: '/ProyectoEccomerce/emprendevende_back/public/checkout',
+    action : '/ProyectoAplicaciones/ProyectoEccomerceV1.0/emprendevende_back/public/checkout',
+
    // action: '/ProyectoAplicaciones/ProyectoEccomerceV1.0/emprendevende_back/public/checkout',
    //action: '../resources/views/modulostienda/checkout.blade.php',
     //action: "{{ route('carrito') }}",
