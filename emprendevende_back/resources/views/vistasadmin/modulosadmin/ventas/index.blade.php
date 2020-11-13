@@ -1,5 +1,5 @@
 @extends('vistasadmin.indexadmin')
-@section('tituloadmin', 'Facturación')
+@section('tituloadmin', 'Ventas')
 
 @section('contenidoadministrable')
     <!-- Content Wrapper. Contains page content -->
@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Facturación</h1>
+                        <h1>Ventas</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('administrable') }}">Inicio</a></li>
-                            <li class="breadcrumb-item active">Facturación</li>
+                            <li class="breadcrumb-item active">Ventas</li>
                         </ol>
                     </div>
                 </div>
@@ -52,15 +52,15 @@
                                         <tr>
                                             <th style="width:10px">#</th>
                                             <th>Codigo Factura</th>
-                                            <th>Plan</th>
-                                            <th>Fecha Inicio</th>
-                                            <th>Fecha Fin</th>
-                                            <th>Estado</th>
-                                            <th>Importe</th>
-                                            <th>Detalle</th>
-                                            <th>Descuento</th>
-                                            <th>Metodo Pago</th>
-                                            <th>Empresa</th>
+                                            <th>Hora y fecha de transacción</th>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio Unitario</th>
+                                            <th>Total</th>
+                                            <th>Comprador</th>
+                                            <th>Vendido por</th>
+                                            
+                                            
 
                                         </tr>
                                     </thead>
@@ -70,23 +70,14 @@
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $value->codigoLetra}} {{ $value->codigoFactura}} </td>
-                                                <td>{{ $value->nombrePlan}}</td>
-                                                <td>{{ $value->fechaEmision }}</td>
-                                                <td>{{ $value->fechaPago }}</td>
-                                                <td>
-                                                    @if ( $value->estado == '1')
-                                                        <span class="badge badge-success">En curso</span>
-                                                    
-                                                    @endif
-                                                    @if ( $value->estado == '2')
-                                                    <span class="badge badge-danger">En deuda</span>
-                                                    @endif
-                                                   </td>
-                                                <td>{{ $value->importe }}</td>
-                                                <td>{{ $value->detalle }}</td>
-                                                <td>{{ $value->descuento }}</td>
-                                                <td>{{ $value->tipo }}</td>
+                                                <td>{{ $value->fecha}}</td>
+                                                <td>{{ $value->nombreProducto }}</td>
+                                                <td>{{ $value->cantidad }}</td>
+                                                <td>{{ $value->precio }}</td>
+                                                <td>{{ $value->precioTotal }}</td>
+                                                <td>{{ $value->name}}</td>
                                                 <td>{{ $value->nombreEmpresa }}</td>
+                                                
                                             </tr>
                                         @endforeach
 
@@ -151,14 +142,14 @@
                                                         <label class="form-check-label" for="inlineRadio2">Inactivo</label>
                                                     </div>
                                                 </div>
-                                            </div> -->
+                                            </div> 
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                 </div>
-                </form>
+                </form>-->
             </div>
         </div>
     </div>

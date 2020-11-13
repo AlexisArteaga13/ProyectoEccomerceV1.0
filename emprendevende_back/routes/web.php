@@ -83,3 +83,5 @@ Route::get('/login/facturacion','FacturacionController@index')->name('facturacio
 Route::get('/login/facturacion/store','FacturacionController@store')->name('facturacion.store');
 
 Route::get('/descripcion/{id}','TiendaController@descripcionProducto')->name('descripcion');
+//ruta de ventas
+Route::get('/login/ventas','VentasController@index')->name('ventas.index');

@@ -30,6 +30,12 @@ class TiendaController extends Controller
          }
          $i = $i + 1;
          }
+         for($j=0;$j<count($cadena_id);$j++){
+          
+            $producto = DB::table('producto')->where('idPRODUCTO',$cadena_id[$j])->first();
+         }
+
+         /////////////////////7
         $count=0;
         $productosSelecionados = DB::table('producto')->whereIn('idPRODUCTO',$cadena_id)->get();
         // Crear la venta
