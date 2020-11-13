@@ -5,6 +5,7 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 use App\Plan;
 use App\User;
+use App\Facturacion;
 use App\MetodoPago;
 use Illuminate\Http\Request;
 use Carbon\Carbon; 
@@ -39,23 +40,68 @@ class PlanesController extends Controller
     }
     public function escogerplan($id,Request $request){
         $plan = DB::table('users')->where('id',Auth::user()->id)->where('idPlan',$id)->first();
+        $empresa = DB::table('users as u')
+        ->join('empresa as e','u.id','e.idUsuario')
+        ->where('u.id',Auth::user()->id)
+        ->first();
+        
         if($plan){
             return back()->with('info','Actualmente estas con este plan.');
         }
         else {
+            if($request->facturacion == '150'){
+           // return $request->all();
             $iduser = Auth::user()->id;
             $actualizarplan = User::findOrFail($iduser);
             $actualizarplan->idPlan = $id;
             $actualizarplan->update();
             $fecha = Carbon::now();
-           
+            $factura = new Facturacion ();
+            $ultimafact = DB::table('facturacion')->orderBy('created_at', 'desc')->first();
+            $factura ->codigoLetra = 'F0001';
+            $factura ->codigoFactura = str_pad(intval($ultimafact->codigoFactura)+1,5,0,STR_PAD_LEFT);
+            $factura ->estado = 2;
+            $factura ->fechaEmision = Carbon::now();
+            $factura ->fechaPago = Carbon::now()->addYear();
+            $factura ->importe= $request->facturacion;
+            $factura ->idPlan = $id;
+            $factura ->idMETODO_PAGO = $request->metodos;
+            $factura->idEmpresa= $empresa->nombreEmpresa;
+            $factura->save();
+
+        }
+        else{
+            $iduser = Auth::user()->id;
+            $actualizarplan = User::findOrFail($iduser);
+            $actualizarplan->idPlan = $id;
+            $actualizarplan->update();
+            $fecha = Carbon::now();
+            $factura = new Facturacion ();
+            $ultimafact = DB::table('facturacion')->orderBy('created_at', 'desc')->first();
+            $factura ->codigoLetra = 'F0001';
+            $factura ->codigoFactura = str_pad(intval($ultimafact->codigoFactura)+1,5,0,STR_PAD_LEFT);
+            $factura ->estado = 2;
+            $factura ->fechaEmision = Carbon::now();
+            $factura ->fechaPago = Carbon::now()->addMonth();
+            $factura ->importe= $request->facturacion;
+            $factura ->idPlan = $id;
+            $factura ->idMETODO_PAGO = $request->metodos;
+            $factura->idEmpresa= $empresa->nombreEmpresa;
+            $factura->save();
+        }
+
+       // alert()->success('Excelente','Migraste de ');
+           // $factura ->importe = 
+
+
             /*->select('user_id', DB::raw('count(*) as total_posts'))
             ->groupBy('user_id)*/
            // ->get();
-            return json_decode($empresa);
+           // return json_decode($empresa);
             //return $fecha->format('d-m-Y H:i:s');
-           // return back()->with('success','Gracias por migrar de plan, no te arrepentiras.');
-        }
+            return back()->with('success','Gracias por migrar de plan, no te arrepentiras.');
+        
+    }
        
     }
     public function store(Request $request){
