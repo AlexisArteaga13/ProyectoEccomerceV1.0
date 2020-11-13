@@ -58,7 +58,7 @@ class PlanesController extends Controller
             $fecha = Carbon::now();
             $factura = new Facturacion ();
             $ultimafact = DB::table('facturacion')->orderBy('created_at', 'desc')->first();
-            $factura ->codigoLetra = 'F0001';
+            $factura ->codigoLetra = 'F001';
             $factura ->codigoFactura = str_pad(intval($ultimafact->codigoFactura)+1,5,0,STR_PAD_LEFT);
             $factura ->estado = 2;
             $factura ->fechaEmision = Carbon::now();
@@ -66,7 +66,7 @@ class PlanesController extends Controller
             $factura ->importe= $request->facturacion;
             $factura ->idPlan = $id;
             $factura ->idMETODO_PAGO = $request->metodos;
-            $factura->idEmpresa= $empresa->nombreEmpresa;
+            $factura->idEmpresa= $empresa->idEmpresa;
             $factura->save();
 
         }
@@ -78,7 +78,7 @@ class PlanesController extends Controller
             $fecha = Carbon::now();
             $factura = new Facturacion ();
             $ultimafact = DB::table('facturacion')->orderBy('created_at', 'desc')->first();
-            $factura ->codigoLetra = 'F0001';
+            $factura ->codigoLetra = 'F001';
             $factura ->codigoFactura = str_pad(intval($ultimafact->codigoFactura)+1,5,0,STR_PAD_LEFT);
             $factura ->estado = 2;
             $factura ->fechaEmision = Carbon::now();
@@ -86,7 +86,7 @@ class PlanesController extends Controller
             $factura ->importe= $request->facturacion;
             $factura ->idPlan = $id;
             $factura ->idMETODO_PAGO = $request->metodos;
-            $factura->idEmpresa= $empresa->nombreEmpresa;
+            $factura->idEmpresa= $empresa->idEmpresa;
             $factura->save();
         }
 
