@@ -38,6 +38,7 @@ class PlanesController extends Controller
        
     }
     public function escogerplan($id,Request $request){
+       
         $plan = DB::table('users')->where('id',Auth::user()->id)->where('idPlan',$id)->first();
         if($plan){
             return back()->with('info','Actualmente estas con este plan.');
@@ -49,10 +50,11 @@ class PlanesController extends Controller
             $actualizarplan->update();
             $fecha = Carbon::now();
            
+
             /*->select('user_id', DB::raw('count(*) as total_posts'))
             ->groupBy('user_id)*/
            // ->get();
-            return json_decode($empresa);
+            
             //return $fecha->format('d-m-Y H:i:s');
            // return back()->with('success','Gracias por migrar de plan, no te arrepentiras.');
         }
