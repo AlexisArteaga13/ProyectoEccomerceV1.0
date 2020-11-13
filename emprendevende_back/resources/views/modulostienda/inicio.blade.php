@@ -1333,132 +1333,186 @@
                 <div class="col-lg-3 mt-lg-0 mt-4 p-lg-0 ">
                     <div class="side-bar p-sm-4 p-3">
                         <div class="search-hotel border-bottom py-2">
-                            <h3 class="agileits-sear-head mb-3">Buscar aquí..</h3>
-                            <form action="#" method="post">
-                                <input type="search" placeholder="Nombre de producto..." name="search" required="">
-                                <input type="submit" value=" ">
+                            <form action="{{ route('destacados') }}" method="get">
+
+                                @if (isset($_GET['buscador']))
+                                    <input type="search" placeholder="Buscar producto..." name="buscador" required=""
+                                        value="{{ $_GET['buscador'] }}">
+                                    <input type="submit" value=" ">
+                                @else
+                                    <input type="search" placeholder="Buscar producto..." name="buscador" required=""
+                                        value="">
+                                    <input type="submit" value=" ">
+                                @endif
+
+
+                                <div class="left-side py-2">
+                                    <span class="badge badge-success">Busca tu producto por empresa</span>
+                                    <ul>
+                                        <li>
+                                            @if (!isset($_GET['empresas']))
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="empresas"
+                                                        id="opcion1" value="todo">
+                                                    <label class="form-check-label" for="inlineRadio1">
+                                                        Todos</label>
+                                                </div>
+                                        </li>
+                                        @foreach ($empresas as $key => $value)
+                                            <li>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="empresas"
+                                                        id="opcion1" value="{{ $value->idEmpresa }}">
+                                                    <label class="form-check-label" for="inlineRadio1">
+                                                        {{ $value->nombreEmpresa }}</label>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        @if ($_GET['empresas'] == 'todo')
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="empresas" id="opcion1"
+                                                    value="todo" checked>
+                                                <label class="form-check-label" for="inlineRadio1">
+                                                    Todos</label>
+                                            </div>
+                                            </li>
+                                            @foreach ($empresas as $key => $value)
+                                                <li>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="empresas"
+                                                            id="opcion1" value="{{ $value->idEmpresa }}">
+                                                        <label class="form-check-label" for="inlineRadio1">
+                                                            {{ $value->nombreEmpresa }}</label>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        @endif
+                                        @if ($_GET['empresas'] != 'todo')
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="empresas" id="opcion1"
+                                                    value="todo" checked>
+                                                <label class="form-check-label" for="inlineRadio1">
+                                                    Todos</label>
+                                            </div>
+                                            </li>
+                                            @foreach ($empresas as $key => $value)
+                                                @if ($_GET['empresas'] == $value->idEmpresa)
+                                                    <li>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="empresas"
+                                                                id="opcion1" value="{{ $value->idEmpresa }}" checked>
+                                                            <label class="form-check-label" for="inlineRadio1">
+                                                                {{ $value->nombreEmpresa }}</label>
+                                                        </div>
+                                                    </li>
+                                                @else
+                                                    <li>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="empresas"
+                                                                id="opcion1" value="{{ $value->idEmpresa }}">
+                                                            <label class="form-check-label" for="inlineRadio1">
+                                                                {{ $value->nombreEmpresa }}</label>
+                                                        </div>
+                                                    </li>
+                                                @endif
+
+                                            @endforeach
+                                        @endif
+                                        @endif
+
+                                    </ul>
+                                </div>
+                                <!--
+                                                                <div class="range border-bottom py-2">
+                                                                    <h3 class="agileits-sear-head mb-3">Precio</h3>
+                                                                    <div class="w3l-range">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <div class="form-check form-check-inline">
+                                                                                    <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                                                        value="10">
+                                                                                    <label class="form-check-label" for="inlineRadio1">
+                                                                                        Menor a 10</label>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="my-1">
+                                                                                <div class="form-check form-check-inline">
+                                                                                    <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                                                        value="50">
+                                                                                    <label class="form-check-label" for="inlineRadio1">
+                                                                                        Menor a 50</label>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="form-check form-check-inline">
+                                                                                    <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                                                        value=100>
+                                                                                    <label class="form-check-label" for="inlineRadio1">
+                                                                                        Menor a 100</label>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="my-1">
+                                                                                <div class="form-check form-check-inline">
+                                                                                    <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                                                        value="200">
+                                                                                    <label class="form-check-label" for="inlineRadio1">
+                                                                                        Menor a 200</label>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="form-check form-check-inline">
+                                                                                    <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                                                        value="350">
+                                                                                    <label class="form-check-label" for="inlineRadio1">
+                                                                                        Menor a 350</label>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="mt-1">
+                                                                                <div class="form-check form-check-inline">
+                                                                                    <input class="form-check-input" type="radio" name="precios" id="opcion1"
+                                                                                        value="todo">
+                                                                                    <label class="form-check-label" for="inlineRadio1">
+                                                                                        Cualquiera</label>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div> -->
+                                <div class="search-hotel border-bottom py-2">
+
+                                    <span class="agileits-sear-head mb-3">Ordenar por </span>
+                                    <select name="selector" id="">
+                                        @if (!isset($_GET['selector']))
+                                            <option selected disabled> -- Seleccione -- </option>
+                                            <option value="asc">Precio: Menor a Mayor</option>
+                                            <option value="desc">Precio: Mayor a Menor</option>
+                                        @else
+                                            @if ($_GET['selector'] == 'asc')
+                                                <option disabled> -- Seleccione -- </option>
+                                                <option value="asc" selected>Precio: Menor a Mayor</option>
+                                                <option value="desc">Precio: Mayor a Menor</option>
+                                            @endif
+                                            @if ($_GET['selector'] == 'desc')
+                                                <option disabled> -- Seleccione -- </option>
+                                                <option value="asc">Precio: Menor a Mayor</option>
+                                                <option value="desc" selected>Precio: Mayor a Menor</option>
+                                            @endif
+                                        @endif
+                                    </select>
+                                    <br>
+                                    <button class="btn btn-success"> Buscar</button>
                             </form>
-                        </div>
-                        <!-- price -->
-                        <div class="range border-bottom py-2">
-                            <h3 class="agileits-sear-head mb-3">Precio</h3>
-                            <div class="w3l-range">
-                                <ul>
-                                    <li>
-                                        <a href="#">Debajo S/. 10.00</a>
-                                    </li>
-                                    <li class="my-1">
-                                        <a href="#">S/. 10.00 - S/. 50.00</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">S/. 50.00 - S/. 100.00</a>
-                                    </li>
-                                    <li class="my-1">
-                                        <a href="#">S/. 100.00 - S/. 200.00</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">S/. 200.00 - S/. 350.00</a>
-                                    </li>
-                                    <li class="mt-1">
-                                        <a href="#">Más de S/. 350.00</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- //price -->
-                        <!-- discounts -->
-                        <div class="left-side border-bottom py-2">
-                            <h3 class="agileits-sear-head mb-3">Descuento</h3>
-                            <ul>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">5% o Más</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">10% o Más</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">20% o Más</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">30% o Más</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">50% o Más</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">60% o Más</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- //discounts -->
-                        <!-- reviews -->
-                        <div class="customer-rev border-bottom left-side py-2">
-                            <h3 class="agileits-sear-head mb-3">Puntuación de vendedor</h3>
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span>5.0</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span>4.0</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half"></i>
-                                        <span>3.5</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span>3.0</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half"></i>
-                                        <span>2.5</span>
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
                         <!-- //reviews -->
                         <!-- electronics -->
                         <div class="left-side border-bottom py-2">
                             <h3 class="agileits-sear-head mb-3">Categorías</h3>
-                            <a href="#" class="badge badge-primary">Primary</a>
-                            <a href="#" class="badge badge-secondary">Secondary</a>
-                            <a href="#" class="badge badge-success">Success</a>
-                            <a href="#" class="badge badge-danger">Danger</a>
-                            <a href="#" class="badge badge-warning">Warning</a>
-                            <a href="#" class="badge badge-info">Info</a>
-                            <a href="#" class="badge badge-light">Light</a>
-                            <a href="#" class="badge badge-dark">Dark</a>
+                            @foreach ($categorias as $c)
+                                 <a href="{{route('tienda.categoria',$c->idCategoria)}}" class="badge badge-primary">{{$c->nombreCategoria}}</a> 
+                            @endforeach
+
                         </div>
                         <!-- //electronics -->
                         <!-- delivery -->
