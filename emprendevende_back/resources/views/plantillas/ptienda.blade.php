@@ -451,8 +451,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <i class="fas fa-dolly"></i>
                             </div>
                             <div class="col-8 text-form-footer">
-                                <h3>Free Shipping</h3>
-                                <p>on orders over $100</p>
+                                <h3>Compra sin límites</h3>
+                                <p>Sin descuentos</p>
                             </div>
                         </div>
                     </div>
@@ -462,8 +462,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <i class="fas fa-shipping-fast"></i>
                             </div>
                             <div class="col-8 text-form-footer">
-                                <h3>Fast Delivery</h3>
-                                <p>World Wide</p>
+                                <h3>Emprendedor Responsable</h3>
+                                <p>Tu producto en tus mano de manera rápida</p>
                             </div>
                         </div>
                     </div>
@@ -473,8 +473,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <i class="far fa-thumbs-up"></i>
                             </div>
                             <div class="col-8 text-form-footer">
-                                <h3>Big Choice</h3>
-                                <p>of Products</p>
+                                <h3>Te orientamos</h3>
+                                <p>Si eres vendedor y quieres digitalizar te ayudamos a lograrlo</p>
                             </div>
                         </div>
                     </div>
@@ -518,9 +518,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <li class="mb-3">
                                 <a href="{{ route('nosotros') }}">Nosotros</a>
                             </li>
+                            <!--
                             <li class="mb-3">
                                 <a href="contact.html">Preguntas frecuentes</a>
-                            </li>
+                            </li>-->
                             <li class="mb-3">
                                 <a href="{{ route('terminos') }}">Términos y condiciones</a>
                             </li>
