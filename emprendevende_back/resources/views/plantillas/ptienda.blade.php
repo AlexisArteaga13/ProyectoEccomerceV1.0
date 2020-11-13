@@ -72,10 +72,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="col-lg-9 header-right mt-lg-0 mt-2">
                     <!-- header lists -->
                     <ul>
+                        <!--
                         <li class="text-center border-right text-white">
                             <a class="play-icon popup-with-zoom-anim text-white" href="#small-dialog1">
                                 <i class="fas fa-map-marker mr-2"></i>Selecciona tu localidad</a>
-                        </li>
+                        </li>-->
                         <li class="text-center border-right text-white">
                             <a href="#" data-toggle="modal" data-target="#ModalCategoria" class="text-white">
                                 <i class="fas fa-truck mr-2"></i>Compra por categoría</a>
@@ -107,7 +108,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                                 </li>
                             @endcan
-
+                            <li class="text-center border-right text-white">
+                                <a href="{{ route('miscompras') }}" class="text-white">
+                                    <i class="fas fa-truck mr-2"></i>Mis compras</a>
+    
+                            </li>
                             <li class="text-white nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -133,9 +138,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <i class="fas fa-sign-in-alt mr-2"></i>
                                     Iniciar Sesión
                                 </a>
+                            </li>
+                           
                         @endif
-
-                        </li>
+                       
                         <!--<li class="text-center text-white">
        <a href="#" data-toggle="modal" data-target="#exampleModal2" class="text-white">
         <i class="fas fa-sign-out-alt mr-2"></i>Register </a>
@@ -184,8 +190,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="row">
                         <!-- search -->
                         <div class="col-10 agileits_search">
-                            <form class="form-inline" action="#" method="post">
-                                <input class="form-control mr-sm-2" type="search"
+                        <form class="form-inline" action="{{route('inicio')}}" method="get">
+                                <input class="form-control mr-sm-2" name="buscgen" type="search"
                                     placeholder="Buscar tienda, marca, etc" aria-label="Search" required>
                                 <button class="btn my-2 my-sm-0 bg-primary" type="submit">Buscar</button>
                             </form>

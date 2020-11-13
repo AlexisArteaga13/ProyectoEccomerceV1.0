@@ -7,12 +7,15 @@ use DB;
 use App\Venta;
 use App\Facturacion;
 use App\SubVenta;
+use App\DetalleVenta;
+use App\Producto;
 use Carbon\Carbon; 
 use Illuminate\Support\Facades\Auth;
 class TiendaController extends Controller
 {
     //
     public function payment(Request $request){  
+        if(Auth::check()){
         $contador=9999999;
         $i = 1;
          $cadena_id=array();
@@ -28,11 +31,23 @@ class TiendaController extends Controller
          }
          $i = $i + 1;
          }
+         for($j=0;$j<count($cadena_id);$j++){
+          
+            $producto = DB::table('producto')->where('idPRODUCTO',$cadena_id[$j])->first();
+            if($producto->stock<$cadena_cantidad[$j])
+             {
+                 $resta = $cadena_cantidad[$j] - $producto->stock;
+                alert()->warning('Uy!', 'El producto '.$producto->nombreProducto.' superó el stock, reducele '.$resta.' elemento(s) para seguir con la operación');
+                return back();
+             }
+         }
+
+         /////////////////////7
         $count=0;
         $productosSelecionados = DB::table('producto')->whereIn('idPRODUCTO',$cadena_id)->get();
         // Crear la venta
         $ultimafact = DB::table('facturacion')->orderBy('created_at', 'desc')->first();
-        /*
+        
         $factura = new Facturacion();
         $factura->fechaEmision = Carbon::now();
         $factura->fechaPago = Carbon::now();
@@ -40,37 +55,64 @@ class TiendaController extends Controller
         $factura->estado=1;
         $factura->detalle="Ventas de Productos";
         $factura->idMETODO_PAGO= 2;
+        $factura->codigoLetra='F001';
         $factura->save();
         //Creamos la venta
         $venta = new Venta();
         $venta->fecha= Carbon::now();
         $venta->idUsuario = Auth::user()->id;
-        $venta->idEstado=1;
+        $venta->nombre_tarjeta=$request->nombre_tarjeta;
+        $venta->numero_tarjeta=$request->numero_tarjeta;
+        $venta->estado=1;
         $venta->save();
         //creamos la subventa
         $subventa = new SubVenta() ;
         $subventa->idVENTA = $venta->idVENTA;
         $subventa->FACTURA_idFACTURACIÓN=$factura->idFACTURACIÓN;
-        $subventa->save();*/
+        $subventa->save();
         ////////////////////
-        
+        $costototal=0;
         for($j=0;$j<count($cadena_id);$j++){
-          // echo "un array es ".$cadena_id[$j];
-           $producto = DB::table('producto')->where('idPRODUCTO',$cadena_id[$j])->first();
-           //$detallesub = ;
-           $producto->nombreProducto;
-           echo "su precio es : ".$producto->precio;
-           echo '<br>';
-           echo (($producto->precio)*$cadena_cantidad[$j]);
           
+           $producto = DB::table('producto')->where('idPRODUCTO',$cadena_id[$j])->first();
+           $detallesub = new DetalleVenta();
+           $detallesub->cantidad = $cadena_cantidad[$j];
+           $detallesub->precioTotal = ($producto->precio)*$cadena_cantidad[$j];
+           $costototal = $costototal+ (($producto->precio)*$cadena_cantidad[$j]);
+           $detallesub->idPRODUCTO = $cadena_id[$j];
+           $detallesub->idSUB_VENTA = $subventa->idSUB_VENTA;
+           $detallesub->save();
+           $updateproducto = Producto::findOrFail($producto->idPRODUCTO);
+           $updateproducto->stock=($producto->stock - $cadena_cantidad[$j]);
+           $updateproducto->update();
+           
         }
+        // Agregamos el importe
+        $updatefactura = Facturacion::findOrFail($factura->idFACTURACIÓN);
+        $updatefactura->importe=$costototal;
+        $updatefactura->update();
+        /// Agregamos el importe a la venta
+        $updateventa = Venta::findOrFail($venta->idVENTA);
+        $updateventa->importeFinal = $costototal;
+        $updateventa->update();
+        // Agregamos el importe a subventas
+        $updatesubventa = SubVenta::findOrFail($subventa->idSUB_VENTA);
+        $updatesubventa->precioBruto = $costototal;
+        $updatesubventa->precioNeto = $costototal;
+        $updatesubventa->update();
+        /////////////////////////
         $empresas = DB::table('empresa')->where('estado',1)->get();
         $categorias = DB::table('categoria')->where('estado',1)->get();
+        return back()->with('success','Compra realizada correctamente.');
        // return view('modulostienda.payment',compact('categorias','empresas','productosSelecionados','cadena_id','cadena_cantidad'));
-  
+        }
+        else{
+            alert()->error('Uy!', 'Necesitas iniciar sesión para realizar esta operación!');
+            return back();
+        }
     }
 
-    public function index(){
+    public function index(Request $request){
         //Obtener los productos destacados de BD // 
         $vendedores = DB::table('empresa as e')
         ->join('users as u','e.idUsuario','u.id')
@@ -87,6 +129,8 @@ class TiendaController extends Controller
         ->where('p.destacado','1')
         ->orderBy('p.fecha_destacado', 'desc')
         ->get();
+        if(empty($request->all())){
+       
         // Obtener los productos de BD
         $productos = DB::table('producto as p')
         ->join('empresa as e','e.idEmpresa','p.idEmpresa')
@@ -94,9 +138,103 @@ class TiendaController extends Controller
         ->where('e.estado','1')      
         ->paginate(12);
         //*******************// */
+         }
+        elseif($request->all()){
+            if($request->buscgen){
+                $productos = DB::table('producto as p')
+                    ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                    ->where('p.estado','1')
+                    ->where('e.estado','1')       
+                   
+                   ->Where('p.nombreProducto','LIKE','%'.$request->buscgen.'%')
+                   ->OrWhere('e.idEmpresa','LIKE','%'.$request->buscgen.'%')
+                   
+                   ->paginate(200);
+            }
+            else{
+            if(!empty($request->selector) && !empty($request->buscador) && !empty($request->empresas)){
+                if($request->empresas != 'todo'){
+                    $productos = DB::table('producto as p')
+                    ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                    ->where('p.estado','1')
+                    ->where('e.estado','1')       
+                   
+                   ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')
+                   ->Where('e.idEmpresa','LIKE','%'.$request->empresas.'%')
+                   ->orderBy('p.precio',$request->selector)
+                   ->paginate(12);
+               }
+               elseif($request->empresas == 'todo'){                
+                $productos = DB::table('producto as p')
+                ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                ->where('p.estado','1')
+                ->where('e.estado','1')   
+                   
+                   ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')   
+                   ->orderBy('p.precio',$request->selector)
+                   ->paginate(12);
+               }
+             }
+             elseif(empty($request->selector) && !empty($request->buscador) && !empty($request->empresas) ){
+               if($request->empresas != 'todo'){
+                $productos = DB::table('producto as p')
+                ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                ->where('p.estado','1')
+                ->where('e.estado','1')     
+               
+               ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')
+               ->Where('e.idEmpresa','LIKE','%'.$request->empresas.'%')
+               ->paginate(12);
+               }
+               else{
+                $productos = DB::table('producto as p')
+                ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                ->where('p.estado','1')
+                ->where('e.estado','1')    
+                  
+                   ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')
+                   
+                   ->paginate(12);
+               }
+             }
+             elseif(empty($request->selector) && empty($request->buscador) && !empty($request->empresas) ){
+               
+               $productos  = DB::table('producto as p')
+              
+               ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+               ->where('p.estado','1')
+               ->where('e.estado','1')    
+               
+               
+               ->Where('e.idEmpresa','LIKE','%'.$request->empresas.'%')
+              
+               ->paginate(12);
+             }
+           elseif(empty($request->selector) && empty($request->buscador) && empty($request->empresas)){
+            $productos = DB::table('producto as p')
+            ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+            ->where('p.estado','1')
+            ->where('e.estado','1')      
+              
+              
+               ->paginate(12);
+           }
+           else{
+            $productos = DB::table('producto as p')
+            ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+            ->where('p.estado','1')
+            ->where('e.estado','1')      
+               ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')
+               ->Where('e.idEmpresa','LIKE','%'.$request->empresas.'%')
+               
+               ->paginate(12);
+           }    
+        }
+    }
         $empresas = DB::table('empresa')->where('estado',1)->get();
         $categorias = DB::table('categoria')->where('estado',1)->get();
         return view('modulostienda.inicio',compact('categorias','empresas','productos','destacados','vendedores'));
+      
     }
     public function checkout(Request $request){
        // return $request->all();
