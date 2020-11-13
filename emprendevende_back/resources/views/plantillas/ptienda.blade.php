@@ -524,12 +524,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <li class="mb-3">
                                 <a href="{{ route('terminos') }}">Términos y condiciones</a>
                             </li>
-                            <li class="mb-3">
+                           <!-- <li class="mb-3">
                                 <a href="faqs.html">Tiendas</a>
                             </li>
                             <li class="mb-3">
                                 <a href="terms.html">Categorías</a>
-                            </li>
+                            </li>-->
                             <li>
                                 <a href="{{ route('politicas') }}">Política de privacidad</a>
                             </li>
@@ -543,48 +543,52 @@ License URL: http://creativecommons.org/licenses/by/3.0/
        <li class="mb-3">
         <i class="fas fa-mobile"></i> 333 222 3333 </li>-->
                             <li class="mb-3">
-                                <i class="fas fa-phone"></i> +222 11 4444
+                                <i class="fas fa-phone"></i> +51 936 193 965
                             </li>
                             <li class="mb-3">
                                 <i class="fas fa-envelope-open"></i>
-                                <a href="mailto:example@mail.com"> mail 1@example.com</a>
+                                <a href="mailto:jarteagac@unprg.edu.pe">jarteagac@unprg.edu.pe</a>
                             </li>
                             <li>
-                                <i class="fas fa-envelope-open"></i>
-                                <a href="mailto:example@mail.com"> mail 2@example.com</a>
+                                <a class="icon fb" href="https://wa.link/yvnj7m">
+                                    <i class="fab fa-whatsapp"></i>+51 936 193 965
+                                </a>
                             </li>
                         </ul>
                     </div>
+
                     <div class="col-md-3 col-sm-6 footer-grids w3l-agileits mt-md-0 mt-4">
                         <!-- newsletter -->
+                        <!--
                         <h3 class="text-white font-weight-bold mb-3">Está al tanto</h3>
-                        <p class="mb-3">Entérate de todo!</p>
+                        <p class="mb-3">Por Whatsapp</p>
                         <form action="#" method="post">
                             <div class="form-group">
                                 <input type="email" class="form-control" placeholder="Correo electrónico" name="email"
                                     required="">
                                 <input type="submit" value="Ir">
                             </div>
-                        </form>
+                        </form>-->
                         <!-- //newsletter -->
                         <!-- social icons -->
                         <div class="footer-grids  w3l-socialmk mt-3">
                             <h3 class="text-white font-weight-bold mb-3">Síguenos</h3>
                             <div class="social">
                                 <ul>
+                                   
                                     <li>
-                                        <a class="icon fb" href="#">
+                                        <a class="icon fb" target="_blank" href="https://www.facebook.com/EmprendeVende-100563221871483/?view_public_for=100563221871483">
                                             <i class="fab fa-facebook-f"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="icon tw" href="#">
+                                        <a class="icon tw" target="_blank" href="https://twitter.com/VendeEmprende">
                                             <i class="fab fa-twitter"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="icon gp" href="#">
-                                            <i class="fab fa-google-plus-g"></i>
+                                        <a class="icon gp" target="_blank" href="https://www.youtube.com/channel/UCaIX_qsNSILZYs_68q4LTkQ">
+                                            <i class="fab fa-youtube"></i>
                                         </a>
                                     </li>
                                 </ul>
@@ -599,10 +603,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!-- //footer third section -->
 
         <!-- footer fourth section -->
+<!--
         <div class="agile-sometext py-md-5 py-sm-4 py-3">
             <div class="container">
 
-                <!-- payment -->
+                 payment 
                 <div class="sub-some child-momu mt-4">
                     <h5 class="font-weight-bold mb-3">Métodos de pago</h5>
                     <ul>
@@ -634,9 +639,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <img src="images/pay9.png" alt="">
                         </li>
                     </ul>
-                </div>
-                <!-- //payment -->
-            </div>
+                </div>-->
+                <!-- //payment
+            </div> -->
             @include('sweetalert::alert')
 
         </div>

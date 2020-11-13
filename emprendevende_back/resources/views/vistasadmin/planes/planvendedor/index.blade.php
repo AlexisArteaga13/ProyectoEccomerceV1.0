@@ -55,9 +55,9 @@
                                                 <div class="card-body" style="background-color: coral">
                                                    @if ($p->idPLAN == 2)
                                                    <button class="btn btn-warning">Quiero este plan</button>
-                                                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-{{$p->idPLAN}}">
-                                                   Prueba
-                                                   </button>
+                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-{{$p->idPLAN}}">
+                                                        Prueba
+                                                     </button>
                                                    @include('vistasadmin.planes.planvendedor.modalcompra')
                                                    @else
                                                        Hasta máximo 3 productos en vitrina
