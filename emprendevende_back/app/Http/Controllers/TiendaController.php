@@ -8,6 +8,7 @@ use App\Venta;
 use App\Facturacion;
 use App\SubVenta;
 use App\DetalleVenta;
+use App\Producto;
 use Carbon\Carbon; 
 use Illuminate\Support\Facades\Auth;
 class TiendaController extends Controller
@@ -33,6 +34,12 @@ class TiendaController extends Controller
          for($j=0;$j<count($cadena_id);$j++){
           
             $producto = DB::table('producto')->where('idPRODUCTO',$cadena_id[$j])->first();
+            if($producto->stock<$cadena_cantidad[$j])
+             {
+                 $resta = $cadena_cantidad[$j] - $producto->stock;
+                alert()->warning('Uy!', 'El producto '.$producto->nombreProducto.' superó el stock, reducele '.$resta.' elemento(s) para seguir con la operación');
+                return back();
+             }
          }
 
          /////////////////////7
@@ -75,6 +82,9 @@ class TiendaController extends Controller
            $detallesub->idPRODUCTO = $cadena_id[$j];
            $detallesub->idSUB_VENTA = $subventa->idSUB_VENTA;
            $detallesub->save();
+           $updateproducto = Producto::findOrFail($producto->idPRODUCTO);
+           $updateproducto->stock=($producto->stock - $cadena_cantidad[$j]);
+           $updateproducto->update();
            
         }
         // Agregamos el importe
