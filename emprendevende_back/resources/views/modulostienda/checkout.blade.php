@@ -65,7 +65,7 @@
 								<td class="invert">{{ $key + 1 }}</td>
 							<input type="hidden" name="id.{{$key+1}}" value="{{$value->idPRODUCTO}}">
 								<td class="invert-image">
-									<a href="single.html">
+								<a href="{{route('descripcion',$value->idPRODUCTO)}}">
 										<img src="{{ asset('../storage/app/' . $value->imagen_f) }}" alt=" " class="img-responsive">
 									</a>
 								</td>
@@ -166,27 +166,27 @@
 										<div class="first-row form-group">
 											<div class="controls">
 												<label class="control-label">Nombre de la Tarjeta</label>
-												<input class="billing-address-name form-control" type="text" name="name" value="" placeholder="John Smith">
+												<input class="billing-address-name form-control" type="text" name="nombre_tarjeta" value="" placeholder="John Smith" required>
 											</div>
 											<div class="paymntf_card_number_grids my-2">
 												<div class="fpay_card_number_grid_left">
 													<div class="controls">
 														<label class="control-label">Numero de serie de la tarjeta</label>
-														<input class="number credit-card-number-2 form-control" type="text" name="number" inputmode="numeric" autocomplete="cc-number"
-															autocompletetype="cc-number" x-autocompletetype="cc-number" placeholder="•••• •••• •••• ••••">
+														<input class="number credit-card-number-2 form-control" type="text" name="numero_tarjeta" inputmode="numeric" autocomplete="cc-number"
+															autocompletetype="cc-number" x-autocompletetype="cc-number" placeholder="•••• •••• •••• ••••" required>
 													</div>
 												</div>
 												<div class="fpay_card_number_grid_right mt-2">
 													<div class="controls">
 														<label class="control-label">CVV</label>
-														<input class="security-code-2 form-control" Â·="" inputmode="numeric" type="text" name="security-code" placeholder="•••">
+														<input class="security-code-2 form-control" Â·="" inputmode="numeric" type="text" name="security-code" placeholder="•••" required>
 													</div>
 												</div>
 												<div class="clear"> </div>
 											</div>
 											<div class="controls">
 												<label class="control-label">Fecha de Validacion</label>
-												<input class="expiration-month-and-year-2 form-control" type="text" name="expiration-month-and-year" placeholder="MM / YY">
+												<input class="expiration-month-and-year-2 form-control" type="text" name="expiration-month-and-year" placeholder="MM / YY" required>
 											</div>
 										</div>
 										<input class="submit" type="submit" value="Realizar Pago">
