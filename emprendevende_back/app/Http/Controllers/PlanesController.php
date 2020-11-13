@@ -60,7 +60,7 @@ class PlanesController extends Controller
             $ultimafact = DB::table('facturacion')->orderBy('created_at', 'desc')->first();
             $factura ->codigoLetra = 'F001';
             $factura ->codigoFactura = str_pad(intval($ultimafact->codigoFactura)+1,5,0,STR_PAD_LEFT);
-            $factura ->estado = 2;
+            $factura ->estado = 1;
             $factura ->fechaEmision = Carbon::now();
             $factura ->fechaPago = Carbon::now()->addYear();
             $factura ->importe= $request->facturacion;
@@ -76,18 +76,18 @@ class PlanesController extends Controller
             $actualizarplan->idPlan = $id;
             $actualizarplan->update();
             $fecha = Carbon::now();
-            $factura = new Facturacion ();
+            /*$factura = new Facturacion ();
             $ultimafact = DB::table('facturacion')->orderBy('created_at', 'desc')->first();
             $factura ->codigoLetra = 'F001';
             $factura ->codigoFactura = str_pad(intval($ultimafact->codigoFactura)+1,5,0,STR_PAD_LEFT);
-            $factura ->estado = 2;
+            $factura ->estado = 1;
             $factura ->fechaEmision = Carbon::now();
             $factura ->fechaPago = Carbon::now()->addMonth();
             $factura ->importe= $request->facturacion;
             $factura ->idPlan = $id;
             $factura ->idMETODO_PAGO = $request->metodos;
             $factura->idEmpresa= $empresa->idEmpresa;
-            $factura->save();
+            $factura->save();*/
         }
 
        // alert()->success('Excelente','Migraste de ');

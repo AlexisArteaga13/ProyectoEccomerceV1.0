@@ -74,6 +74,7 @@
                                                 <td>{{ $value->fechaEmision }}</td>
                                                 <td>{{ $value->fechaPago }}</td>
                                                 <td>
+                                                    
                                                     @if ( $value->estado == '1')
                                                         <span class="badge badge-success">En curso</span>
                                                     
