@@ -21,6 +21,7 @@ Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProvider
 //****RUTAS SIN NECESIDAD DE CONTROLADOR */
 Route::get('/','TiendaController@index')->name('inicio');
 Route::post('/payment','TiendaController@payment')->name('payment');
+Route::get('/miscompras','ComprasController@index')->name('miscompras');
 Route::get('/vitrina','TiendaController@vitrina')->name('vitrina');
 Route::get('/destacados','TiendaController@destacados')->name('destacados');
 Route::get('/categorias/{id?}','TiendaController@categoria')->name('tienda.categoria');

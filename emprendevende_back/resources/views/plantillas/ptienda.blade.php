@@ -108,7 +108,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                                 </li>
                             @endcan
-
+                            <li class="text-center border-right text-white">
+                                <a href="{{ route('miscompras') }}" class="text-white">
+                                    <i class="fas fa-truck mr-2"></i>Mis compras</a>
+    
+                            </li>
                             <li class="text-white nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -134,9 +138,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <i class="fas fa-sign-in-alt mr-2"></i>
                                     Iniciar Sesión
                                 </a>
+                            </li>
+                           
                         @endif
-
-                        </li>
+                       
                         <!--<li class="text-center text-white">
        <a href="#" data-toggle="modal" data-target="#exampleModal2" class="text-white">
         <i class="fas fa-sign-out-alt mr-2"></i>Register </a>
