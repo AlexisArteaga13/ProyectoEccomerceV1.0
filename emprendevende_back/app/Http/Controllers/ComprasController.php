@@ -19,7 +19,7 @@ class ComprasController extends Controller
     public function __construct()
     {
         
-        // $this->middleware(Auth::check());
+        $this->middleware('auth');
      }
     public function index(){
              $facturacion = DB::table('sub_venta as sv')

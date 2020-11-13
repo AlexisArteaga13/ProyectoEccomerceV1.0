@@ -42,7 +42,7 @@ Route::post('/graciasporregistrarte','UsuariosController@crear_user_vendedor')->
 ///************************************/ */
 
 //Rutas para administrable
-Route::get('/login/administrable','HomeController@indexadmin')->name('administrable')->middleware('role:["administrador"],["vendedor"]');
+Route::get('/login/administrable','EmpresasController@index')->name('administrable')->middleware('role:["administrador"],["vendedor"]');
 
 //*******ruta de rubros****************//
 Route::get('/login/rubros','RubrosController@index')->name('rubros.index');
