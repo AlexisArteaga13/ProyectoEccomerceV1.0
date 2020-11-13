@@ -7,7 +7,11 @@
 			<div class="container">
 				<ul class="w3_short">
 					<li>
+<<<<<<< HEAD
+						<a href="{{ route('inicio') }}">Inicio</a>
+=======
 					<a href="{{route('inicio')}}">Inicio</a>
+>>>>>>> 88e39fd55bccc68849aed18018f6fc9b4c95dc63
 						<i>|</i>
 					</li>
 					<li>Carrito</li>
