@@ -184,8 +184,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="row">
                         <!-- search -->
                         <div class="col-10 agileits_search">
-                            <form class="form-inline" action="#" method="post">
-                                <input class="form-control mr-sm-2" type="search"
+                        <form class="form-inline" action="{{route('inicio')}}" method="get">
+                                <input class="form-control mr-sm-2" name="buscgen" type="search"
                                     placeholder="Buscar tienda, marca, etc" aria-label="Search" required>
                                 <button class="btn my-2 my-sm-0 bg-primary" type="submit">Buscar</button>
                             </form>

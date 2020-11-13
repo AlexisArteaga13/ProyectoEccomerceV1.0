@@ -140,6 +140,18 @@ class TiendaController extends Controller
         //*******************// */
          }
         elseif($request->all()){
+            if($request->buscgen){
+                $productos = DB::table('producto as p')
+                    ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                    ->where('p.estado','1')
+                    ->where('e.estado','1')       
+                   
+                   ->Where('p.nombreProducto','LIKE','%'.$request->buscgen.'%')
+                   ->OrWhere('e.idEmpresa','LIKE','%'.$request->buscgen.'%')
+                   
+                   ->paginate(200);
+            }
+            else{
             if(!empty($request->selector) && !empty($request->buscador) && !empty($request->empresas)){
                 if($request->empresas != 'todo'){
                     $productos = DB::table('producto as p')
@@ -218,6 +230,7 @@ class TiendaController extends Controller
                ->paginate(12);
            }    
         }
+    }
         $empresas = DB::table('empresa')->where('estado',1)->get();
         $categorias = DB::table('categoria')->where('estado',1)->get();
         return view('modulostienda.inicio',compact('categorias','empresas','productos','destacados','vendedores'));
