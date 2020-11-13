@@ -4,10 +4,72 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-
+use App\Venta;
+use App\Facturacion;
+use App\SubVenta;
+use Carbon\Carbon; 
+use Illuminate\Support\Facades\Auth;
 class TiendaController extends Controller
 {
     //
+    public function payment(Request $request){  
+        $contador=9999999;
+        $i = 1;
+         $cadena_id=array();
+         $cadena_cantidad=array();
+        while ($contador>0){
+        $id = $request->input('id_'.$i);
+         if(is_null($id)){
+             break;
+         }
+         else{
+             array_push($cadena_id,$request->input('id_'.$i));
+             array_push($cadena_cantidad,$request->input('cantidad_'.$i));
+         }
+         $i = $i + 1;
+         }
+        $count=0;
+        $productosSelecionados = DB::table('producto')->whereIn('idPRODUCTO',$cadena_id)->get();
+        // Crear la venta
+        $ultimafact = DB::table('facturacion')->orderBy('created_at', 'desc')->first();
+        /*
+        $factura = new Facturacion();
+        $factura->fechaEmision = Carbon::now();
+        $factura->fechaPago = Carbon::now();
+        $factura->codigofactura=str_pad(intval($ultimafact->codigoFactura)+1,5,0,STR_PAD_LEFT);
+        $factura->estado=1;
+        $factura->detalle="Ventas de Productos";
+        $factura->idMETODO_PAGO= 2;
+        $factura->save();
+        //Creamos la venta
+        $venta = new Venta();
+        $venta->fecha= Carbon::now();
+        $venta->idUsuario = Auth::user()->id;
+        $venta->idEstado=1;
+        $venta->save();
+        //creamos la subventa
+        $subventa = new SubVenta() ;
+        $subventa->idVENTA = $venta->idVENTA;
+        $subventa->FACTURA_idFACTURACIÓN=$factura->idFACTURACIÓN;
+        $subventa->save();*/
+        ////////////////////
+        
+        for($j=0;$j<count($cadena_id);$j++){
+          // echo "un array es ".$cadena_id[$j];
+           $producto = DB::table('producto')->where('idPRODUCTO',$cadena_id[$j])->first();
+           //$detallesub = ;
+           $producto->nombreProducto;
+           echo "su precio es : ".$producto->precio;
+           echo '<br>';
+           echo (($producto->precio)*$cadena_cantidad[$j]);
+          
+        }
+        $empresas = DB::table('empresa')->where('estado',1)->get();
+        $categorias = DB::table('categoria')->where('estado',1)->get();
+       // return view('modulostienda.payment',compact('categorias','empresas','productosSelecionados','cadena_id','cadena_cantidad'));
+  
+    }
+
     public function index(){
         //Obtener los productos destacados de BD // 
         $vendedores = DB::table('empresa as e')

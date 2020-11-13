@@ -20,6 +20,7 @@ Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProvider
 /* ***************Fin de rutas autenticar de facebook*** */ 
 //****RUTAS SIN NECESIDAD DE CONTROLADOR */
 Route::get('/','TiendaController@index')->name('inicio');
+Route::post('/payment','TiendaController@payment')->name('payment');
 Route::get('/vitrina','TiendaController@vitrina')->name('vitrina');
 Route::get('/destacados','TiendaController@destacados')->name('destacados');
 Route::get('/categorias/{id?}','TiendaController@categoria')->name('tienda.categoria');
@@ -81,4 +82,4 @@ Route::post('/login/productos/update/{id}','ProductosController@destacar')->name
 Route::get('/login/facturacion','FacturacionController@index')->name('facturacion.index');
 Route::get('/login/facturacion/store','FacturacionController@store')->name('facturacion.store');
 
-Route::post('/descripcion/{id}','TiendaController@descripcionProducto')->name('descripcion');
+Route::get('/descripcion/{id}','TiendaController@descripcionProducto')->name('descripcion');

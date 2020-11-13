@@ -7,7 +7,11 @@
 			<div class="container">
 				<ul class="w3_short">
 					<li>
+<<<<<<< HEAD
 						<a href="{{ route('inicio') }}">Inicio</a>
+=======
+					<a href="{{route('inicio')}}">Inicio</a>
+>>>>>>> 88e39fd55bccc68849aed18018f6fc9b4c95dc63
 						<i>|</i>
 					</li>
 					<li>Carrito</li>
@@ -25,20 +29,34 @@
 			</h3>
 			<!-- //tittle heading -->
 			<div class="checkout-right">
-				<h4 class="mb-sm-4 mb-3">Your shopping cart contains:
-					<span>3 Products</span>
+				<h4 class="mb-sm-4 mb-3">Tu carrito de compras contiene:
+					<span>
+					@php
+						$conteo = 0;
+					
+					foreach ($productosSelecionados as $key=>$value){
+						$conteo ++;
+					}
+						
+					
+					
+					echo($conteo) 
+					@endphp
+					Productos</span>
 				</h4>
 				<div class="table-responsive">
+				<form action="{{route('payment')}}" method="POST">
+					@csrf
 					<table class="timetable_sub">
 						<thead>
 							<tr>
 								<th>SL No.</th>
-								<th>Product</th>
-								<th>Quality</th>
-								<th>Product Name</th>
+								<th>Producto</th>
+								<th>Cantidad</th>
+								<th>Nombre de Producto</th>
 
-								<th>Price</th>
-								<th>Remove</th>
+								<th>Precio</th>
+								<th>Quitar</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -49,19 +67,21 @@
 						@if ($id == $value->idPRODUCTO)
 							<tr class="rem{{ $key + 1 }}">
 								<td class="invert">{{ $key + 1 }}</td>
+							<input type="hidden" name="id.{{$key+1}}" value="{{$value->idPRODUCTO}}">
 								<td class="invert-image">
 									<a href="single.html">
-										<img src="images/a.jpg" alt=" " class="img-responsive">
+										<img src="{{ asset('../storage/app/' . $value->imagen_f) }}" alt=" " class="img-responsive">
 									</a>
 								</td>
 								<td class="invert">
 									<div class="quantity">
 										<div class="quantity-select">
-											<div class="entry value-minus">&nbsp;</div>
+											<!--<div class="entry value-minus">&nbsp;</div>-->
 											<div class="entry value">
+											<input type="hidden" name="cantidad.{{$key+1}}" value="{{$cantidad}}">
 												<span>{{ $cantidad}}</span>
 											</div>
-											<div class="entry value-plus active">&nbsp;</div>
+											<!--<div class="entry value-plus active">&nbsp;</div>-->
 										</div>
 									</div>
 								</td>
@@ -134,6 +154,54 @@
 						</tbody>
 					</table>
 				</div>
+				<h3>Paga por PAYPAL</h3>
+				<div id="tab4" class="tab-grid" style="display: block;">
+					<div class="row">
+						<div class="col-md-6 pay-forms">
+							<img class="pp-img" src="images/paypal.png" alt="Image Alternative text" title="Image Title">
+							<p>
+								Importante: Será redirigido al sitio web de PayPal para completar su pago de forma segura..</p>
+							<a class="btn btn-primary">Pago a traves de Paypal</a>
+						</div>
+						<div class="col-md-6 number-paymk">
+							<form action="#" method="post" class="creditly-card-form-2 shopf-sear-headinfo_form">
+								<section class="creditly-wrapper payf_wrapper">
+									<div class="credit-card-wrapper">
+										<div class="first-row form-group">
+											<div class="controls">
+												<label class="control-label">Nombre de la Tarjeta</label>
+												<input class="billing-address-name form-control" type="text" name="name" value="" placeholder="John Smith">
+											</div>
+											<div class="paymntf_card_number_grids my-2">
+												<div class="fpay_card_number_grid_left">
+													<div class="controls">
+														<label class="control-label">Numero de serie de la tarjeta</label>
+														<input class="number credit-card-number-2 form-control" type="text" name="number" inputmode="numeric" autocomplete="cc-number"
+															autocompletetype="cc-number" x-autocompletetype="cc-number" placeholder="•••• •••• •••• ••••">
+													</div>
+												</div>
+												<div class="fpay_card_number_grid_right mt-2">
+													<div class="controls">
+														<label class="control-label">CVV</label>
+														<input class="security-code-2 form-control" Â·="" inputmode="numeric" type="text" name="security-code" placeholder="•••">
+													</div>
+												</div>
+												<div class="clear"> </div>
+											</div>
+											<div class="controls">
+												<label class="control-label">Fecha de Validacion</label>
+												<input class="expiration-month-and-year-2 form-control" type="text" name="expiration-month-and-year" placeholder="MM / YY">
+											</div>
+										</div>
+										<input class="submit" type="submit" value="Realizar Pago">
+									</div>
+								</section>
+							</form>
+						</div>
+					</div>
+				</div>
+				
+				</form>
 			</div>
 			<div class="checkout-left">
 				<div class="address_form_agile mt-sm-5 mt-4">
@@ -174,11 +242,12 @@
 							</div>
 						</div>
 					</form>
+					<!--
 					<div class="checkout-right-basket">
-						<a href="payment.html">Make a Payment
+					<a href="{{route('payment')}}">Ir a Pagar
 							<span class="far fa-hand-point-right"></span>
 						</a>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
