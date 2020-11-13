@@ -426,7 +426,50 @@
                                         </div>
                                     </div>
                                 @endforeach
+                                <div class="container row justify-content-center h-100">
+                                    <nav aria-label="Page navigation example">
+                                        <br>
+                                        <ul class="pagination">
 
+                                            <!--
+                                                                                    <li class="page-item">
+                                                                                        <a class="page-link" href="#" aria-label="Previous">
+                                                                                            <span aria-hidden="true">&laquo;</span>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                                                    <li class="page-item">
+                                                                                        <a class="page-link" href="#" aria-label="Next">
+                                                                                            <span aria-hidden="true">&raquo;</span>
+                                                                                        </a>
+                                                                                    </li>-->
+                                            @if (!isset($_GET['buscador']) && !isset($_GET['empresas']) && !isset($_GET['selector']))
+                                                {{ $productos->links() }}
+                                            @else
+                                                @if (isset($_GET['buscador']) && isset($_GET['empresas']) && isset($_GET['selector']))
+                                                    {{ $productos->appends(['buscador' => $_GET['buscador'], 'empresas' => $_GET['empresas'], 'selector' => $_GET['selector']])->links() }}
+                                                @else
+                                                    @if (isset($_GET['buscador']) && isset($_GET['empresas']) && !isset($_GET['selector']))
+                                                        {{ $productos->appends(['buscador' => $_GET['buscador'], 'empresas' => $_GET['empresas']])->links() }}
+
+                                                    @else
+                                                        @if (isset($_GET['buscador']) && !isset($_GET['empresas']) && !isset($_GET['selector']))
+                                                            {{ $productos->appends(['buscador' => $_GET['buscador']])->links() }}
+
+                                                        @else
+                                                            {{ $productos->appends(['buscador' => $_GET['buscador']])->links() }}
+                                                        @endif
+                                                    @endif
+                                                @endif
+
+                                            @endif
+
+                                        </ul>
+                                    </nav>
+
+                                </div>
                                 <!--
 
 
@@ -1026,12 +1069,13 @@
                                          </div>
                                         </div>
                                        -->
+
+                                            <!--
                                 <div class="container row justify-content-center h-100">
                                     <nav aria-label="Page navigation example">
                                         <br>
                                         <ul class="pagination">
 
-                                            <!--
                                                 <li class="page-item">
                                                     <a class="page-link" href="#" aria-label="Previous">
                                                         <span aria-hidden="true">&laquo;</span>
@@ -1044,13 +1088,13 @@
                                                     <a class="page-link" href="#" aria-label="Next">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
-                                                </li>-->
+                                                </li>
                                             {{ $productos->links() }}
                                         </ul>
                                     </nav>
 
                                 </div>
-
+-->
                             </div>
                         </div>
                         <!-- //first section -->
@@ -1333,7 +1377,7 @@
                 <div class="col-lg-3 mt-lg-0 mt-4 p-lg-0 ">
                     <div class="side-bar p-sm-4 p-3">
                         <div class="search-hotel border-bottom py-2">
-                            <form action="{{ route('destacados') }}" method="get">
+                            <form action="{{ route('inicio') }}" method="get">
 
                                 @if (isset($_GET['buscador']))
                                     <input type="search" placeholder="Buscar producto..." name="buscador" required=""
@@ -1528,6 +1572,7 @@
                                       </div>-->
                         <!-- //delivery -->
                         <!-- arrivals -->
+                        <!--
                         <div class="left-side border-bottom py-2">
                             <h3 class="agileits-sear-head mb-3">Nuevas llegadas</h3>
                             <ul>
@@ -1540,14 +1585,26 @@
                                     <span class="span">Últimos 90 días</span>
                                 </li>
                             </ul>
-                        </div>
+                        </div>-->
                         <!-- //arrivals -->
                         <!-- best seller -->
                         <div class="f-grid py-2">
-                            <h3 class="agileits-sear-head mb-3">Mejor Vendido</h3>
+                            <h3 class="agileits-sear-head mb-3">Conocelos</h3>
                             <div class="box-scroll">
                                 <div class="scroll">
-                                    <div class="row">
+                                    
+                                        @foreach ($destacados as $i)
+                                        <div class="row">
+                                            <div class="col-lg-3 col-sm-2 col-3 left-mar">
+                                                <img src="{{ asset('../storage/app/' . $i->imagen_f) }}" alt="" class="img-fluid">
+                                            </div>
+                                            <div class="col-lg-9 col-sm-10 col-9 w3_mvd">
+                                            <a href="{{route('descripcion',$i->idPRODUCTO)}}">{{$i->nombreProducto}}</a>
+                                                <a href="{{route('descripcion',$i->idPRODUCTO)}}" class="price-mar mt-2">S/ . {{$i->precio}} </a>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                        <!--
                                         <div class="col-lg-3 col-sm-2 col-3 left-mar">
                                             <img src="images/k1.jpg" alt="" class="img-fluid">
                                         </div>
@@ -1573,7 +1630,7 @@
                                             <a href="">Ambrane 13000 mAh Power Bank (P-1310 Premium)</a>
                                             <a href="" class="price-mar mt-2">$1,199.00 </a>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>

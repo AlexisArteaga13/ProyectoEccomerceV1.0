@@ -112,7 +112,7 @@ class TiendaController extends Controller
         }
     }
 
-    public function index(){
+    public function index(Request $request){
         //Obtener los productos destacados de BD // 
         $vendedores = DB::table('empresa as e')
         ->join('users as u','e.idUsuario','u.id')
@@ -129,6 +129,8 @@ class TiendaController extends Controller
         ->where('p.destacado','1')
         ->orderBy('p.fecha_destacado', 'desc')
         ->get();
+        if(empty($request->all())){
+       
         // Obtener los productos de BD
         $productos = DB::table('producto as p')
         ->join('empresa as e','e.idEmpresa','p.idEmpresa')
@@ -136,9 +138,90 @@ class TiendaController extends Controller
         ->where('e.estado','1')      
         ->paginate(12);
         //*******************// */
+         }
+        elseif($request->all()){
+            if(!empty($request->selector) && !empty($request->buscador) && !empty($request->empresas)){
+                if($request->empresas != 'todo'){
+                    $productos = DB::table('producto as p')
+                    ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                    ->where('p.estado','1')
+                    ->where('e.estado','1')       
+                   
+                   ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')
+                   ->Where('e.idEmpresa','LIKE','%'.$request->empresas.'%')
+                   ->orderBy('p.precio',$request->selector)
+                   ->paginate(12);
+               }
+               elseif($request->empresas == 'todo'){                
+                $productos = DB::table('producto as p')
+                ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                ->where('p.estado','1')
+                ->where('e.estado','1')   
+                   
+                   ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')   
+                   ->orderBy('p.precio',$request->selector)
+                   ->paginate(12);
+               }
+             }
+             elseif(empty($request->selector) && !empty($request->buscador) && !empty($request->empresas) ){
+               if($request->empresas != 'todo'){
+                $productos = DB::table('producto as p')
+                ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                ->where('p.estado','1')
+                ->where('e.estado','1')     
+               
+               ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')
+               ->Where('e.idEmpresa','LIKE','%'.$request->empresas.'%')
+               ->paginate(12);
+               }
+               else{
+                $productos = DB::table('producto as p')
+                ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+                ->where('p.estado','1')
+                ->where('e.estado','1')    
+                  
+                   ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')
+                   
+                   ->paginate(12);
+               }
+             }
+             elseif(empty($request->selector) && empty($request->buscador) && !empty($request->empresas) ){
+               
+               $productos  = DB::table('producto as p')
+              
+               ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+               ->where('p.estado','1')
+               ->where('e.estado','1')    
+               
+               
+               ->Where('e.idEmpresa','LIKE','%'.$request->empresas.'%')
+              
+               ->paginate(12);
+             }
+           elseif(empty($request->selector) && empty($request->buscador) && empty($request->empresas)){
+            $productos = DB::table('producto as p')
+            ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+            ->where('p.estado','1')
+            ->where('e.estado','1')      
+              
+              
+               ->paginate(12);
+           }
+           else{
+            $productos = DB::table('producto as p')
+            ->join('empresa as e','e.idEmpresa','p.idEmpresa')
+            ->where('p.estado','1')
+            ->where('e.estado','1')      
+               ->Where('p.nombreProducto','LIKE','%'.$request->buscador.'%')
+               ->Where('e.idEmpresa','LIKE','%'.$request->empresas.'%')
+               
+               ->paginate(12);
+           }    
+        }
         $empresas = DB::table('empresa')->where('estado',1)->get();
         $categorias = DB::table('categoria')->where('estado',1)->get();
         return view('modulostienda.inicio',compact('categorias','empresas','productos','destacados','vendedores'));
+      
     }
     public function checkout(Request $request){
        // return $request->all();

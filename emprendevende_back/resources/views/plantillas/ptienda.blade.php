@@ -72,10 +72,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="col-lg-9 header-right mt-lg-0 mt-2">
                     <!-- header lists -->
                     <ul>
+                        <!--
                         <li class="text-center border-right text-white">
                             <a class="play-icon popup-with-zoom-anim text-white" href="#small-dialog1">
                                 <i class="fas fa-map-marker mr-2"></i>Selecciona tu localidad</a>
-                        </li>
+                        </li>-->
                         <li class="text-center border-right text-white">
                             <a href="#" data-toggle="modal" data-target="#ModalCategoria" class="text-white">
                                 <i class="fas fa-truck mr-2"></i>Compra por categoría</a>
